@@ -1,0 +1,23 @@
+{
+  "brand": {
+    "name_ar": "قلم و آهار",
+    "name_latin": "Qalam & Ahar",
+    "tagline": "A two-bench calligraphy supply workshop"
+  },
+  "announcement": "Lot One opens to the list first. Nothing is held back for later.",
+  "contact": {
+    "email": "bench@qalam-ahar.example",
+    "links": [
+      { "label": "Instagram", "url": "https://instagram.com/" },
+      { "label": "Email the bench", "url": "mailto:bench@qalam-ahar.example" }
+    ]
+  },
+  "seo": {
+    "title": "Qalam & Ahar — reed pens, soot ink, burnished paper",
+    "description": "A two-bench workshop cutting reed pens to order, cooking soot ink, and burnishing ahar paper. Lot One opens this winter.",
+    "share_image": ""
+  },
+  "footer": {
+    "note": "Cut, cooked, and burnished at one bench each. Nothing is kept in stock."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "eyebrow": "Lot One",
+  "heading": "The four that open the shop",
+  "blurb": "Each lot is cut, cooked, or burnished in one run, then the run closes. Numbers are the order they leave the bench.",
+  "items": [
+    {
+      "lot": "01",
+      "title": "Java reed pen, cut to your angle",
+      "blurb": "Seasoned three years, cut at the qatt you name. Ships with a bone qat'ah for the second cut.",
+      "price": "From 34",
+      "status": "Opens first",
+      "image": "",
+      "image_alt": ""
+    },
+    {
+      "lot": "02",
+      "title": "Lamp-black ink, one cooking",
+      "blurb": "Soot, gum arabic, and a long stir. Thirty bottles from a single pot, then the pot is done.",
+      "price": "18",
+      "status": "30 made",
+      "image": "",
+      "image_alt": ""
+    },
+    {
+      "lot": "03",
+      "title": "Ahar paper, burnished by hand",
+      "blurb": "Sized with starch, dried flat, then run under agate until the surface refuses to bleed.",
+      "price": "26 for 25 sheets",
+      "status": "Opens first",
+      "image": "",
+      "image_alt": ""
+    },
+    {
+      "lot": "04",
+      "title": "Walnut pen case",
+      "blurb": "Holds four pens and a bottle upright. Lacquered inside, oiled outside, no hardware.",
+      "price": "95",
+      "status": "12 made",
+      "image": "",
+      "image_alt": ""
+    }
+  ]
+}

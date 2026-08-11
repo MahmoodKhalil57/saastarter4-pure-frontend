@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "eyebrow": "Lot One opens this winter",
+    "word_ar": "قَلَم",
+    "headline": "A pen is not bought. It is cut for the hand that will hold it.",
+    "sub": "We cut reed pens to your nib angle, cook our own soot ink, and burnish paper the slow way. Four items open the shop. Put your name down and you will hear first."
+  },
+  "notify": {
+    "heading": "Get the opening notice",
+    "button_label": "Put my name down",
+    "privacy_note": "One message when the shop opens. Nothing else, ever.",
+    "success_note": "You are on the list. Watch your inbox.",
+    "closer_heading": "The shop opens once. Be on the list.",
+    "form_action": ""
+  },
+  "craft": {
+    "eyebrow": "How a pen is cut",
+    "heading": "Three cuts, in this order, no going back",
+    "steps": [
+      {
+        "title": "The shoulder",
+        "body": "The reed is opened at a long shallow angle so the ink has somewhere to sit. Cut it short and the pen runs dry mid-letter."
+      },
+      {
+        "title": "The slit",
+        "body": "One press splits the nib down the centre. It has to stop exactly where the shoulder ends, or the two halves will spread under pressure."
+      },
+      {
+        "title": "The qatt",
+        "body": "The tip is trimmed against the qat'ah at the angle your script needs — flat for thuluth, oblique for nastaliq. This is the cut you cannot take back."
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Questions",
+    "items": [
+      {
+        "question": "Can I order before the shop opens?",
+        "answer": "No. Lot One is cut in a single run and every piece goes to the list in the order names came in. Adding your name is the whole queue."
+      },
+      {
+        "question": "Do you cut for left hands?",
+        "answer": "Yes. Say so when you order and the qatt is reversed. There is no extra charge and no extra wait."
+      },
+      {
+        "question": "How long does a reed pen last?",
+        "answer": "A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen and instructions for the second cut."
+      },
+      {
+        "question": "Do you ship outside the country?",
+        "answer": "Not for Lot One. Ink is a problem at customs and we would rather solve it properly than lose your parcel."
+      }
+    ]
+  }
+}

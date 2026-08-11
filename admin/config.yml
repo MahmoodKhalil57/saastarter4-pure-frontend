@@ -1,0 +1,179 @@
+# Sveltia CMS configuration
+# Docs: https://sveltiacms.app/en/docs
+#
+# CHANGE THIS FIRST: `repo` must be the GitHub repository this site is
+# committed to, in owner/name form. Everything else works as-is.
+
+backend:
+  name: github
+  repo: MahmoodKhalil57/saastarter4-pure-frontend
+  branch: master
+  # Token only: GitHub Pages has no server, so there is nowhere to run an OAuth
+  # client. Sign in with a personal access token instead. Add 'oauth' here if you
+  # later deploy the sveltia-cms-auth worker.
+  auth_methods: [token]
+  commit_messages:
+    update: 'content: update {{collection}} "{{slug}}"'
+    uploadMedia: "media: upload {{path}}"
+    deleteMedia: "media: delete {{path}}"
+
+# The site is served from the repository root (GitHub Pages, deploy from
+# branch), so repo paths and public URLs are the same thing.
+media_folder: media/uploads
+public_folder: /media/uploads
+
+site_url: https://mahmoodkhalil57.github.io/saastarter4-pure-frontend/
+display_url: https://mahmoodkhalil57.github.io/saastarter4-pure-frontend/
+
+collections:
+  - name: pages
+    label: Pages
+    icon: description
+    files:
+      - name: landing
+        label: Landing page
+        file: content/landing.json
+        format: json
+        description: Everything above and below the catalog.
+        fields:
+          - label: Hero
+            name: hero
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+              - label: Arabic wordmark
+                name: word_ar
+                widget: string
+                hint: The large word drawn across the top of the page. Keep it to one word.
+              - { label: Headline, name: headline, widget: text }
+              - { label: Supporting line, name: sub, widget: text }
+          - label: Sign-up form
+            name: notify
+            widget: object
+            fields:
+              - { label: Form heading, name: heading, widget: string }
+              - { label: Button label, name: button_label, widget: string }
+              - { label: Note under the form, name: privacy_note, widget: string }
+              - { label: Message after signing up, name: success_note, widget: string }
+              - { label: Closing heading, name: closer_heading, widget: string }
+              - label: Form endpoint
+                name: form_action
+                widget: string
+                required: false
+                hint: >-
+                  A POST URL from Formspree, Basin, or similar. Leave empty and
+                  the form opens the visitor's mail app instead.
+          - label: How it is made
+            name: craft
+            widget: object
+            fields:
+              - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+              - { label: Heading, name: heading, widget: string }
+              - label: Steps
+                name: steps
+                widget: list
+                label_singular: Step
+                summary: "{{fields.title}}"
+                hint: Numbered on the page in this order.
+                fields:
+                  - { label: Title, name: title, widget: string }
+                  - { label: Body, name: body, widget: text }
+          - label: Questions
+            name: faq
+            widget: object
+            fields:
+              - { label: Heading, name: heading, widget: string }
+              - label: Questions
+                name: items
+                widget: list
+                label_singular: Question
+                summary: "{{fields.question}}"
+                fields:
+                  - { label: Question, name: question, widget: string }
+                  - { label: Answer, name: answer, widget: text }
+
+      - name: catalog
+        label: Catalog
+        file: content/catalog.json
+        format: json
+        description: The items shown in the Lot One grid.
+        fields:
+          - { label: Eyebrow, name: eyebrow, widget: string, required: false }
+          - { label: Heading, name: heading, widget: string }
+          - { label: Intro, name: blurb, widget: text, required: false }
+          - label: Items
+            name: items
+            widget: list
+            label_singular: Item
+            summary: "{{fields.lot}} — {{fields.title}}"
+            fields:
+              - { label: Lot number, name: lot, widget: string, hint: "Shown as “Lot 01”." }
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: blurb, widget: text, required: false }
+              - label: Price
+                name: price
+                widget: string
+                required: false
+                hint: Free text, so you can write “From 34” or “26 for 25 sheets”.
+              - label: Status
+                name: status
+                widget: select
+                required: false
+                options: ["Opens first", "Pre-order", "30 made", "12 made", "Sold out"]
+              - { label: Photograph, name: image, widget: image, required: false }
+              - label: Photograph description
+                name: image_alt
+                widget: string
+                required: false
+                hint: Read aloud by screen readers. Describe the object, not the photo.
+
+  - name: settings
+    label: Settings
+    icon: settings
+    files:
+      - name: site
+        label: Site
+        file: content/site.json
+        format: json
+        description: Name, contact details, and what search engines see.
+        fields:
+          - label: Brand
+            name: brand
+            widget: object
+            fields:
+              - { label: Arabic name, name: name_ar, widget: string }
+              - { label: Latin name, name: name_latin, widget: string }
+              - { label: Tagline, name: tagline, widget: string, required: false }
+          - label: Announcement bar
+            name: announcement
+            widget: string
+            required: false
+            hint: Shown across the top of the page. Leave empty to hide the bar.
+          - label: Contact
+            name: contact
+            widget: object
+            fields:
+              - label: Email
+                name: email
+                widget: string
+                hint: Where the sign-up form sends people when no form endpoint is set.
+              - label: Footer links
+                name: links
+                widget: list
+                label_singular: Link
+                summary: "{{fields.label}}"
+                fields:
+                  - { label: Label, name: label, widget: string }
+                  - { label: URL, name: url, widget: string }
+          - label: Search and sharing
+            name: seo
+            widget: object
+            fields:
+              - { label: Page title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Share image, name: share_image, widget: image, required: false }
+          - label: Footer
+            name: footer
+            widget: object
+            fields:
+              - { label: Note, name: note, widget: text }

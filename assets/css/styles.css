@@ -1,0 +1,673 @@
+/* ===========================================================================
+   Qalam & Ahar — pre-launch landing page
+   Palette is an Ottoman lacquered pen case (qalamdan): a black ground with red
+   in it, gold leaf, verdigris, and the ivory of burnished ahar paper.
+   =========================================================================== */
+
+:root {
+  --ground: #191016;
+  --ground-raised: #221620;
+  --ahar: #efe4ce;
+  --ahar-dim: #b9a88e;
+  --brass: #c9a24b;
+  --verdigris: #7fa894;
+  --lac-red: #8c2b34;
+
+  --face-display: "Amiri", Georgia, serif;
+  --face-body: "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --face-util: "IBM Plex Mono", ui-monospace, monospace;
+
+  --gutter: clamp(1.25rem, 5vw, 4.5rem);
+  --measure: 68ch;
+  --rule: 1px solid color-mix(in srgb, var(--ahar) 16%, transparent);
+
+  --step--1: 0.8125rem;
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.25rem, 1.1rem + 0.7vw, 1.6rem);
+  --step-2: clamp(1.75rem, 1.4rem + 1.7vw, 2.75rem);
+  --step-3: clamp(2.25rem, 1.5rem + 3.4vw, 4.25rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ahar);
+  font-family: var(--face-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--verdigris);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10;
+  padding: 0.75rem 1rem;
+  background: var(--ahar);
+  color: var(--ground);
+}
+
+.skip:focus {
+  left: 0;
+}
+
+/* --- shared bits ---------------------------------------------------------- */
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--face-util);
+  font-size: var(--step--1);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.15rem;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.1;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+}
+
+.btn--solid {
+  border: 1px solid var(--brass);
+  background: var(--brass);
+  color: var(--ground);
+}
+
+.btn--solid:hover {
+  background: color-mix(in srgb, var(--brass) 82%, var(--ahar));
+  border-color: color-mix(in srgb, var(--brass) 82%, var(--ahar));
+}
+
+.btn--ghost {
+  border: 1px solid color-mix(in srgb, var(--ahar) 32%, transparent);
+  background: transparent;
+  color: var(--ahar);
+}
+
+.btn--ghost:hover {
+  border-color: var(--brass);
+  color: var(--brass);
+}
+
+.section-head {
+  max-width: var(--measure);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.section-head__title {
+  margin: 0.6rem 0 0;
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.section-head__blurb {
+  margin: 1rem 0 0;
+  max-width: 46ch;
+  color: var(--ahar-dim);
+}
+
+/* --- announcement + masthead --------------------------------------------- */
+
+.banner {
+  padding: 0.55rem var(--gutter);
+  background: var(--lac-red);
+  text-align: center;
+}
+
+.banner p {
+  margin: 0;
+  font-family: var(--face-util);
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding: 1.1rem var(--gutter);
+  border-bottom: var(--rule);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.brand__ar {
+  font-family: var(--face-display);
+  font-size: 1.4rem;
+  color: var(--brass);
+  line-height: 1;
+}
+
+.brand__latin {
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.masthead__nav {
+  display: none;
+  gap: 1.6rem;
+  margin-inline-start: auto;
+  font-size: var(--step--1);
+  letter-spacing: 0.04em;
+}
+
+.masthead__nav a {
+  text-decoration: none;
+  color: var(--ahar-dim);
+  padding-block: 0.25rem;
+  border-bottom: 1px solid transparent;
+}
+
+.masthead__nav a:hover {
+  color: var(--ahar);
+  border-bottom-color: var(--brass);
+}
+
+.masthead__cta {
+  margin-inline-start: auto;
+  font-size: var(--step--1);
+}
+
+@media (min-width: 62rem) {
+  .masthead__nav {
+    display: flex;
+  }
+
+  .masthead__cta {
+    margin-inline-start: 0;
+  }
+}
+
+@media (max-width: 34rem) {
+  .masthead__cta {
+    display: none;
+  }
+}
+
+/* --- hero ----------------------------------------------------------------- */
+
+.hero {
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(2.5rem, 7vw, 5.5rem) var(--gutter) clamp(3.5rem, 8vw, 6rem);
+  border-bottom: var(--rule);
+}
+
+.hero__lede {
+  min-width: 0;
+}
+
+/* The signature: the word is revealed right-to-left, the way it is written,
+   with a brass nib riding the leading edge of the stroke. */
+.wordmark {
+  position: relative;
+  display: block;
+  order: -1; /* above the headline until there is room beside it */
+  line-height: 0.78; /* Amiri carries a lot of leading; trim it back to the ink */
+}
+
+@media (min-width: 62rem) {
+  .hero {
+    /* `auto` keeps the word tight against the right gutter instead of leaving a
+       hole between the copy and the glyph. */
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+
+  .wordmark {
+    order: 0;
+  }
+}
+
+.wordmark__ar {
+  display: block;
+  font-family: var(--face-display);
+  font-size: clamp(17rem, 30vw, 27rem);
+  color: var(--brass);
+  clip-path: inset(0 0 0 0);
+  animation: stroke-in 1500ms cubic-bezier(0.65, 0.02, 0.3, 1) both;
+}
+
+.wordmark__nib {
+  position: absolute;
+  top: -16%;
+  right: 0;
+  width: 4px;
+  height: 132%;
+  background: var(--ahar);
+  transform: rotate(-18deg);
+  transform-origin: center;
+  animation: nib-travel 1500ms cubic-bezier(0.65, 0.02, 0.3, 1) both;
+}
+
+@keyframes stroke-in {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes nib-travel {
+  from {
+    right: 0;
+    opacity: 1;
+  }
+
+  85% {
+    opacity: 1;
+  }
+
+  to {
+    right: 100%;
+    opacity: 0;
+  }
+}
+
+.hero__headline {
+  max-width: 20ch;
+  margin: 0;
+  font-size: var(--step-3);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.hero__sub {
+  max-width: 48ch;
+  margin: 1.35rem 0 0;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--ahar-dim);
+}
+
+/* --- notify form ---------------------------------------------------------- */
+
+.notify {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  max-width: 34rem;
+}
+
+.notify__label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--face-util);
+  font-size: var(--step--1);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+
+.notify__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.notify__input {
+  flex: 1 1 15rem;
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
+  font: inherit;
+  color: var(--ahar);
+  background: var(--ground-raised);
+  border: 1px solid color-mix(in srgb, var(--ahar) 24%, transparent);
+  border-radius: 2px;
+}
+
+.notify__input::placeholder {
+  color: color-mix(in srgb, var(--ahar-dim) 70%, transparent);
+}
+
+.notify__input:focus-visible {
+  border-color: var(--verdigris);
+}
+
+.notify__note {
+  margin: 0.75rem 0 0;
+  font-size: var(--step--1);
+  color: var(--ahar-dim);
+}
+
+.notify__status {
+  margin: 0.65rem 0 0;
+  min-height: 1.4em;
+  font-family: var(--face-util);
+  font-size: var(--step--1);
+  color: var(--verdigris);
+}
+
+.notify__status[data-state="error"] {
+  color: color-mix(in srgb, var(--lac-red) 55%, var(--ahar));
+}
+
+/* --- Lot One -------------------------------------------------------------- */
+
+.lots {
+  padding: clamp(3.5rem, 8vw, 6.5rem) var(--gutter);
+  border-bottom: var(--rule);
+}
+
+.lot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: color-mix(in srgb, var(--ahar) 16%, transparent);
+  border: var(--rule);
+}
+
+.lot {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4rem;
+  background: var(--ground);
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.lot.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+.lot__figure {
+  aspect-ratio: 4 / 5;
+  margin: 0 0 1.1rem;
+  overflow: hidden;
+  background: var(--ground-raised);
+}
+
+.lot__figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No photograph yet? Show the grain of the paper instead of a grey box. */
+.lot__figure--empty {
+  background-image: repeating-linear-gradient(
+    -18deg,
+    color-mix(in srgb, var(--brass) 14%, transparent) 0 1px,
+    transparent 1px 9px
+  );
+}
+
+.lot__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--face-util);
+  font-size: var(--step--1);
+  color: var(--brass);
+}
+
+.lot__status {
+  color: var(--verdigris);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.lot__title {
+  margin: 0.5rem 0 0;
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.lot__blurb {
+  margin: 0.5rem 0 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--ahar-dim);
+}
+
+.lot__price {
+  margin-top: auto;
+  padding-top: 0.9rem;
+  border-top: var(--rule);
+  font-family: var(--face-util);
+  font-size: var(--step--1);
+}
+
+/* --- the cut (paper, not lacquer) ---------------------------------------- */
+
+.craft {
+  padding: clamp(3.5rem, 8vw, 6.5rem) var(--gutter);
+  background: var(--ahar);
+  color: var(--ground);
+}
+
+.craft .eyebrow {
+  color: var(--lac-red);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.step {
+  counter-increment: step;
+  padding-top: 1rem;
+  border-top: 2px solid var(--lac-red);
+}
+
+.step::before {
+  content: counter(step, decimal-leading-zero);
+  display: block;
+  margin-bottom: 0.6rem;
+  font-family: var(--face-util);
+  font-size: var(--step--1);
+  color: var(--lac-red);
+}
+
+.step__title {
+  margin: 0 0 0.4rem;
+  font-family: var(--face-display);
+  font-size: var(--step-1);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.step__body {
+  margin: 0;
+  color: color-mix(in srgb, var(--ground) 78%, var(--ahar));
+}
+
+/* --- questions ------------------------------------------------------------ */
+
+.questions {
+  padding: clamp(3.5rem, 8vw, 6.5rem) var(--gutter);
+  border-bottom: var(--rule);
+}
+
+.faq {
+  max-width: var(--measure);
+  border-top: var(--rule);
+}
+
+.faq details {
+  border-bottom: var(--rule);
+}
+
+.faq summary {
+  padding: 1.1rem 0;
+  font-size: var(--step-1);
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  float: right;
+  margin-left: 1rem;
+  font-family: var(--face-util);
+  font-weight: 400;
+  color: var(--brass);
+}
+
+.faq details[open] summary::after {
+  content: "\2212";
+}
+
+.faq p {
+  margin: 0 0 1.25rem;
+  max-width: 58ch;
+  color: var(--ahar-dim);
+}
+
+/* --- closer + colophon ---------------------------------------------------- */
+
+.closer {
+  padding: clamp(3.5rem, 8vw, 6.5rem) var(--gutter);
+}
+
+.closer__title {
+  max-width: 16ch;
+  margin: 0;
+  font-size: var(--step-2);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem clamp(1.5rem, 5vw, 4rem);
+  padding: 2rem var(--gutter) 3rem;
+  border-top: var(--rule);
+}
+
+.colophon__ar {
+  margin: 0;
+  font-family: var(--face-display);
+  font-size: 1.6rem;
+  color: var(--brass);
+}
+
+.colophon__note {
+  margin: 0;
+  max-width: 34ch;
+  font-size: var(--step--1);
+  color: var(--ahar-dim);
+}
+
+.colophon__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 0;
+  margin-inline-start: auto;
+  padding: 0;
+  list-style: none;
+  font-family: var(--face-util);
+  font-size: var(--step--1);
+}
+
+.colophon__links a {
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--brass) 60%, transparent);
+}
+
+.colophon__links a:hover {
+  color: var(--brass);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .wordmark__ar,
+  .wordmark__nib {
+    animation: none;
+  }
+
+  .wordmark__nib {
+    display: none;
+  }
+
+  .lot {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
