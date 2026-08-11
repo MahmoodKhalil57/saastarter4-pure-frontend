@@ -423,15 +423,15 @@ a {
   flex-direction: column;
   padding: 1.4rem;
   background: var(--ground);
-  opacity: 0;
-  transform: translateY(0.75rem);
   transition: opacity 0.5s ease, transform 0.5s ease;
   transition-delay: var(--reveal-delay, 0ms);
 }
 
-.lot.is-revealed {
-  opacity: 1;
-  transform: none;
+/* Cards render visible by default so the page is complete without JavaScript.
+   The scroll-reveal hide only applies once the head script has tagged <html> with .js. */
+html.js .lot:not(.is-revealed) {
+  opacity: 0;
+  transform: translateY(0.75rem);
 }
 
 .lot__figure {

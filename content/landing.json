@@ -1,21 +1,9 @@
 {
-  "hero": {
-    "eyebrow": "Lot One opens this winter",
-    "word_ar": "قَلَم",
-    "headline": "A pen is not bought. It is cut for the hand that will hold it.",
-    "sub": "We cut reed pens to your nib angle, cook our own soot ink, and burnish paper the slow way. Four items open the shop. Put your name down and you will hear first."
-  },
   "notify": {
-    "heading": "Get the opening notice",
-    "button_label": "Put my name down",
-    "privacy_note": "One message when the shop opens. Nothing else, ever.",
     "success_note": "You are on the list. Watch your inbox.",
-    "closer_heading": "The shop opens once. Be on the list.",
     "form_action": ""
   },
   "craft": {
-    "eyebrow": "How a pen is cut",
-    "heading": "Three cuts, in this order, no going back",
     "steps": [
       {
         "title": "The shoulder",
@@ -32,7 +20,6 @@
     ]
   },
   "faq": {
-    "heading": "Questions",
     "items": [
       {
         "question": "Can I order before the shop opens?",

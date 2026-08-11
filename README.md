@@ -1,9 +1,15 @@
-# saastarter4-pure-frontend
+# pure-frontend
 
-A landing page for a shop that has not opened yet. Pure HTML, CSS, and JavaScript —
-no build step, no dependencies to install. Content is edited through
-[Sveltia CMS](https://sveltiacms.app/), which commits JSON straight back to this
-repository. A commit on `master` is a deploy.
+A landing page for a shop that has not opened yet. Pure HTML and CSS — no build
+step, no dependencies to install, and the page reads complete with JavaScript
+turned off. JS only adds motion and live niceties. Two editors commit straight
+back to this repository, and a commit on `master` is a deploy:
+
+- **[Sveltia CMS](https://sveltiacms.app/)** (`/admin/`) edits _data_: catalog
+  items, craft steps, questions, footer links, the announcement bar, settings.
+- **The visual builder** (`/admin/builder.html`,
+  [GrapesJS](https://grapesjs.com/)) edits _the page itself_ — words, layout,
+  cosmetics — and exports plain HTML and CSS.
 
 The seeded content is a calligraphy supply workshop (Qalam & Ahar). Every word and
 image is CMS-editable, so replace it with the real shop when you have one.
@@ -11,21 +17,29 @@ image is CMS-editable, so replace it with the real shop when you have one.
 ## Layout
 
 ```
-index.html              the page
-assets/css/styles.css   all styling
-assets/js/main.js       loads /content/*.json and fills the page in
-content/site.json       brand, contact, SEO, footer      -> CMS "Settings"
-content/landing.json    hero, sign-up form, craft, FAQ   -> CMS "Landing page"
-content/catalog.json    the Lot One grid                 -> CMS "Catalog"
-media/uploads/          images uploaded through the CMS
-admin/index.html        loads Sveltia CMS from a CDN
-admin/config.yml        the content model
-.nojekyll               tells GitHub Pages to serve the files as-is
+index.html                the page — complete HTML, exported by the builder
+assets/css/styles.css     hand-written styling
+assets/css/page.css       styling authored in the visual builder
+assets/js/render.js       the JSON -> HTML renderers (shared: page + builder)
+assets/js/main.js         runtime enhancement: refresh data, wire form, motion
+content/page.grapes.json  the builder's project file (created on first save)
+content/site.json         announcement, contact, backend  -> CMS "Settings"
+content/landing.json      steps, FAQ, form behaviour      -> CMS "Landing page"
+content/catalog.json      the Lot One grid                -> CMS "Catalog"
+media/uploads/            images uploaded through the CMS
+admin/index.html          loads Sveltia CMS from a CDN
+admin/config.yml          the content model
+admin/builder.html        loads GrapesJS from a CDN
+admin/builder.js          the whole builder integration
+.nojekyll                 tells GitHub Pages to serve the files as-is
 ```
 
-`index.html` ships with the current copy written into it. The JSON files overwrite
-it on load. If a fetch ever fails the page still reads correctly — it just shows
-whatever was last baked into the HTML.
+Who owns what: `index.html` is a compiled artifact of the builder. Its `<head>`
+is hand-owned and preserved verbatim on every save; its `<body>` is whatever was
+last saved in the builder, with the CMS data lists baked in so the page needs no
+JavaScript to read. `main.js` only _refreshes_ the lists and the announcement
+from `/content/*.json` at load, so a CMS edit shows up before the next builder
+save. If a fetch fails — or JS is off — the baked page stands.
 
 ## Setup, once
 
@@ -55,6 +69,37 @@ Worker, then add `base_url` to the backend block and put `oauth` back into
 
 Saving in the CMS commits to `master`, which redeploys the site. Give it a minute.
 
+## Editing the page visually
+
+Open `https://<owner>.github.io/<repo>/admin/builder.html`.
+
+The builder is [GrapesJS](https://grapesjs.com/) pinned from a CDN, editing the
+real page against the real stylesheet. The first run imports `index.html` once;
+after that the editor loads its own project file and never re-parses the HTML —
+`content/page.grapes.json` is the source of truth for the page, and
+`index.html` is re-exported from it on every save. Saving writes three files in
+one commit:
+
+```
+content/page.grapes.json   the editable project
+index.html                 the exported page, CMS data baked in
+assets/css/page.css        styles authored in the editor
+```
+
+**Connect GitHub** asks for the same kind of personal access token as the CMS
+(stored in this browser only), reads the repository from `admin/config.yml`,
+and commits straight to `master`. In a Chromium browser, **Work with local
+folder** writes the files to disk instead — pair it with `bunx serve .` and
+commit when it looks right.
+
+Regions rendered from CMS data — the catalog grid, the steps, the questions,
+the footer links, the announcement bar — appear in the canvas but are locked:
+edit them in the CMS. The builder re-bakes them from the latest JSON into every
+export. Two things follow from the export model: hand edits to `index.html`'s
+`<body>` and to `assets/css/page.css` are overwritten by the next builder save
+(hand-written markup belongs in the builder; hand-written CSS in `styles.css`),
+and the `<head>` stays yours to edit directly.
+
 ## Working locally
 
 ```sh
@@ -63,7 +108,9 @@ bunx serve .          # or: python3 -m http.server 8000
 
 Open `http://localhost:8000/`. Open `http://localhost:8000/admin/` and Sveltia
 offers **Work with Local Repository** — it edits the files on disk through the File
-System Access API (Chromium browsers), no token and no commits until you push.
+System Access API (Chromium browsers), no token and no commits until you push. The
+visual builder does the same at `http://localhost:8000/admin/builder.html` via
+**Work with local folder**.
 
 ## This repository is public
 
@@ -104,3 +151,5 @@ writes an index file on each commit.
 `admin/index.html` pins Sveltia CMS to `0.186.0` rather than tracking latest, so a
 CDN release can never change the editor without you choosing it. Sveltia logs a
 console warning when a newer version ships; bump the one line to take it.
+`admin/builder.html` pins GrapesJS to `0.23.5` for the same reason — two lines
+there (the script and its stylesheet) to bump together.

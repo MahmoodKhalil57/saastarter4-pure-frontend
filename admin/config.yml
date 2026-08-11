@@ -3,6 +3,13 @@
 #
 # CHANGE THIS FIRST: `repo` must be the GitHub repository this site is
 # committed to, in owner/name form. Everything else works as-is.
+#
+# The split between this CMS and the visual builder (/admin/builder.html):
+# the CMS edits DATA — lists and settings that render the same way every
+# time (catalog items, steps, questions, links, the announcement). The words
+# and layout of the page itself are edited visually in the builder, which
+# owns index.html. Headings, the hero, and the page <head> are not here on
+# purpose.
 
 backend:
   name: github
@@ -26,36 +33,23 @@ site_url: https://mahmoodkhalil57.github.io/saastarter4-pure-frontend/
 display_url: https://mahmoodkhalil57.github.io/saastarter4-pure-frontend/
 
 collections:
-  - name: pages
-    label: Pages
+  - name: content
+    label: Content
     icon: description
     files:
       - name: landing
         label: Landing page
         file: content/landing.json
         format: json
-        description: Everything above and below the catalog.
+        description: The steps, the questions, and how the sign-up form behaves.
         fields:
-          - label: Hero
-            name: hero
-            widget: object
-            fields:
-              - { label: Eyebrow, name: eyebrow, widget: string, required: false }
-              - label: Arabic wordmark
-                name: word_ar
-                widget: string
-                hint: The large word drawn across the top of the page. Keep it to one word.
-              - { label: Headline, name: headline, widget: text }
-              - { label: Supporting line, name: sub, widget: text }
           - label: Sign-up form
             name: notify
             widget: object
             fields:
-              - { label: Form heading, name: heading, widget: string }
-              - { label: Button label, name: button_label, widget: string }
-              - { label: Note under the form, name: privacy_note, widget: string }
-              - { label: Message after signing up, name: success_note, widget: string }
-              - { label: Closing heading, name: closer_heading, widget: string }
+              - label: Message after signing up
+                name: success_note
+                widget: string
               - label: Form endpoint
                 name: form_action
                 widget: string
@@ -67,8 +61,6 @@ collections:
             name: craft
             widget: object
             fields:
-              - { label: Eyebrow, name: eyebrow, widget: string, required: false }
-              - { label: Heading, name: heading, widget: string }
               - label: Steps
                 name: steps
                 widget: list
@@ -82,7 +74,6 @@ collections:
             name: faq
             widget: object
             fields:
-              - { label: Heading, name: heading, widget: string }
               - label: Questions
                 name: items
                 widget: list
@@ -98,9 +89,6 @@ collections:
         format: json
         description: The items shown in the Lot One grid.
         fields:
-          - { label: Eyebrow, name: eyebrow, widget: string, required: false }
-          - { label: Heading, name: heading, widget: string }
-          - { label: Intro, name: blurb, widget: text, required: false }
           - label: Items
             name: items
             widget: list
@@ -135,15 +123,8 @@ collections:
         label: Site
         file: content/site.json
         format: json
-        description: Name, contact details, and what search engines see.
+        description: The announcement bar, contact details, and where sign-ups go.
         fields:
-          - label: Brand
-            name: brand
-            widget: object
-            fields:
-              - { label: Arabic name, name: name_ar, widget: string }
-              - { label: Latin name, name: name_latin, widget: string }
-              - { label: Tagline, name: tagline, widget: string, required: false }
           - label: Announcement bar
             name: announcement
             widget: string
@@ -184,15 +165,3 @@ collections:
                 fields:
                   - { label: Label, name: label, widget: string }
                   - { label: URL, name: url, widget: string }
-          - label: Search and sharing
-            name: seo
-            widget: object
-            fields:
-              - { label: Page title, name: title, widget: string }
-              - { label: Description, name: description, widget: text }
-              - { label: Share image, name: share_image, widget: image, required: false }
-          - label: Footer
-            name: footer
-            widget: object
-            fields:
-              - { label: Note, name: note, widget: text }

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Qalam &amp; Ahar — page builder</title>
+
+    <!-- Pinned on purpose, same discipline as the Sveltia line in index.html.
+         Bump both lines together when taking a new GrapesJS release. -->
+    <link rel="stylesheet" href="https://unpkg.com/grapesjs@0.23.5/dist/css/grapes.min.css" />
+    <script src="https://unpkg.com/grapesjs@0.23.5/dist/grapes.min.js"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: system-ui, sans-serif;
+      }
+
+      .bar {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+        height: 46px;
+        padding: 0 0.8rem;
+        background: #191016;
+        color: #f4ece2;
+      }
+
+      .bar strong {
+        font-size: 0.85rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .bar__status {
+        flex: 1;
+        overflow: hidden;
+        font-size: 0.8rem;
+        color: #c9b9a8;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .bar__status[data-state="error"] {
+        color: #ff9d80;
+      }
+
+      .bar button {
+        padding: 0.35rem 0.8rem;
+        font: inherit;
+        font-size: 0.8rem;
+        color: #f4ece2;
+        cursor: pointer;
+        background: transparent;
+        border: 1px solid #5c4a3d;
+        border-radius: 3px;
+      }
+
+      .bar button:hover {
+        border-color: #c9b9a8;
+      }
+
+      .bar button[disabled] {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+
+      .bar button.bar__save {
+        background: #b3552e;
+        border-color: #b3552e;
+      }
+
+      #gjs {
+        height: calc(100% - 46px);
+        border: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="bar">
+      <strong>Page builder</strong>
+      <span class="bar__status" id="status">Loading…</span>
+      <button id="connect-local" hidden>Work with local folder</button>
+      <button id="connect-github">Connect GitHub</button>
+      <button class="bar__save" id="save" disabled>Save</button>
+    </header>
+
+    <div id="gjs"></div>
+
+    <script src="../assets/js/render.js"></script>
+    <script src="builder.js"></script>
+  </body>
+</html>

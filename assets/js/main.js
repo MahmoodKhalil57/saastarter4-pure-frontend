@@ -1,12 +1,22 @@
 /* ===========================================================================
-   Qalam & Ahar — content loader
-   No build step. The page ships with real copy baked into index.html; this
-   script replaces it with whatever the CMS last committed to /content.
-   If a fetch fails, the baked-in copy stays and the page still works.
+   Qalam & Ahar — runtime enhancement
+   No build step, and nothing here is load-bearing for reading the page: the
+   words and the catalog are baked into index.html (by hand or by the visual
+   builder in /admin/builder.html). This script only
+     1. refreshes the data-driven lists and the announcement bar from
+        /content/*.json, so a CMS edit shows up without re-saving the page,
+     2. wires the sign-up form,
+     3. adds the scroll-reveal motion.
+   If a fetch fails — or JavaScript never runs — the baked-in page stands.
+   Rendering logic lives in render.js (shared with the builder).
    =========================================================================== */
 
 (function () {
   "use strict";
+
+  // Opt in to JS-only styling (the scroll-reveal hide) only once this script
+  // is actually running, so a blocked script can never strand content hidden.
+  document.documentElement.classList.add("js");
 
   // Everything resolves against the directory the page is served from, so the
   // same files work at user.github.io/repo/ and at a custom domain root.
@@ -19,28 +29,8 @@
     return new URL(String(path).replace(/^\/+/, ""), BASE).href;
   }
 
-  /** Read `a.b.c` out of an object, returning undefined rather than throwing. */
-  function get(root, path) {
-    return String(path)
-      .split(".")
-      .reduce(function (node, key) {
-        return node == null ? undefined : node[key];
-      }, root);
-  }
-
-  function isFilled(value) {
-    if (value == null) return false;
-    if (typeof value === "string") return value.trim() !== "";
-    if (Array.isArray(value)) return value.length > 0;
-    return true;
-  }
-
-  function el(tag, className, text) {
-    var node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text != null) node.textContent = text;
-    return node;
-  }
+  var get = window.PureRender.get;
+  var isFilled = window.PureRender.isFilled;
 
   function fetchJSON(name) {
     return fetch(new URL("content/" + name, BASE).href, { cache: "no-cache" })
@@ -52,136 +42,6 @@
         console.warn("[content]", err.message);
         return null;
       });
-  }
-
-  /* --- renderers ---------------------------------------------------------- */
-
-  function renderLots(container, items) {
-    container.replaceChildren();
-
-    items.forEach(function (item, index) {
-      var li = el("li", "lot");
-      li.style.setProperty("--reveal-delay", index * 70 + "ms");
-
-      var figure = el("figure", "lot__figure");
-      if (isFilled(item.image)) {
-        var img = el("img");
-        img.src = asset(item.image);
-        img.alt = item.image_alt || item.title || "";
-        img.loading = "lazy";
-        figure.appendChild(img);
-      } else {
-        figure.classList.add("lot__figure--empty");
-      }
-      li.appendChild(figure);
-
-      var meta = el("p", "lot__meta");
-      meta.appendChild(el("span", null, item.lot ? "Lot " + item.lot : ""));
-      if (isFilled(item.status)) meta.appendChild(el("span", "lot__status", item.status));
-      li.appendChild(meta);
-
-      li.appendChild(el("h3", "lot__title", item.title || ""));
-      if (isFilled(item.blurb)) li.appendChild(el("p", "lot__blurb", item.blurb));
-      if (isFilled(item.price)) li.appendChild(el("p", "lot__price", item.price));
-
-      container.appendChild(li);
-    });
-
-    reveal(container.querySelectorAll(".lot"));
-  }
-
-  function renderSteps(container, items) {
-    container.replaceChildren();
-
-    items.forEach(function (item) {
-      var li = el("li", "step");
-      li.appendChild(el("h3", "step__title", item.title || ""));
-      if (isFilled(item.body)) li.appendChild(el("p", "step__body", item.body));
-      container.appendChild(li);
-    });
-  }
-
-  function renderFaq(container, items) {
-    container.replaceChildren();
-
-    items.forEach(function (item) {
-      var details = document.createElement("details");
-      var summary = el("summary", null, item.question || "");
-      details.appendChild(summary);
-      details.appendChild(el("p", null, item.answer || ""));
-      container.appendChild(details);
-    });
-  }
-
-  function renderLinks(container, items) {
-    container.replaceChildren();
-
-    items.forEach(function (item) {
-      if (!isFilled(item.url) || !isFilled(item.label)) return;
-      var li = el("li");
-      var a = el("a", null, item.label);
-      a.href = item.url;
-      if (/^https?:/.test(item.url)) {
-        a.rel = "noopener";
-        a.target = "_blank";
-      }
-      li.appendChild(a);
-      container.appendChild(li);
-    });
-  }
-
-  var LIST_RENDERERS = {
-    "catalog.items": renderLots,
-    "landing.craft.steps": renderSteps,
-    "landing.faq.items": renderFaq,
-    "site.contact.links": renderLinks,
-  };
-
-  /* --- binding ------------------------------------------------------------ */
-
-  function bind(content) {
-    document.querySelectorAll("[data-text]").forEach(function (node) {
-      var value = get(content, node.dataset.text);
-      if (isFilled(value)) node.textContent = value;
-    });
-
-    document.querySelectorAll("[data-when]").forEach(function (node) {
-      node.hidden = !isFilled(get(content, node.dataset.when));
-    });
-
-    document.querySelectorAll("[data-list]").forEach(function (node) {
-      var path = node.dataset.list;
-      var items = get(content, path);
-      var render = LIST_RENDERERS[path];
-      if (render && Array.isArray(items) && items.length) render(node, items);
-    });
-
-    applyHead(content);
-    applyForms(content);
-  }
-
-  function applyHead(content) {
-    var seo = get(content, "site.seo") || {};
-    var title = seo.title || get(content, "site.brand.name_latin");
-    if (isFilled(title)) {
-      document.title = title;
-      setMeta("property", "og:title", title);
-    }
-    if (isFilled(seo.description)) {
-      setMeta("name", "description", seo.description);
-      setMeta("property", "og:description", seo.description);
-    }
-    if (isFilled(seo.share_image)) setMeta("property", "og:image", asset(seo.share_image));
-  }
-
-  function setMeta(attr, key, value) {
-    var tag = document.head.querySelector("meta[" + attr + '="' + key + '"]');
-    if (!tag) {
-      tag = document.createElement("meta");
-      tag.setAttribute(attr, key);
-      document.head.appendChild(tag);
-    }
-    tag.setAttribute("content", value);
   }
 
   /* --- the notify form ---------------------------------------------------- */
@@ -345,7 +205,15 @@
 
   Promise.all([fetchJSON("site.json"), fetchJSON("landing.json"), fetchJSON("catalog.json")]).then(
     function (parts) {
-      bind({ site: parts[0] || {}, landing: parts[1] || {}, catalog: parts[2] || {} });
+      var content = { site: parts[0] || {}, landing: parts[1] || {}, catalog: parts[2] || {} };
+      window.PureRender.bindAll(document, content, { asset: asset });
+      applyForms(content);
+
+      var lots = document.querySelectorAll(".lot");
+      lots.forEach(function (node, index) {
+        node.style.setProperty("--reveal-delay", index * 70 + "ms");
+      });
+      reveal(lots);
     }
   );
 })();
