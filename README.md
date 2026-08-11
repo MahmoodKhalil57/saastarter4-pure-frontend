@@ -106,7 +106,10 @@ Saving in the CMS commits to `master`, which redeploys the site. Give it a minut
 
 ## Editing the page visually
 
-Open `https://<owner>.github.io/<repo>/admin/builder.html`.
+Open the dashboard (`/admin/`) and pick **Page** at the top of the sidebar —
+the builder opens inside the dashboard, on the same sign-in, and **‹ Content**
+brings you back to where you were. (`/admin/builder.html` also works directly;
+it is the same tool.)
 
 The builder is [GrapesJS](https://grapesjs.com/) pinned from a CDN, editing the
 real page against the real stylesheet. The first run imports `index.html` once;

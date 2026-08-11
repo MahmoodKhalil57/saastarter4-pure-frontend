@@ -574,6 +574,28 @@
     ui.save.addEventListener("click", save);
     ui.saveBlock.addEventListener("click", saveBlock);
 
+    // Inside the dashboard (admin/index.html embeds this page via shell.js),
+    // offer the way back. The dashboard removes the overlay on this message.
+    if (window.self !== window.top) {
+      var back = document.createElement("button");
+      back.id = "back-to-content";
+      back.textContent = "‹ Content";
+      back.addEventListener("click", function () {
+        var dirty = 0;
+        try {
+          dirty = state.editor ? state.editor.getDirtyCount() : 0;
+        } catch (error) {
+          /* older API — skip the guard */
+        }
+        if (dirty > 0 && !window.confirm("Leave the builder? Unsaved page edits will be lost.")) {
+          return;
+        }
+        window.parent.postMessage({ type: "pure-builder:close" }, window.location.origin);
+      });
+      var bar = document.querySelector(".bar");
+      bar.insertBefore(back, bar.firstChild);
+    }
+
     Promise.all([
       loadConfig(),
       loadContent(),
