@@ -495,6 +495,13 @@
           protectedCss: "",
           canvas: {
             styles: [FONTS_URL, new URL("assets/css/styles.css", SITE_BASE).href],
+            // GrapesJS's default frameStyle paints the canvas body white, which
+            // hides the site's own dark body background. Keep only its
+            // scrollbar styling so the canvas shows exactly what the site does.
+            frameStyle:
+              "* ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1) }" +
+              "* ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2) }" +
+              "* ::-webkit-scrollbar { width: 10px }",
           },
           assetManager: { upload: false },
           blockManager: { blocks: BLOCKS },
