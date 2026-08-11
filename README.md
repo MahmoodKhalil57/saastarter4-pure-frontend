@@ -154,7 +154,7 @@ writes an index file on each commit.
 
 ## Pinned version
 
-`admin/index.html` pins Sveltia CMS to `0.186.0` rather than tracking latest, so a
+`admin/index.html` pins Sveltia CMS to `0.187.0` rather than tracking latest, so a
 CDN release can never change the editor without you choosing it. Sveltia logs a
 console warning when a newer version ships; bump the one line to take it.
 `admin/builder.html` pins GrapesJS to `0.23.5` for the same reason — two lines

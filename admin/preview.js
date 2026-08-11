@@ -10,6 +10,12 @@
    the live page uses pours the draft content in — draft values for the file
    being edited, last-committed JSON for the other two. No React, no build.
 
+   One rule keeps this honest: NEVER touch the DOM during the component call.
+   React owns the iframe body as its root container; its first commit clears
+   the container's children, and mutating it mid-render fights the reconciler.
+   The component only records the latest request and schedules a paint with
+   setTimeout(0), which lands after React has committed.
+
    Loaded by admin/index.html after sveltia-cms.js and ../assets/js/render.js.
    =========================================================================== */
 
@@ -39,8 +45,9 @@
   var bodyHtml = "";
   var committed = { site: {}, landing: {}, catalog: {} };
   var ready = false;
-  /** Latest render request per preview document, replayed once loading ends. */
+  /** The latest paint request; painting is always deferred (see header). */
   var pending = null;
+  var flushScheduled = false;
 
   function siteFetch(path) {
     return fetch(new URL(path, SITE_BASE).href, { cache: "no-cache" });
@@ -73,10 +80,7 @@
     committed.landing = parts[2] || {};
     committed.catalog = parts[3] || {};
     ready = true;
-    if (pending) {
-      apply(pending.doc, pending.fileKey, pending.props);
-      pending = null;
-    }
+    scheduleFlush();
   });
 
   /* --- painting ------------------------------------------------------------ */
@@ -106,11 +110,12 @@
   }
 
   function apply(doc, fileKey, props) {
-    var firstPaint = doc.body.getAttribute("data-site-preview") !== "1";
+    // React's first commit clears the iframe body, so detect injection by
+    // content, not by a marker: re-inject whenever the page isn't there.
+    var firstPaint = !doc.querySelector("main");
 
     if (firstPaint) {
       doc.body.innerHTML = bodyHtml;
-      doc.body.setAttribute("data-site-preview", "1");
     }
 
     var content = {
@@ -128,16 +133,32 @@
     }
   }
 
+  function scheduleFlush() {
+    if (flushScheduled) return;
+    flushScheduled = true;
+    setTimeout(function () {
+      flushScheduled = false;
+      if (!ready || !pending || !bodyHtml) return;
+      var request = pending;
+      try {
+        apply(request.doc, request.fileKey, request.props);
+        pending = null;
+      } catch (error) {
+        console.warn("[preview]", error);
+      }
+    }, 0);
+  }
+
   /* --- registration --------------------------------------------------------- */
 
-  /** One template per CMS file; each returns null and paints the iframe DOM. */
+  /** One template per CMS file. Each returns null and never touches the DOM
+      synchronously — it records the request and lets scheduleFlush paint
+      after React's commit. */
   function sitePreview(fileKey) {
     return function SitePreview(props) {
-      var doc = props.document;
-
-      if (doc) {
-        if (ready) apply(doc, fileKey, props);
-        else pending = { doc: doc, fileKey: fileKey, props: props };
+      if (props.document) {
+        pending = { doc: props.document, fileKey: fileKey, props: props };
+        scheduleFlush();
       }
 
       return null;
