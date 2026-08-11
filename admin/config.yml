@@ -149,6 +149,25 @@ collections:
             widget: string
             required: false
             hint: Shown across the top of the page. Leave empty to hide the bar.
+          - label: Backend
+            name: backend
+            widget: object
+            hint: >-
+              The saastarter4-emdash instance that receives sign-ups. Neither
+              value is a secret — this repository is public.
+            fields:
+              - label: Backend URL
+                name: url
+                widget: string
+                required: false
+                hint: >-
+                  e.g. https://saastarter4-emdash.workers.dev — leave empty and the
+                  form falls back to the visitor's mail app.
+              - label: Form
+                name: form
+                widget: string
+                required: false
+                hint: The form's slug in the backend admin, e.g. opening-notice.
           - label: Contact
             name: contact
             widget: object

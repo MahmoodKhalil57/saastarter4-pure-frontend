@@ -186,9 +186,26 @@
 
   /* --- the notify form ---------------------------------------------------- */
 
+  /**
+   * Where a sign-up goes, in order of preference:
+   *   1. the saastarter4-emdash backend, if this site has been told about one
+   *   2. any third-party endpoint set in the CMS (Formspree and friends)
+   *   3. the visitor's own mail app
+   * This repo is public, so none of these can be a secret — the form id
+   * identifies a form, it does not authorise anything.
+   */
+  function submitEndpoint(content) {
+    var backend = get(content, "site.backend") || {};
+    if (isFilled(backend.url) && isFilled(backend.form)) {
+      return String(backend.url).replace(/\/+$/, "") + "/api/f/" + encodeURIComponent(backend.form);
+    }
+    var action = get(content, "landing.notify.form_action");
+    return isFilled(action) ? action : "";
+  }
+
   function applyForms(content) {
     var notify = get(content, "landing.notify") || {};
-    var action = isFilled(notify.form_action) ? notify.form_action : "";
+    var action = submitEndpoint(content);
     var mailto = get(content, "site.contact.email");
     var success = notify.success_note || "You are on the list. Watch your inbox.";
 
@@ -228,15 +245,37 @@
         button.disabled = true;
         say(status, "Sending…");
 
+        // Sent as FormData on purpose: multipart/form-data is a CORS-safe
+        // content type, so the browser skips the preflight round trip that
+        // application/json would force on every submission.
         fetch(action, {
           method: "POST",
           headers: { Accept: "application/json" },
           body: new FormData(form),
         })
           .then(function (res) {
-            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.json().then(
+              function (body) {
+                return { ok: res.ok, body: body };
+              },
+              function () {
+                return { ok: res.ok, body: {} };
+              }
+            );
+          })
+          .then(function (result) {
+            // The backend reports per-field problems rather than a bare failure.
+            var fieldError = (result.body.errors || [])[0];
+            if (fieldError) {
+              say(status, fieldError.message, "error");
+              return;
+            }
+            if (!result.ok || result.body.success === false) {
+              say(status, result.body.message || "That did not send. Try again.", "error");
+              return;
+            }
             form.reset();
-            say(status, success);
+            say(status, result.body.message || success);
           })
           .catch(function () {
             say(status, "That did not send. Try again, or email us directly.", "error");

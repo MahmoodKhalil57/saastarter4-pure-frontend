@@ -65,12 +65,31 @@ Open `http://localhost:8000/`. Open `http://localhost:8000/admin/` and Sveltia
 offers **Work with Local Repository** — it edits the files on disk through the File
 System Access API (Chromium browsers), no token and no commits until you push.
 
+## This repository is public
+
+Everything here is readable by anyone, deliberately. Nothing in it is a secret and
+nothing in it may become one. Anything that needs a secret, shared state, identity,
+or write authority lives in the backend — `saastarter4-emdash` — and the line
+between the two is written down in that repo's `ARCHITECTURE.md`.
+
+The two values that connect them, `backend.url` and `backend.form`, are public by
+design. The form id identifies a form; it does not authorise anything.
+
 ## The sign-up form
 
-It posts nowhere until you tell it where. Set **Landing page → Sign-up form → Form
-endpoint** in the CMS to a POST URL from Formspree, Basin, or similar. Until then
-the form opens the visitor's mail app addressed to **Settings → Contact → Email**,
-so no address is silently dropped.
+Three places it can go, in order:
+
+1. **The backend.** Set **Settings → Backend** in the CMS to your
+   `saastarter4-emdash` URL and the form's slug. Submissions are stored there,
+   with spam protection and notifications.
+2. **A third-party endpoint.** Set **Landing page → Sign-up form → Form endpoint**
+   to a Formspree/Basin URL.
+3. **Nothing configured** — the form opens the visitor's mail app addressed to
+   **Settings → Contact → Email**, so no address is silently dropped.
+
+Submissions are sent as `FormData` on purpose: `multipart/form-data` is a CORS-safe
+content type, so the browser skips the preflight round trip that JSON would force
+on every submission.
 
 ## When this becomes a real shop
 

@@ -5,11 +5,21 @@
     "tagline": "A two-bench calligraphy supply workshop"
   },
   "announcement": "Lot One opens to the list first. Nothing is held back for later.",
+  "backend": {
+    "url": "",
+    "form": "opening-notice"
+  },
   "contact": {
     "email": "bench@qalam-ahar.example",
     "links": [
-      { "label": "Instagram", "url": "https://instagram.com/" },
-      { "label": "Email the bench", "url": "mailto:bench@qalam-ahar.example" }
+      {
+        "label": "Instagram",
+        "url": "https://instagram.com/"
+      },
+      {
+        "label": "Email the bench",
+        "url": "mailto:bench@qalam-ahar.example"
+      }
     ]
   },
   "seo": {
