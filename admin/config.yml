@@ -107,7 +107,17 @@ collections:
                 name: status
                 widget: select
                 required: false
-                options: ["Opens first", "Pre-order", "30 made", "12 made", "Sold out"]
+                # The explicit empty option is load-bearing, not cosmetic: on an
+                # optional select with no empty-value option, Sveltia (<= 0.187)
+                # prepends one reactively and enters an infinite loop as soon as
+                # the field has a value, hanging the whole entry editor.
+                options:
+                  - { label: Not set, value: "" }
+                  - { label: Opens first, value: Opens first }
+                  - { label: Pre-order, value: Pre-order }
+                  - { label: 30 made, value: 30 made }
+                  - { label: 12 made, value: 12 made }
+                  - { label: Sold out, value: Sold out }
               - { label: Photograph, name: image, widget: image, required: false }
               - label: Photograph description
                 name: image_alt
