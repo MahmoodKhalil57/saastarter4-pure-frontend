@@ -62,7 +62,7 @@
         node.remove();
       }
     });
-    option.appendChild(document.createTextNode("Page"));
+    option.appendChild(document.createTextNode("Builder"));
 
     option.addEventListener(
       "click",

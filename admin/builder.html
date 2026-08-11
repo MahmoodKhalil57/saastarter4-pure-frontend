@@ -72,6 +72,16 @@
         opacity: 0.4;
       }
 
+      .bar select {
+        padding: 0.35rem 0.5rem;
+        font: inherit;
+        font-size: 0.8rem;
+        color: #f4ece2;
+        background: #2a1d24;
+        border: 1px solid #5c4a3d;
+        border-radius: 3px;
+      }
+
       .bar button.bar__save {
         background: #b3552e;
         border-color: #b3552e;
@@ -88,7 +98,11 @@
     <header class="bar">
       <strong>Page builder</strong>
       <span class="bar__status" id="status">Loading…</span>
-      <button id="save-block" title="Save the selected element as a reusable block">
+      <select id="page-select" title="Switch page" hidden></select>
+      <button id="make-symbol" title="Make the selected element reusable — edits sync everywhere">
+        Make reusable
+      </button>
+      <button id="save-block" title="Save a copy of the selected element as a starter block">
         Save block
       </button>
       <button id="connect-local" hidden>Work with local folder</button>

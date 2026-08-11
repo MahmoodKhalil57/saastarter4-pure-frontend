@@ -54,10 +54,11 @@
    * This repo is public, so none of these can be a secret — the form id
    * identifies a form, it does not authorise anything.
    */
-  function submitEndpoint(content) {
+  function submitEndpoint(content, slug) {
     var backend = get(content, "site.backend") || {};
-    if (isFilled(backend.url) && isFilled(backend.form)) {
-      return String(backend.url).replace(/\/+$/, "") + "/api/f/" + encodeURIComponent(backend.form);
+    var form = slug || backend.form;
+    if (isFilled(backend.url) && isFilled(form)) {
+      return String(backend.url).replace(/\/+$/, "") + "/api/f/" + encodeURIComponent(form);
     }
     var action = get(content, "landing.notify.form_action");
     return isFilled(action) ? action : "";
@@ -65,11 +66,13 @@
 
   function applyForms(content) {
     var notify = get(content, "landing.notify") || {};
-    var action = submitEndpoint(content);
     var mailto = get(content, "site.contact.email");
     var success = notify.success_note || "You are on the list. Watch your inbox.";
 
-    document.querySelectorAll(".notify").forEach(function (form) {
+    // Any form carrying data-form (stamped by the builder from a symbol's
+    // binding) is wired to the backend; .notify is the hand-written original.
+    document.querySelectorAll("form[data-form], form.notify").forEach(function (form) {
+      var action = submitEndpoint(content, form.dataset.form);
       form.addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -203,9 +206,19 @@
 
   /* --- go ----------------------------------------------------------------- */
 
-  Promise.all([fetchJSON("site.json"), fetchJSON("landing.json"), fetchJSON("catalog.json")]).then(
+  Promise.all([
+    fetchJSON("site.json"),
+    fetchJSON("landing.json"),
+    fetchJSON("catalog.json"),
+    fetchJSON("pages.json"),
+  ]).then(
     function (parts) {
-      var content = { site: parts[0] || {}, landing: parts[1] || {}, catalog: parts[2] || {} };
+      var content = {
+        site: parts[0] || {},
+        landing: parts[1] || {},
+        catalog: parts[2] || {},
+        pages: parts[3] || {},
+      };
       window.PureRender.bindAll(document, content, { asset: asset });
       applyForms(content);
 

@@ -42,8 +42,9 @@
 
   /* --- the page, fetched once --------------------------------------------- */
 
-  var bodyHtml = "";
-  var committed = { site: {}, landing: {}, catalog: {} };
+  var bodyHtml = ""; // homepage body — the default preview surface
+  var pageBodies = {}; // slug -> body html, for multi-page sites
+  var committed = { site: {}, landing: {}, catalog: {}, pages: {} };
   var ready = false;
   /** The latest paint request; painting is always deferred (see header). */
   var pending = null;
@@ -63,6 +64,14 @@
       });
   }
 
+  function stripBody(html) {
+    var doc = new DOMParser().parseFromString(html, "text/html");
+    doc.body.querySelectorAll("script").forEach(function (node) {
+      node.remove();
+    });
+    return doc.body.innerHTML;
+  }
+
   Promise.all([
     siteFetch("index.html").then(function (res) {
       return res.ok ? res.text() : "";
@@ -70,23 +79,58 @@
     jsonPart("site.json"),
     jsonPart("landing.json"),
     jsonPart("catalog.json"),
-  ]).then(function (parts) {
-    var doc = new DOMParser().parseFromString(parts[0], "text/html");
-    doc.body.querySelectorAll("script").forEach(function (node) {
-      node.remove();
+    jsonPart("pages.json"),
+  ])
+    .then(function (parts) {
+      bodyHtml = stripBody(parts[0]);
+      pageBodies.index = bodyHtml;
+      committed.site = parts[1] || {};
+      committed.landing = parts[2] || {};
+      committed.catalog = parts[3] || {};
+      committed.pages = parts[4] || {};
+
+      // Multi-page sites: fetch the other exported pages, so the preview can
+      // show whichever page actually holds the data being edited.
+      var others = (committed.pages.pages || []).filter(function (page) {
+        return page.slug && page.slug !== "index";
+      });
+      return Promise.all(
+        others.map(function (page) {
+          return siteFetch(page.slug + ".html")
+            .then(function (res) {
+              return res.ok ? res.text() : null;
+            })
+            .then(function (html) {
+              if (html) pageBodies[page.slug] = stripBody(html);
+            })
+            .catch(function () {
+              /* not exported yet */
+            });
+        })
+      );
+    })
+    .then(function () {
+      ready = true;
+      scheduleFlush();
     });
-    bodyHtml = doc.body.innerHTML;
-    committed.site = parts[1] || {};
-    committed.landing = parts[2] || {};
-    committed.catalog = parts[3] || {};
-    ready = true;
-    scheduleFlush();
-  });
+
+  /** Pick the page whose markup holds the data the current file feeds. */
+  function bodyFor(fileKey) {
+    var hint = 'data-list="' + fileKey + ".";
+    var slugs = Object.keys(pageBodies);
+
+    for (var i = 0; i < slugs.length; i += 1) {
+      if (pageBodies[slugs[i]].indexOf(hint) !== -1) {
+        return { slug: slugs[i], html: pageBodies[slugs[i]] };
+      }
+    }
+    return { slug: "index", html: bodyHtml };
+  }
 
   /* --- painting ------------------------------------------------------------ */
 
   /** Where to scroll on first paint, so the edited data is on screen. */
-  var FOCUS = { catalog: "#lots", landing: "#craft", site: ".banner" };
+  var FOCUS = { catalog: "#lots", landing: "#craft", site: ".banner", pages: ".masthead" };
 
   /** The last painted preview, so field focus can steer it (see below). */
   var active = null;
@@ -113,18 +157,22 @@
   }
 
   function apply(doc, fileKey, props) {
+    var chosen = bodyFor(fileKey);
     // React's first commit clears the iframe body, so detect injection by
-    // content, not by a marker: re-inject whenever the page isn't there.
-    var firstPaint = !doc.querySelector("main");
+    // content, not by a marker — and re-inject when the right page changes.
+    var firstPaint =
+      !doc.querySelector("main") || doc.body.getAttribute("data-preview-src") !== chosen.slug;
 
     if (firstPaint) {
-      doc.body.innerHTML = bodyHtml;
+      doc.body.innerHTML = chosen.html;
+      doc.body.setAttribute("data-preview-src", chosen.slug);
     }
 
     var content = {
       site: committed.site,
       landing: committed.landing,
       catalog: committed.catalog,
+      pages: committed.pages,
     };
 
     content[fileKey] = toPlain(props.entry && props.entry.get("data"));
@@ -180,6 +228,7 @@
       [/^contact/, bySelector(".colophon")],
       [/^backend/, bySelector("#notify")],
     ],
+    pages: [[/^pages/, bySelector(".masthead__nav")]],
   };
 
   function bySelector(selector) {
@@ -274,6 +323,8 @@
   window.CMS.registerPreviewTemplate("landing", sitePreview("landing"));
   window.CMS.registerPreviewTemplate("catalog", sitePreview("catalog"));
   window.CMS.registerPreviewTemplate("site", sitePreview("site"));
+  // Editing Pages previews the menu live (nav renders from the draft list).
+  window.CMS.registerPreviewTemplate("pages", sitePreview("pages"));
 
   // Console/debug access — lets you drive a preview by hand.
   window.PurePreview = { sitePreview: sitePreview };

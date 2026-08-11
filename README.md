@@ -17,21 +17,26 @@ image is CMS-editable, so replace it with the real shop when you have one.
 ## Layout
 
 ```
-index.html                the page — complete HTML, exported by the builder
-assets/css/styles.css     hand-written styling
-assets/css/page.css       styling authored in the visual builder
-assets/js/render.js       the JSON -> HTML renderers (shared: page + builder)
-assets/js/main.js         runtime enhancement: refresh data, wire form, motion
-content/page.grapes.json  the builder's project file (created on first save)
-content/site.json         announcement, contact, backend  -> CMS "Settings"
-content/landing.json      steps, FAQ, form behaviour      -> CMS "Landing page"
-content/catalog.json      the Lot One grid                -> CMS "Catalog"
-media/uploads/            images uploaded through the CMS
-admin/index.html          loads Sveltia CMS from a CDN
-admin/config.yml          the content model
-admin/builder.html        loads GrapesJS from a CDN
-admin/builder.js          the whole builder integration
-.nojekyll                 tells GitHub Pages to serve the files as-is
+index.html (+ <slug>.html)  the pages — complete HTML, exported by the builder
+assets/css/styles.css       hand-written styling
+assets/css/page.css         styling authored in the visual builder
+assets/js/render.js         the JSON -> HTML renderers (shared: page + builder)
+assets/js/main.js           runtime enhancement: refresh data, wire forms, motion
+content/pages.json          the pages: slug, title, menu   -> CMS "Structure"
+content/symbols.json        reusable elements + bindings   -> CMS "Structure"
+content/page.grapes.json    the builder's project file — every page's drawing
+content/blocks.grapes.json  designer-saved starter blocks
+content/site.json           announcement, contact, backend -> CMS "Settings"
+content/landing.json        steps, FAQ, form behaviour     -> CMS "Landing page"
+content/catalog.json        the Lot One grid               -> CMS "Catalog"
+media/uploads/              images uploaded through the CMS
+admin/index.html            loads Sveltia CMS from a CDN — the dashboard
+admin/config.yml            the content model
+admin/builder.html          loads GrapesJS from a CDN
+admin/builder.js            the whole builder integration
+admin/preview.js            live preview inside the CMS
+admin/shell.js              puts the builder inside the dashboard
+.nojekyll                   tells GitHub Pages to serve the files as-is
 ```
 
 Who owns what: `index.html` is a compiled artifact of the builder. Its `<head>`
@@ -44,7 +49,25 @@ save. If a fetch fails — or JS is off — the baked page stands.
 ## Two editors, one rule
 
 The two admin surfaces are not two ways to do the same thing.
-**The builder owns what you would point at; the CMS owns what you would count.**
+**Sveltia owns what things _are_; the builder owns what they _look like_.**
+(Equivalently: the builder owns what you would point at; the CMS owns what
+you would count or configure.)
+
+Concretely, Sveltia **creates and binds** under Structure:
+
+- **Pages** (`content/pages.json`): slug, title, description, menu label.
+  The builder composes each declared page and exports it to `<slug>.html`;
+  it cannot create or delete pages. Give a page a menu label and the site
+  menu renders from this list on every page.
+- **Symbols** (`content/symbols.json`): reusable elements and their backend
+  **bindings**. A symbol bound to a form (`type: form`, plus the form's slug
+  from `odash.json`) gets its submit endpoint stamped at export and wired at
+  runtime — backend functionality attaches here, as configuration, never as
+  code in the builder.
+
+And the builder **draws and places**: page bodies, symbol bodies (declared
+symbols appear as stubs to fill in), instances from the "Reusable" block
+category. Editing a symbol updates every instance on every page.
 
 - **GrapesJS** (`/admin/builder.html`) is for visual building — the singular:
   layout, structure, cosmetics, one-off copy. It builds pages out of blocks,
@@ -60,11 +83,19 @@ The two admin surfaces are not two ways to do the same thing.
   _what_ the items are; `render.js` turns one into the other — baked into the
   HTML at save time, refreshed live in the browser.
 
-The graduation path: free-form work is born in the builder. When a saved block
-starts repeating with hand-edited variations, that is the signal to
-industrialize it — add its fields to `admin/config.yml`, give its container a
-`data-list`, teach `render.js` the item shape. From then on editors count it in
-the CMS instead of redrawing it in the builder.
+The graduation path — copy, reference, data:
+
+```
+copy (Save block)   →   reference (Make reusable)   →   data (collection)
+   builder                   builder + Structure           Sveltia
+```
+
+A saved block is a stamp: dropped copies diverge, which is right for "start
+from this pattern." A symbol is a reference: edit once, updated everywhere,
+and bindable to the backend. When a symbol's instances keep wanting different
+content in the same shape, it has outgrown being a symbol — add its fields to
+`admin/config.yml`, give its container a `data-list`, teach `render.js` the
+item shape, and count it in the CMS from then on.
 
 One sign-in covers both: each tool stores the GitHub token where the other
 looks, so signing in to the CMS unlocks the builder and vice versa. Whoever
@@ -106,22 +137,27 @@ Saving in the CMS commits to `master`, which redeploys the site. Give it a minut
 
 ## Editing the page visually
 
-Open the dashboard (`/admin/`) and pick **Page** at the top of the sidebar —
+Open the dashboard (`/admin/`) and pick **Builder** at the top of the sidebar —
 the builder opens inside the dashboard, on the same sign-in, and **‹ Content**
 brings you back to where you were. (`/admin/builder.html` also works directly;
 it is the same tool.)
 
 The builder is [GrapesJS](https://grapesjs.com/) pinned from a CDN, editing the
-real page against the real stylesheet. The first run imports `index.html` once;
+real pages against the real stylesheet. The first run imports `index.html` once;
 after that the editor loads its own project file and never re-parses the HTML —
-`content/page.grapes.json` is the source of truth for the page, and
-`index.html` is re-exported from it on every save. Saving writes three files in
-one commit:
+`content/page.grapes.json` is the source of truth for every page, and each
+`<slug>.html` is re-exported from it on every save. With more than one page
+declared in Structure → Pages, a page switcher appears in the top bar. A page's
+`<head>` is its current file's head with the title/description from its Pages
+entry applied — so SEO lives in the CMS while the rest of the head stays
+hand-editable. Saving writes everything in one commit:
 
 ```
-content/page.grapes.json   the editable project
-index.html                 the exported page, CMS data baked in
-assets/css/page.css        styles authored in the editor
+content/page.grapes.json    the editable project (all pages, all symbols)
+<slug>.html                 every declared page, CMS data baked in
+assets/css/page.css         styles authored in the editor
+content/symbols.json        the symbol registry (builder adds, CMS binds)
+content/blocks.grapes.json  saved starter blocks, if any
 ```
 
 If you have signed in to the CMS in this browser, the builder picks up the

@@ -115,11 +115,31 @@
     });
   }
 
+  /** The site menu, rendered from the Pages list (content/pages.json). Only
+      pages given a menu label appear; while none have one, the hand-written
+      links in the markup are left alone. */
+  function renderNav(container, pages) {
+    var doc = container.ownerDocument;
+    var items = pages.filter(function (page) {
+      return isFilled(page.nav_label);
+    });
+
+    if (!items.length) return;
+    container.replaceChildren();
+
+    items.forEach(function (page) {
+      var a = el(doc, "a", null, page.nav_label);
+      a.setAttribute("href", page.slug === "index" ? "./" : page.slug + ".html");
+      container.appendChild(a);
+    });
+  }
+
   var RENDERERS = {
     "catalog.items": renderLots,
     "landing.craft.steps": renderSteps,
     "landing.faq.items": renderFaq,
     "site.contact.links": renderLinks,
+    "pages.pages": renderNav,
   };
 
   /* --- binding ----------------------------------------------------------- */

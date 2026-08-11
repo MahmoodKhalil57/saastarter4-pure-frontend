@@ -125,6 +125,90 @@ collections:
                 required: false
                 hint: Read aloud by screen readers. Describe the object, not the photo.
 
+  # Structure is where things are CREATED and BOUND: Sveltia owns what a page
+  # or symbol IS (slug, title, backend binding); the visual builder owns what
+  # it LOOKS like. The builder reads these files and composes accordingly.
+  - name: structure
+    label: Structure
+    icon: account_tree
+    files:
+      - name: pages
+        label: Pages
+        file: content/pages.json
+        format: json
+        description: >-
+          The site's pages. The builder composes each one visually and exports
+          it to <slug>.html on save; it cannot create or delete pages — that
+          happens here.
+        fields:
+          - label: Pages
+            name: pages
+            widget: list
+            label_singular: Page
+            summary: "{{fields.slug}} — {{fields.title}}"
+            fields:
+              - label: Slug
+                name: slug
+                widget: string
+                pattern: ["^[a-z0-9-]+$", "Lowercase letters, digits and dashes only"]
+                hint: The file name — "about" becomes about.html. "index" is the homepage.
+              - { label: Title, name: title, widget: string, hint: The browser-tab and search-result title. }
+              - label: Description
+                name: description
+                widget: text
+                required: false
+                hint: What search engines and link previews show.
+              - label: Menu label
+                name: nav_label
+                widget: string
+                required: false
+                hint: >-
+                  Shown in the site menu. Leave empty to keep the page out of
+                  the menu (while any page has one, the menu renders from this
+                  list).
+      - name: symbols
+        label: Symbols
+        file: content/symbols.json
+        format: json
+        description: >-
+          Reusable elements — declared and bound here, drawn in the builder.
+          A symbol edited in the builder updates everywhere it is placed.
+        fields:
+          - label: Symbols
+            name: symbols
+            widget: list
+            label_singular: Symbol
+            summary: "{{fields.name}} ({{fields.id}})"
+            fields:
+              - label: Id
+                name: id
+                widget: string
+                pattern: ["^[a-z0-9-]+$", "Lowercase letters, digits and dashes only"]
+                hint: Stable handle the builder uses to match the drawing to this entry.
+              - { label: Name, name: name, widget: string }
+              - label: Binding
+                name: binding
+                widget: object
+                hint: What backend capability this symbol carries, if any.
+                fields:
+                  # `required: true` with a default dodges the same Sveltia
+                  # optional-select hang the catalog Status field hit.
+                  - label: Type
+                    name: type
+                    widget: select
+                    required: true
+                    default: none
+                    options:
+                      - { label: None — purely visual, value: none }
+                      - { label: Form — submits to the backend, value: form }
+                  - label: Form
+                    name: form
+                    widget: string
+                    required: false
+                    hint: >-
+                      Only used when type is Form: the form's slug in
+                      odash.json, e.g. opening-notice.
+
   - name: settings
     label: Settings
     icon: settings
