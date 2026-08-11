@@ -88,6 +88,9 @@
   /** Where to scroll on first paint, so the edited data is on screen. */
   var FOCUS = { catalog: "#lots", landing: "#craft", site: ".banner" };
 
+  /** The last painted preview, so field focus can steer it (see below). */
+  var active = null;
+
   function toPlain(value) {
     return value && typeof value.toJS === "function" ? value.toJS() : value || {};
   }
@@ -126,6 +129,7 @@
 
     content[fileKey] = toPlain(props.entry && props.entry.get("data"));
     window.PureRender.bindAll(doc, content, { asset: assetResolver(props.getAsset) });
+    active = { doc: doc, fileKey: fileKey };
 
     if (firstPaint && FOCUS[fileKey]) {
       var target = doc.querySelector(FOCUS[fileKey]);
@@ -148,6 +152,108 @@
       }
     }, 0);
   }
+
+  /* --- follow the editor's focus ----------------------------------------------
+     Every Sveltia field editor is wrapped in a light-DOM section carrying
+     data-key-path (e.g. "items.2.title"). Focusing any field bubbles a
+     focusin event out of the shadow DOM, so clicking into a field steers the
+     preview to the exact element that field feeds — the third catalog card,
+     the second question — and flashes it. */
+
+  /** Map a field key path to the element it feeds. Order matters: most
+      specific first. `m` is the regex match; index groups are item indexes. */
+  var TARGET_RULES = {
+    catalog: [
+      [/^items\.(\d+)/, byIndex(".lot-grid .lot", "#lots")],
+      [/^items/, bySelector("#lots")],
+    ],
+    landing: [
+      [/^craft\.steps\.(\d+)/, byIndex(".steps .step", "#craft")],
+      [/^craft/, bySelector("#craft")],
+      [/^faq\.items\.(\d+)/, byIndex(".faq details", "#questions")],
+      [/^faq/, bySelector("#questions")],
+      [/^notify/, bySelector("#notify")],
+    ],
+    site: [
+      [/^announcement/, bySelector(".banner")],
+      [/^contact\.links/, bySelector(".colophon__links")],
+      [/^contact/, bySelector(".colophon")],
+      [/^backend/, bySelector("#notify")],
+    ],
+  };
+
+  function bySelector(selector) {
+    return function (doc) {
+      return doc.querySelector(selector);
+    };
+  }
+
+  function byIndex(itemSelector, fallback) {
+    return function (doc, m) {
+      return doc.querySelectorAll(itemSelector)[Number(m[1])] || doc.querySelector(fallback);
+    };
+  }
+
+  var FLASH_CSS =
+    ".preview-flash { outline: 2px solid #b3552e; outline-offset: 5px; " +
+    "transition: outline-color 0.4s ease; } " +
+    ".preview-flash.preview-flash--fade { outline-color: transparent; }";
+  var flashTimers = [];
+
+  function flash(doc, el) {
+    if (!doc.getElementById("preview-flash-style")) {
+      var style = doc.createElement("style");
+      style.id = "preview-flash-style";
+      style.textContent = FLASH_CSS;
+      doc.head.appendChild(style);
+    }
+    flashTimers.forEach(clearTimeout);
+    flashTimers = [];
+    doc.querySelectorAll(".preview-flash").forEach(function (node) {
+      node.classList.remove("preview-flash", "preview-flash--fade");
+    });
+    el.classList.add("preview-flash");
+    flashTimers.push(
+      setTimeout(function () {
+        el.classList.add("preview-flash--fade");
+      }, 900),
+      setTimeout(function () {
+        el.classList.remove("preview-flash", "preview-flash--fade");
+      }, 1400)
+    );
+  }
+
+  function steerPreview(keyPath) {
+    if (!active || !active.doc.defaultView) return;
+    var rules = TARGET_RULES[active.fileKey] || [];
+
+    for (var i = 0; i < rules.length; i += 1) {
+      var m = keyPath.match(rules[i][0]);
+
+      if (m) {
+        var el = rules[i][1](active.doc, m);
+
+        if (el && !el.hidden) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          flash(active.doc, el);
+        }
+        return;
+      }
+    }
+  }
+
+  document.addEventListener("focusin", function (event) {
+    var path = event.composedPath ? event.composedPath() : [event.target];
+
+    for (var i = 0; i < path.length; i += 1) {
+      var el = path[i];
+
+      if (el && el.dataset && el.dataset.keyPath) {
+        steerPreview(el.dataset.keyPath);
+        return;
+      }
+    }
+  });
 
   /* --- registration --------------------------------------------------------- */
 
