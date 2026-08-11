@@ -67,6 +67,12 @@ editors later, deploy
 Worker, then add `base_url` to the backend block and put `oauth` back into
 `auth_methods`.
 
+The preview pane shows the real page, not an abstract field list: `admin/preview.js`
+registers a preview template per file that injects `index.html` into Sveltia's
+preview iframe and re-runs the site's own renderers (`render.js`) on every
+keystroke — draft values for the file being edited, committed content for the
+rest. Not-yet-committed image uploads preview via blob URLs.
+
 Saving in the CMS commits to `master`, which redeploys the site. Give it a minute.
 
 ## Editing the page visually
