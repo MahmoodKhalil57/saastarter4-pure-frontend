@@ -1,0 +1,72 @@
+{
+  "$schema": "https://odash.dev/schema/v1/project.json",
+  "version": 1,
+  "project": {
+    "name": "Qalam & Ahar",
+    "slug": "qalam-ahar"
+  },
+  "forms": [
+    {
+      "slug": "opening-notice",
+      "name": "Opening notice",
+      "fields": [
+        {
+          "name": "email",
+          "label": "Email address",
+          "type": "email",
+          "required": true,
+          "placeholder": "you@example.com"
+        },
+        {
+          "name": "name",
+          "label": "Your name",
+          "type": "text",
+          "width": "half"
+        }
+      ],
+      "settings": {
+        "confirmationMessage": "You are on the list. Watch your inbox.",
+        "submitLabel": "Put my name down",
+        "spamProtection": "honeypot",
+        "retentionDays": 0
+      }
+    },
+    {
+      "slug": "wholesale",
+      "name": "Wholesale enquiry",
+      "fields": [
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "required": true
+        },
+        {
+          "name": "volume",
+          "label": "Expected volume",
+          "type": "select",
+          "options": [
+            {
+              "value": "small",
+              "label": "Under 50"
+            },
+            {
+              "value": "large",
+              "label": "50 or more"
+            }
+          ]
+        },
+        {
+          "name": "detail",
+          "label": "Tell us more",
+          "type": "textarea",
+          "showWhen": {
+            "field": "volume",
+            "is": "equal",
+            "value": "large"
+          }
+        }
+      ]
+    }
+  ]
+}
