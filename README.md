@@ -41,6 +41,35 @@ JavaScript to read. `main.js` only _refreshes_ the lists and the announcement
 from `/content/*.json` at load, so a CMS edit shows up before the next builder
 save. If a fetch fails — or JS is off — the baked page stands.
 
+## Two editors, one rule
+
+The two admin surfaces are not two ways to do the same thing.
+**The builder owns what you would point at; the CMS owns what you would count.**
+
+- **GrapesJS** (`/admin/builder.html`) is for visual building — the singular:
+  layout, structure, cosmetics, one-off copy. It builds pages out of blocks,
+  and it builds the blocks themselves: select anything in the canvas, hit
+  **Save block**, and it joins the block panel for reuse. The library lives in
+  `content/blocks.grapes.json`, committed with the page.
+- **Sveltia** (`/admin/`) is for what must be standardized: anything that
+  exists N times with one shape (catalog items, steps, questions, links), and
+  anything that configures behaviour (form endpoint, announcement, contact).
+  Repetition needs a schema, and a schema needs a form — that is Sveltia.
+- **The bridge** is a `data-list` container. The builder decides _where_
+  repeated content sits and how everything around it looks; the CMS decides
+  _what_ the items are; `render.js` turns one into the other — baked into the
+  HTML at save time, refreshed live in the browser.
+
+The graduation path: free-form work is born in the builder. When a saved block
+starts repeating with hand-edited variations, that is the signal to
+industrialize it — add its fields to `admin/config.yml`, give its container a
+`data-list`, teach `render.js` the item shape. From then on editors count it in
+the CMS instead of redrawing it in the builder.
+
+One sign-in covers both: each tool stores the GitHub token where the other
+looks, so signing in to the CMS unlocks the builder and vice versa. Whoever
+can push to the repository can do both — that is the entire permission model.
+
 ## Setup, once
 
 1. **Push this directory to a GitHub repository** with `master` as the default branch.
@@ -92,9 +121,11 @@ index.html                 the exported page, CMS data baked in
 assets/css/page.css        styles authored in the editor
 ```
 
-**Connect GitHub** asks for the same kind of personal access token as the CMS
-(stored in this browser only), reads the repository from `admin/config.yml`,
-and commits straight to `master`. In a Chromium browser, **Work with local
+If you have signed in to the CMS in this browser, the builder picks up the
+same GitHub token automatically — no second sign-in. Otherwise **Connect
+GitHub** asks for a personal access token (stored in this browser only, and
+shared back to the CMS), reads the repository from `admin/config.yml`, and
+commits straight to `master`. In a Chromium browser, **Work with local
 folder** writes the files to disk instead — pair it with `bunx serve .` and
 commit when it looks right.
 

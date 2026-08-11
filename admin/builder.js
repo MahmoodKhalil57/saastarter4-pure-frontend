@@ -28,8 +28,10 @@
 
   var SITE_BASE = new URL("..", location.href);
   var PROJECT_PATH = "content/page.grapes.json";
+  var BLOCKS_PATH = "content/blocks.grapes.json";
   var PAGE_CSS_PATH = "assets/css/page.css";
   var TOKEN_KEY = "pure-builder.github-token";
+  var SVELTIA_USER_KEY = "sveltia-cms.user";
   var FONTS_URL =
     "https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap";
   var PAGE_CSS_HEADER =
@@ -40,6 +42,7 @@
   var ui = {
     status: document.getElementById("status"),
     save: document.getElementById("save"),
+    saveBlock: document.getElementById("save-block"),
     local: document.getElementById("connect-local"),
     github: document.getElementById("connect-github"),
   };
@@ -52,7 +55,37 @@
     branch: "master",
     token: localStorage.getItem(TOKEN_KEY) || "",
     dirHandle: null,
+    customBlocks: [], // designer-made blocks, persisted in content/blocks.grapes.json
+    hadBlocksFile: false,
   };
+
+  /* --- one sign-in for both editors -------------------------------------------
+     Sveltia keeps its signed-in user (token included) in localStorage under
+     `sveltia-cms.user`. Anyone who can push can use both tools, so the builder
+     reads that token first and, when it collects one itself, leaves it where
+     Sveltia will find it. Sign in to either editor once and both work. */
+
+  function sveltiaToken() {
+    try {
+      var user = JSON.parse(localStorage.getItem(SVELTIA_USER_KEY) || "null");
+      return user && typeof user.token === "string" ? user.token : "";
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function shareTokenWithSveltia(token) {
+    try {
+      if (!localStorage.getItem(SVELTIA_USER_KEY)) {
+        localStorage.setItem(
+          SVELTIA_USER_KEY,
+          JSON.stringify({ backendName: "github", token: token })
+        );
+      }
+    } catch (error) {
+      /* sharing is best-effort */
+    }
+  }
 
   function status(message, isError) {
     ui.status.textContent = message;
@@ -308,6 +341,35 @@
       });
   }
 
+  function verifyGithub(announce) {
+    return ghFetch("").then(function (repo) {
+      if (repo.permissions && repo.permissions.push === false) {
+        throw new Error("GitHub: that token cannot push to " + state.repo);
+      }
+      state.mode = "github";
+      ui.save.disabled = false;
+      if (announce) {
+        status("Connected to " + state.repo + " (" + state.branch + "). Save commits directly.");
+      }
+    });
+  }
+
+  /** Try the CMS's token, then the builder's own — no prompt. Signing in to
+      either editor once signs you in to both. */
+  function autoConnectGithub() {
+    var token = sveltiaToken() || state.token;
+    if (!state.repo || !token) return;
+    state.token = token;
+
+    verifyGithub(false)
+      .then(function () {
+        status("Signed in with the shared GitHub token. Save commits to " + state.branch + ".");
+      })
+      .catch(function () {
+        state.mode = null; // stale token — the Connect button still works
+      });
+  }
+
   function connectGithub() {
     if (!state.repo) {
       status("config.yml has no backend.repo — set it first.", true);
@@ -316,22 +378,17 @@
     var token = window.prompt(
       "Paste a GitHub personal access token with write access to " +
         state.repo +
-        ".\nIt is stored in this browser's local storage only — same deal as the CMS token.",
-      state.token
+        ".\nStored in this browser only, and shared with the CMS — sign in once, use both.",
+      sveltiaToken() || state.token
     );
     if (!token) return;
     state.token = token.trim();
 
     status("Checking access to " + state.repo + "…");
-    ghFetch("")
-      .then(function (repo) {
-        if (repo.permissions && repo.permissions.push === false) {
-          throw new Error("GitHub: that token cannot push to " + state.repo);
-        }
+    verifyGithub(true)
+      .then(function () {
         localStorage.setItem(TOKEN_KEY, state.token);
-        state.mode = "github";
-        ui.save.disabled = false;
-        status("Connected to " + state.repo + " (" + state.branch + "). Save commits directly.");
+        shareTokenWithSveltia(state.token);
       })
       .catch(function (err) {
         status(err.message, true);
@@ -413,6 +470,12 @@
           { path: PAGE_CSS_PATH, content: PAGE_CSS_HEADER + state.editor.getCss() + "\n" },
           { path: "index.html", content: buildIndexHtml(shellHtml) },
         ];
+        if (state.customBlocks.length || state.hadBlocksFile) {
+          files.push({
+            path: BLOCKS_PATH,
+            content: JSON.stringify(state.customBlocks, null, 2) + "\n",
+          });
+        }
         if (state.mode === "local") {
           return Promise.all(
             files.map(function (file) {
@@ -434,7 +497,49 @@
       });
   }
 
-  /* --- blocks: new content arrives already wearing the site's classes ------- */
+  /* --- blocks ------------------------------------------------------------------
+     Two tiers, one panel. The starter blocks below wear the site's classes;
+     the designer grows the library from there: select anything in the canvas,
+     hit "Save block", and it becomes a reusable block stored in
+     content/blocks.grapes.json — committed with the next save, loaded into
+     the block panel on every visit. This is where visual patterns are born;
+     when one starts repeating with varying content, it graduates into a
+     Sveltia collection (see the README). */
+
+  function slugify(text) {
+    return String(text).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  function saveBlock() {
+    var selected = state.editor && state.editor.getSelected();
+    if (!selected) {
+      status("Select an element in the canvas first, then save it as a block.", true);
+      return;
+    }
+    var label = window.prompt("Name this block:");
+    if (!label) return;
+
+    var html = selected.toHTML();
+    var css = "";
+    try {
+      css = state.editor.getCss({ component: selected }) || "";
+    } catch (error) {
+      /* older API — block still works, styles stay in page.css */
+    }
+    var block = {
+      id: "saved-" + slugify(label) + "-" + (state.customBlocks.length + 1),
+      label: label,
+      content: css.trim() ? html + "<style>" + css + "</style>" : html,
+    };
+
+    state.customBlocks.push(block);
+    state.editor.BlockManager.add(block.id, {
+      label: block.label,
+      content: block.content,
+      category: "Saved blocks",
+    });
+    status("Block “" + label + "” added to the panel — committed with the next save.");
+  }
 
   var BLOCKS = [
     {
@@ -467,6 +572,7 @@
     ui.github.addEventListener("click", connectGithub);
     ui.local.addEventListener("click", connectLocal);
     ui.save.addEventListener("click", save);
+    ui.saveBlock.addEventListener("click", saveBlock);
 
     Promise.all([
       loadConfig(),
@@ -474,10 +580,18 @@
       siteFetch(PROJECT_PATH).then(function (res) {
         return res.ok ? res.json() : null;
       }),
+      siteFetch(BLOCKS_PATH).then(function (res) {
+        return res.ok ? res.json() : null;
+      }),
     ])
       .then(function (results) {
         state.content = results[1];
         var projectData = results[2];
+        if (Array.isArray(results[3])) {
+          state.customBlocks = results[3];
+          state.hadBlocksFile = true;
+        }
+        autoConnectGithub();
         return projectData
           ? { projectData: projectData }
           : loadSeedHtml().then(function (html) {
@@ -504,7 +618,18 @@
               "* ::-webkit-scrollbar { width: 10px }",
           },
           assetManager: { upload: false },
-          blockManager: { blocks: BLOCKS },
+          blockManager: {
+            blocks: BLOCKS.concat(
+              state.customBlocks.map(function (block) {
+                return {
+                  id: block.id,
+                  label: block.label,
+                  content: block.content,
+                  category: "Saved blocks",
+                };
+              })
+            ),
+          },
         };
         if (source.projectData) options.projectData = source.projectData;
         else options.components = source.components;
