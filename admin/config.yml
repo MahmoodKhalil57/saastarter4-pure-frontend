@@ -41,22 +41,11 @@ collections:
         label: Landing page
         file: content/landing.json
         format: json
-        description: The steps, the questions, and how the sign-up form behaves.
+        description: >-
+          The craft steps. (The questions and the form's behaviour moved to
+          their symbols — content that feeds a component lives on the
+          component's entry, not here.)
         fields:
-          - label: Sign-up form
-            name: notify
-            widget: object
-            fields:
-              - label: Message after signing up
-                name: success_note
-                widget: string
-              - label: Form endpoint
-                name: form_action
-                widget: string
-                required: false
-                hint: >-
-                  A POST URL from Formspree, Basin, or similar. Leave empty and
-                  the form opens the visitor's mail app instead.
           - label: How it is made
             name: craft
             widget: object
@@ -70,18 +59,6 @@ collections:
                 fields:
                   - { label: Title, name: title, widget: string }
                   - { label: Body, name: body, widget: text }
-          - label: Questions
-            name: faq
-            widget: object
-            fields:
-              - label: Questions
-                name: items
-                widget: list
-                label_singular: Question
-                summary: "{{fields.question}}"
-                fields:
-                  - { label: Question, name: question, widget: string }
-                  - { label: Answer, name: answer, widget: text }
 
       - name: catalog
         label: Catalog
@@ -214,6 +191,33 @@ collections:
             hint: >-
               Only used when type is Form: the form's slug in odash.json,
               e.g. opening-notice.
+          - label: Message after submitting
+            name: success_note
+            widget: string
+            required: false
+            hint: Shown inside this form when a submission succeeds.
+          - label: Fallback endpoint
+            name: endpoint
+            widget: string
+            required: false
+            hint: >-
+              A POST URL from Formspree, Basin, or similar — used only when no
+              odash backend is configured in Settings.
+      - label: Content items
+        name: items
+        widget: list
+        required: false
+        label_singular: Item
+        summary: "{{fields.title}}"
+        hint: >-
+          This symbol's own content. In the builder, give a container inside
+          the symbol data-list="symbol:items" and draw ONE item in it as the
+          template, with data-text="item.title" / data-text="item.body" on the
+          text slots — these items then render through that template, on every
+          placement.
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: text, required: false }
 
   - name: settings
     label: Settings

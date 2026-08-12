@@ -3,6 +3,7 @@
   "name": "Opening notice form",
   "binding": {
     "type": "form",
-    "form": "opening-notice"
+    "form": "opening-notice",
+    "success_note": "You are on the list. Watch your inbox."
   }
 }

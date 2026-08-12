@@ -142,6 +142,40 @@
     "pages.pages": renderNav,
   };
 
+  /* --- symbol-bound content ---------------------------------------------------
+     A container inside a symbol carrying data-list="symbol:items" renders the
+     symbol's OWN items (from its Sveltia entry) through a template the
+     designer drew: one item element with data-text="item.<field>" slots. The
+     template travels with the markup — as the visible first child in the
+     builder's drawing, and as a <template data-item> in exported pages — so
+     any tool can re-render the list without knowing the item's shape. */
+
+  function renderSymbolItems(container, items) {
+    var doc = container.ownerDocument;
+    var template = container.querySelector("template[data-item]");
+    var proto = template
+      ? template.content.firstElementChild
+      : container.firstElementChild;
+
+    if (!proto) return;
+
+    if (!template) {
+      template = doc.createElement("template");
+      template.setAttribute("data-item", "");
+      template.content.appendChild(proto.cloneNode(true));
+    }
+
+    container.replaceChildren(template);
+    items.forEach(function (item) {
+      var clone = proto.cloneNode(true);
+      clone.querySelectorAll('[data-text^="item."]').forEach(function (slot) {
+        var value = item[slot.getAttribute("data-text").slice(5)];
+        if (isFilled(value)) slot.textContent = value;
+      });
+      container.appendChild(clone);
+    });
+  }
+
   /* --- binding ----------------------------------------------------------- */
 
   /**
@@ -172,6 +206,16 @@
 
     root.querySelectorAll("[data-list]").forEach(function (node) {
       var path = node.getAttribute("data-list");
+
+      if (path === "symbol:items") {
+        var host = node.closest("[data-symbol]");
+        var entry = host && get(content, "symbolEntries." + host.getAttribute("data-symbol"));
+        if (entry && Array.isArray(entry.items) && entry.items.length) {
+          renderSymbolItems(node, entry.items);
+        }
+        return;
+      }
+
       var items = get(content, path);
       var render = RENDERERS[path];
       if (render && Array.isArray(items) && items.length) render(node, items, opts);

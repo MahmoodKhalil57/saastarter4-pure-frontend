@@ -44,7 +44,7 @@
 
   var bodyHtml = ""; // homepage body — the default preview surface
   var pageBodies = {}; // slug -> body html, for multi-page sites
-  var committed = { site: {}, landing: {}, catalog: {}, pages: {} };
+  var committed = { site: {}, landing: {}, catalog: {}, pages: {}, symbolEntries: {} };
   var ready = false;
   /** The latest paint request; painting is always deferred (see header). */
   var pending = null;
@@ -80,6 +80,7 @@
     jsonPart("landing.json"),
     jsonPart("catalog.json"),
     jsonPart("pages.json"),
+    jsonPart("symbols.json"),
   ])
     .then(function (parts) {
       bodyHtml = stripBody(parts[0]);
@@ -88,6 +89,9 @@
       committed.landing = parts[2] || {};
       committed.catalog = parts[3] || {};
       committed.pages = parts[4] || {};
+      (((parts[5] || {}).symbols) || []).forEach(function (entry) {
+        if (entry && entry.id) committed.symbolEntries[entry.id] = entry;
+      });
 
       // Multi-page sites: fetch the other exported pages, so the preview can
       // show whichever page actually holds the data being edited.
@@ -189,7 +193,8 @@
 
   function applySymbolStage(doc, draft) {
     var html = symbolHtml(draft.id);
-    var fingerprint = (draft.id || "") + ":" + html.length;
+    var fingerprint =
+      (draft.id || "") + ":" + html.length + ":" + JSON.stringify(draft.items || "").length;
     if (doc.body.getAttribute("data-symbol-stage") === fingerprint) return;
 
     if (!doc.getElementById("symbol-stage-style")) {
@@ -206,6 +211,14 @@
         " (or select one and use “Make reusable”), and place it on a page.</p>") +
       "</div>";
     doc.body.setAttribute("data-symbol-stage", fingerprint);
+
+    // The symbol's own items render live from the draft, so editing Content
+    // items updates the staged component as you type.
+    if (html && draft.id) {
+      var entries = {};
+      entries[draft.id] = draft;
+      window.PureRender.bindAll(doc, { symbolEntries: entries }, {});
+    }
   }
 
   /** Pick the page whose markup holds the data the current file feeds. */
@@ -286,6 +299,7 @@
       landing: committed.landing,
       catalog: committed.catalog,
       pages: committed.pages,
+      symbolEntries: committed.symbolEntries,
     };
 
     if (fileKey === "pages") {

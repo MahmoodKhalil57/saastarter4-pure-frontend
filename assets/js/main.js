@@ -54,25 +54,24 @@
    * This repo is public, so none of these can be a secret — the form id
    * identifies a form, it does not authorise anything.
    */
-  function submitEndpoint(content, slug) {
+  /** A form's behaviour comes from its symbol's binding, stamped onto the
+      markup at export: data-form (the backend form slug), data-endpoint (a
+      third-party fallback), data-success (the message). Nothing global. */
+  function submitEndpoint(content, form) {
     var backend = get(content, "site.backend") || {};
-    var form = slug || backend.form;
-    if (isFilled(backend.url) && isFilled(form)) {
-      return String(backend.url).replace(/\/+$/, "") + "/api/f/" + encodeURIComponent(form);
+    var slug = form.dataset.form || backend.form;
+    if (isFilled(backend.url) && isFilled(slug)) {
+      return String(backend.url).replace(/\/+$/, "") + "/api/f/" + encodeURIComponent(slug);
     }
-    var action = get(content, "landing.notify.form_action");
-    return isFilled(action) ? action : "";
+    return isFilled(form.dataset.endpoint) ? form.dataset.endpoint : "";
   }
 
   function applyForms(content) {
-    var notify = get(content, "landing.notify") || {};
     var mailto = get(content, "site.contact.email");
-    var success = notify.success_note || "You are on the list. Watch your inbox.";
 
-    // Any form carrying data-form (stamped by the builder from a symbol's
-    // binding) is wired to the backend; .notify is the hand-written original.
     document.querySelectorAll("form[data-form], form.notify").forEach(function (form) {
-      var action = submitEndpoint(content, form.dataset.form);
+      var action = submitEndpoint(content, form);
+      var success = form.dataset.success || "You are on the list. Watch your inbox.";
       form.addEventListener("submit", function (event) {
         event.preventDefault();
 
@@ -211,13 +210,19 @@
     fetchJSON("landing.json"),
     fetchJSON("catalog.json"),
     fetchJSON("pages.json"),
+    fetchJSON("symbols.json"),
   ]).then(
     function (parts) {
+      var symbolEntries = {};
+      (((parts[4] || {}).symbols) || []).forEach(function (entry) {
+        if (entry && entry.id) symbolEntries[entry.id] = entry;
+      });
       var content = {
         site: parts[0] || {},
         landing: parts[1] || {},
         catalog: parts[2] || {},
         pages: parts[3] || {},
+        symbolEntries: symbolEntries,
       };
       window.PureRender.bindAll(document, content, { asset: asset });
       applyForms(content);

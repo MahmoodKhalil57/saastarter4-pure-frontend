@@ -1520,8 +1520,10 @@
                       "questions"
                     ],
                     "attributes": {
-                      "id": "questions"
+                      "id": "questions",
+                      "data-symbol": "questions"
                     },
+                    "__symbol": "questions-2",
                     "components": [
                       {
                         "tagName": "h2",
@@ -1529,277 +1531,73 @@
                         "classes": [
                           "section-head__title"
                         ],
+                        "attributes": {
+                          "id": "ivvzrw"
+                        },
+                        "__symbol": "ijdzzc",
                         "components": [
                           {
                             "type": "textnode",
-                            "content": "Questions"
+                            "content": "Questions",
+                            "attributes": {
+                              "id": "i7dwyf"
+                            },
+                            "__symbol": "igw37p"
                           }
                         ]
                       },
                       {
-                        "droppable": false,
                         "classes": [
                           "faq"
                         ],
                         "attributes": {
-                          "data-list": "landing.faq.items"
+                          "data-list": "symbol:items",
+                          "id": "is8njf"
                         },
+                        "__symbol": "ig4fhn",
                         "components": [
                           {
                             "tagName": "details",
-                            "removable": false,
-                            "draggable": false,
-                            "badgable": false,
-                            "highlightable": false,
-                            "copyable": false,
-                            "layerable": false,
-                            "selectable": false,
-                            "hoverable": false,
+                            "attributes": {
+                              "id": "im9e5u"
+                            },
+                            "__symbol": "iqme05",
                             "components": [
                               {
                                 "tagName": "summary",
                                 "type": "text",
-                                "removable": false,
-                                "draggable": false,
-                                "badgable": false,
-                                "highlightable": false,
-                                "copyable": false,
-                                "editable": false,
-                                "layerable": false,
-                                "selectable": false,
-                                "hoverable": false,
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "inacwu"
+                                },
+                                "__symbol": "i90prj",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "removable": false,
-                                    "draggable": false,
-                                    "badgable": false,
-                                    "highlightable": false,
-                                    "copyable": false,
-                                    "editable": false,
-                                    "hoverable": false,
-                                    "content": "Can I order before the shop opens?"
+                                    "content": "The question goes here",
+                                    "attributes": {
+                                      "id": "ivxm8b"
+                                    },
+                                    "__symbol": "itdahx"
                                   }
                                 ]
                               },
                               {
                                 "tagName": "p",
                                 "type": "text",
-                                "removable": false,
-                                "draggable": false,
-                                "badgable": false,
-                                "highlightable": false,
-                                "copyable": false,
-                                "editable": false,
-                                "layerable": false,
-                                "selectable": false,
-                                "hoverable": false,
+                                "attributes": {
+                                  "data-text": "item.body",
+                                  "id": "iownze"
+                                },
+                                "__symbol": "ij0moq",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "removable": false,
-                                    "draggable": false,
-                                    "badgable": false,
-                                    "highlightable": false,
-                                    "copyable": false,
-                                    "editable": false,
-                                    "hoverable": false,
-                                    "content": "No. Lot One is cut in a single run and every piece goes to the list in the order names came in. Adding your name is the whole queue."
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          {
-                            "tagName": "details",
-                            "removable": false,
-                            "draggable": false,
-                            "badgable": false,
-                            "highlightable": false,
-                            "copyable": false,
-                            "layerable": false,
-                            "selectable": false,
-                            "hoverable": false,
-                            "components": [
-                              {
-                                "tagName": "summary",
-                                "type": "text",
-                                "removable": false,
-                                "draggable": false,
-                                "badgable": false,
-                                "highlightable": false,
-                                "copyable": false,
-                                "editable": false,
-                                "layerable": false,
-                                "selectable": false,
-                                "hoverable": false,
-                                "components": [
-                                  {
-                                    "type": "textnode",
-                                    "removable": false,
-                                    "draggable": false,
-                                    "badgable": false,
-                                    "highlightable": false,
-                                    "copyable": false,
-                                    "editable": false,
-                                    "hoverable": false,
-                                    "content": "Do you cut for left hands?"
-                                  }
-                                ]
-                              },
-                              {
-                                "tagName": "p",
-                                "type": "text",
-                                "removable": false,
-                                "draggable": false,
-                                "badgable": false,
-                                "highlightable": false,
-                                "copyable": false,
-                                "editable": false,
-                                "layerable": false,
-                                "selectable": false,
-                                "hoverable": false,
-                                "components": [
-                                  {
-                                    "type": "textnode",
-                                    "removable": false,
-                                    "draggable": false,
-                                    "badgable": false,
-                                    "highlightable": false,
-                                    "copyable": false,
-                                    "editable": false,
-                                    "hoverable": false,
-                                    "content": "Yes. Say so when you order and the qatt is reversed. There is no extra charge and no extra wait."
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          {
-                            "tagName": "details",
-                            "removable": false,
-                            "draggable": false,
-                            "badgable": false,
-                            "highlightable": false,
-                            "copyable": false,
-                            "layerable": false,
-                            "selectable": false,
-                            "hoverable": false,
-                            "components": [
-                              {
-                                "tagName": "summary",
-                                "type": "text",
-                                "removable": false,
-                                "draggable": false,
-                                "badgable": false,
-                                "highlightable": false,
-                                "copyable": false,
-                                "editable": false,
-                                "layerable": false,
-                                "selectable": false,
-                                "hoverable": false,
-                                "components": [
-                                  {
-                                    "type": "textnode",
-                                    "removable": false,
-                                    "draggable": false,
-                                    "badgable": false,
-                                    "highlightable": false,
-                                    "copyable": false,
-                                    "editable": false,
-                                    "hoverable": false,
-                                    "content": "How long does a reed pen last?"
-                                  }
-                                ]
-                              },
-                              {
-                                "tagName": "p",
-                                "type": "text",
-                                "removable": false,
-                                "draggable": false,
-                                "badgable": false,
-                                "highlightable": false,
-                                "copyable": false,
-                                "editable": false,
-                                "layerable": false,
-                                "selectable": false,
-                                "hoverable": false,
-                                "components": [
-                                  {
-                                    "type": "textnode",
-                                    "removable": false,
-                                    "draggable": false,
-                                    "badgable": false,
-                                    "highlightable": false,
-                                    "copyable": false,
-                                    "editable": false,
-                                    "hoverable": false,
-                                    "content": "A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen and instructions for the second cut."
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          {
-                            "tagName": "details",
-                            "removable": false,
-                            "draggable": false,
-                            "badgable": false,
-                            "highlightable": false,
-                            "copyable": false,
-                            "layerable": false,
-                            "selectable": false,
-                            "hoverable": false,
-                            "components": [
-                              {
-                                "tagName": "summary",
-                                "type": "text",
-                                "removable": false,
-                                "draggable": false,
-                                "badgable": false,
-                                "highlightable": false,
-                                "copyable": false,
-                                "editable": false,
-                                "layerable": false,
-                                "selectable": false,
-                                "hoverable": false,
-                                "components": [
-                                  {
-                                    "type": "textnode",
-                                    "removable": false,
-                                    "draggable": false,
-                                    "badgable": false,
-                                    "highlightable": false,
-                                    "copyable": false,
-                                    "editable": false,
-                                    "hoverable": false,
-                                    "content": "Do you ship outside the country?"
-                                  }
-                                ]
-                              },
-                              {
-                                "tagName": "p",
-                                "type": "text",
-                                "removable": false,
-                                "draggable": false,
-                                "badgable": false,
-                                "highlightable": false,
-                                "copyable": false,
-                                "editable": false,
-                                "layerable": false,
-                                "selectable": false,
-                                "hoverable": false,
-                                "components": [
-                                  {
-                                    "type": "textnode",
-                                    "removable": false,
-                                    "draggable": false,
-                                    "badgable": false,
-                                    "highlightable": false,
-                                    "copyable": false,
-                                    "editable": false,
-                                    "hoverable": false,
-                                    "content": "Not for Lot One. Ink is a problem at customs and we would rather solve it properly than lose your parcel."
+                                    "content": "The answer, written plainly.",
+                                    "attributes": {
+                                      "id": "i3apd3"
+                                    },
+                                    "__symbol": "ivf6qz"
                                   }
                                 ]
                               }
@@ -2245,6 +2043,117 @@
           "__symbols": [
             "i5mk5",
             "ipvxoy"
+          ]
+        }
+      ]
+    },
+    {
+      "tagName": "section",
+      "classes": [
+        "questions"
+      ],
+      "attributes": {
+        "id": "questions-2",
+        "data-symbol": "questions"
+      },
+      "__symbols": [
+        "questions"
+      ],
+      "components": [
+        {
+          "tagName": "h2",
+          "type": "text",
+          "classes": [
+            "section-head__title"
+          ],
+          "attributes": {
+            "id": "ijdzzc"
+          },
+          "__symbols": [
+            "ivvzrw"
+          ],
+          "components": [
+            {
+              "type": "textnode",
+              "content": "Questions",
+              "attributes": {
+                "id": "igw37p"
+              },
+              "__symbols": [
+                "i7dwyf"
+              ]
+            }
+          ]
+        },
+        {
+          "classes": [
+            "faq"
+          ],
+          "attributes": {
+            "data-list": "symbol:items",
+            "id": "ig4fhn"
+          },
+          "__symbols": [
+            "is8njf"
+          ],
+          "components": [
+            {
+              "tagName": "details",
+              "attributes": {
+                "id": "iqme05"
+              },
+              "__symbols": [
+                "im9e5u"
+              ],
+              "components": [
+                {
+                  "tagName": "summary",
+                  "type": "text",
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "i90prj"
+                  },
+                  "__symbols": [
+                    "inacwu"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "content": "The question goes here",
+                      "attributes": {
+                        "id": "itdahx"
+                      },
+                      "__symbols": [
+                        "ivxm8b"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "attributes": {
+                    "data-text": "item.body",
+                    "id": "ij0moq"
+                  },
+                  "__symbols": [
+                    "iownze"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "content": "The answer, written plainly.",
+                      "attributes": {
+                        "id": "ivf6qz"
+                      },
+                      "__symbols": [
+                        "i3apd3"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]

@@ -1,8 +1,4 @@
 {
-  "notify": {
-    "success_note": "You are on the list. Watch your inbox.",
-    "form_action": ""
-  },
   "craft": {
     "steps": [
       {
@@ -16,26 +12,6 @@
       {
         "title": "The qatt",
         "body": "The tip is trimmed against the qat'ah at the angle your script needs — flat for thuluth, oblique for nastaliq. This is the cut you cannot take back."
-      }
-    ]
-  },
-  "faq": {
-    "items": [
-      {
-        "question": "Can I order before the shop opens?",
-        "answer": "No. Lot One is cut in a single run and every piece goes to the list in the order names came in. Adding your name is the whole queue."
-      },
-      {
-        "question": "Do you cut for left hands?",
-        "answer": "Yes. Say so when you order and the qatt is reversed. There is no extra charge and no extra wait."
-      },
-      {
-        "question": "How long does a reed pen last?",
-        "answer": "A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen and instructions for the second cut."
-      },
-      {
-        "question": "Do you ship outside the country?",
-        "answer": "Not for Lot One. Ink is a problem at customs and we would rather solve it properly than lose your parcel."
       }
     ]
   }

@@ -513,6 +513,8 @@
       if (!form) return;
 
       form.setAttribute("data-form", binding.form || "");
+      if (binding.success_note) form.setAttribute("data-success", binding.success_note);
+      if (binding.endpoint) form.setAttribute("data-endpoint", binding.endpoint);
       var backend = (state.content.site || {}).backend || {};
       if (backend.url && binding.form) {
         form.setAttribute("method", "post");
@@ -520,6 +522,9 @@
           "action",
           String(backend.url).replace(/\/+$/, "") + "/api/f/" + encodeURIComponent(binding.form)
         );
+      } else if (binding.endpoint) {
+        form.setAttribute("method", "post");
+        form.setAttribute("action", binding.endpoint);
       }
     });
   }
@@ -552,6 +557,9 @@
 
       root.find("[data-list]").forEach(function (cmp) {
         var path = cmp.getAttributes()["data-list"];
+        // Symbol-bound lists stay untouched in the canvas: the drawing IS the
+        // item template. Items render through it at export and at runtime.
+        if (path.indexOf("symbol:") === 0) return;
         var items = window.PureRender.get(content, path);
         var render = window.PureRender.RENDERERS[path];
         if (!render || !Array.isArray(items) || !items.length) return;
@@ -688,6 +696,12 @@
         // take it down before serializing and exporting, restore it after.
         if (state.symbolMode) removeSymbolStage();
         state.content.pages = { pages: declaredPages() };
+        // Symbol-bound content renders by entry id (data-list="symbol:items").
+        var symbolEntries = {};
+        state.symbols.forEach(function (entry) {
+          if (entry && entry.id) symbolEntries[entry.id] = entry;
+        });
+        state.content.symbolEntries = symbolEntries;
         syncPages();
         syncSymbols();
         bakeCanvas();
