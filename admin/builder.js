@@ -76,6 +76,7 @@
     customBlocks: [], // designer-made blocks, persisted in content/blocks.grapes.json
     hadBlocksFile: false,
     symbolMode: null, // symbol id while the workbench stage is open
+    bakedBound: {}, // symbol id -> items snapshot at last bake (write-back baseline)
   };
 
   function status(message, isError) {
@@ -584,9 +585,10 @@
 
       root.find("[data-list]").forEach(function (cmp) {
         var path = cmp.getAttributes()["data-list"];
-        // Symbol-bound lists stay untouched in the canvas: the drawing IS the
-        // item template. Items render through it at export and at runtime.
-        if (path.indexOf("symbol:") === 0) return;
+        if (path === "symbol:items") {
+          bakeBoundList(cmp);
+          return;
+        }
         var items = window.PureRender.get(content, path);
         var render = window.PureRender.RENDERERS[path];
         if (!render || !Array.isArray(items) || !items.length) return;
@@ -624,6 +626,158 @@
 
     // Baking is bookkeeping, not a user edit — keep it out of undo history.
     state.editor.UndoManager.clear();
+  }
+
+  /* --- bound content, visible and visually editable ----------------------------
+     A symbol's bound items render INTO the canvas through the drawn template.
+     The first rendered item is the template itself (clones keep the slot
+     attributes, so it stays a valid prototype): edit its structure and style
+     and the rest follow. Later items are locked structurally, but every text
+     slot stays editable — and slot edits write back to the content file on
+     save (see harvestBoundContent). */
+
+  function symbolHostId(cmp) {
+    var node = cmp;
+    while (node) {
+      var id = node.getAttributes && node.getAttributes()["data-symbol"];
+      if (id) return id;
+      node = node.parent && node.parent();
+    }
+    return null;
+  }
+
+  function boundItemsFor(entry) {
+    if (!entry) return null;
+    var items = entry.source
+      ? window.PureRender.get(state.content, entry.source)
+      : entry.items;
+    return Array.isArray(items) && items.length ? items : null;
+  }
+
+  function lockBoundItem(cmp) {
+    var attrs = cmp.getAttributes ? cmp.getAttributes() : {};
+    var isSlot = String(attrs["data-text"] || "").indexOf("item.") === 0;
+
+    cmp.set(
+      isSlot
+        ? {
+            editable: true,
+            selectable: true,
+            hoverable: true,
+            draggable: false,
+            removable: false,
+            copyable: false,
+            badgable: false,
+          }
+        : {
+            editable: false,
+            selectable: false,
+            hoverable: false,
+            draggable: false,
+            removable: false,
+            copyable: false,
+            badgable: false,
+            highlightable: false,
+          }
+    );
+    cmp.components().forEach(lockBoundItem);
+  }
+
+  function bakeBoundList(cmp) {
+    var id = symbolHostId(cmp);
+    var entry = state.symbols.find(function (row) {
+      return row.id === id;
+    });
+    var items = boundItemsFor(entry);
+    var proto = cmp.components().at(0);
+    if (!items || !proto) return;
+
+    var holder = document.createElement(cmp.get("tagName") || "div");
+    holder.innerHTML = proto.toHTML();
+    window.PureRender.renderSymbolItems(holder, items, { asset: canvasAsset });
+    var template = holder.querySelector("template[data-item]");
+    if (template) template.remove();
+
+    cmp.set({ droppable: false });
+    cmp.components(holder.innerHTML);
+    cmp.components().forEach(function (itemCmp, index) {
+      if (index > 0) lockBoundItem(itemCmp);
+    });
+
+    // Baseline for write-back: what the canvas said at bake time. Only slot
+    // text that later DIFFERS from this is treated as a designer edit.
+    state.bakedBound[id] = JSON.parse(JSON.stringify(items));
+  }
+
+  /** Read slot text back out of the canvas. */
+  function slotText(cmp) {
+    var div = document.createElement("div");
+    div.innerHTML = cmp.getInnerHTML ? cmp.getInnerHTML() : "";
+    return div.textContent.trim();
+  }
+
+  function setPath(root, path, value) {
+    var keys = String(path).split(".");
+    var last = keys.pop();
+    var node = root;
+    keys.forEach(function (key) {
+      if (typeof node[key] !== "object" || node[key] === null) node[key] = {};
+      node = node[key];
+    });
+    node[last] = value;
+  }
+
+  /** Visual content editing: compare every bound slot against the bake-time
+      baseline; what the designer changed lands in the content file (fields
+      the CMS owns and edited since stay untouched — freshest wins per field).
+      Returns the roots whose files must join the save commit. */
+  function harvestBoundContent() {
+    var dirtyRoots = {};
+
+    state.symbols.forEach(function (entry) {
+      if (!entry || !entry.source) return;
+      var baseline = state.bakedBound[entry.id];
+      if (!baseline) return;
+
+      var container = null;
+      state.editor.Pages.getAll().some(function (page) {
+        container = page
+          .getMainComponent()
+          .find('[data-list="symbol:items"]')
+          .find(function (cmp) {
+            return symbolHostId(cmp) === entry.id;
+          });
+        return !!container;
+      });
+      if (!container) return;
+
+      var fresh = window.PureRender.get(state.content, entry.source);
+      if (!Array.isArray(fresh)) return;
+      var next = fresh.map(function (item) {
+        return Object.assign({}, item);
+      });
+      var changed = false;
+
+      container.components().forEach(function (itemCmp, index) {
+        if (index >= next.length || !baseline[index]) return;
+        itemCmp.find('[data-text^="item."]').forEach(function (slot) {
+          var key = slot.getAttributes()["data-text"].slice(5);
+          var text = slotText(slot);
+          var base = String(baseline[index][key] == null ? "" : baseline[index][key]).trim();
+          if (text !== base) {
+            next[index][key] = text;
+            changed = true;
+          }
+        });
+      });
+
+      if (changed) {
+        setPath(state.content, entry.source, next);
+        dirtyRoots[String(entry.source).split(".")[0]] = true;
+      }
+    });
+
+    return Object.keys(dirtyRoots);
   }
 
   /* --- export ----------------------------------------------------------------
@@ -730,6 +884,9 @@
           if (entry && entry.id) symbolEntries[entry.id] = entry;
         });
         state.content.symbolEntries = symbolEntries;
+        // Slot text the designer edited in the canvas flows back into the
+        // content files — harvest before re-baking overwrites the canvas.
+        state.dirtyContentRoots = harvestBoundContent();
         syncPages();
         syncSymbols();
         bakeCanvas();
@@ -809,6 +966,13 @@
             content: JSON.stringify(state.customBlocks, null, 2) + "\n",
           });
         }
+        // Content edited visually in bound slots goes home to its file.
+        (state.dirtyContentRoots || []).forEach(function (root) {
+          files.push({
+            path: "content/" + root + ".json",
+            content: JSON.stringify(state.content[root], null, 2) + "\n",
+          });
+        });
         if (state.symbolMode) enterSymbolStage(state.symbolMode);
         return files;
       });

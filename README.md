@@ -176,10 +176,12 @@ commits straight to `master`. In a Chromium browser, **Work with local
 folder** writes the files to disk instead — pair it with `bunx serve .` and
 commit when it looks right.
 
-Regions rendered from CMS data — the catalog grid, the steps, the questions,
-the footer links, the announcement bar — appear in the canvas but are locked:
-edit them in the CMS. The builder re-bakes them from the latest JSON into every
-export. Two things follow from the export model: hand edits to `index.html`'s
+Bound content is visible and editable in the canvas: a symbol's items render
+through the drawn template, where the first item _is_ the template (restyle or
+restructure it and the rest follow) and later items are locked structurally —
+but every text slot stays editable, and slot edits write back to the content
+file in the same save commit. Site-chrome regions (footer links, announcement)
+appear locked: edit those in the CMS. Two things follow from the export model: hand edits to `index.html`'s
 `<body>` and to `assets/css/page.css` are overwritten by the next builder save
 (hand-written markup belongs in the builder; hand-written CSS in `styles.css`),
 and the `<head>` stays yours to edit directly.

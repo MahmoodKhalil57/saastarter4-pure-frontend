@@ -194,6 +194,7 @@
     get: get,
     isFilled: isFilled,
     bindAll: bindAll,
+    renderSymbolItems: renderSymbolItems,
     RENDERERS: RENDERERS,
   };
 })();
