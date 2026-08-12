@@ -44,7 +44,7 @@
 
   var bodyHtml = ""; // homepage body — the default preview surface
   var pageBodies = {}; // slug -> body html, for multi-page sites
-  var committed = { site: {}, landing: {}, catalog: {}, pages: {}, symbolEntries: {} };
+  var committed = { site: {}, catalog: {}, pages: {}, symbolEntries: {} };
   var ready = false;
   /** The latest paint request; painting is always deferred (see header). */
   var pending = null;
@@ -77,7 +77,6 @@
       return res.ok ? res.text() : "";
     }),
     jsonPart("site.json"),
-    jsonPart("landing.json"),
     jsonPart("catalog.json"),
     jsonPart("pages.json"),
     jsonPart("symbols.json"),
@@ -86,10 +85,9 @@
       bodyHtml = stripBody(parts[0]);
       pageBodies.index = bodyHtml;
       committed.site = parts[1] || {};
-      committed.landing = parts[2] || {};
-      committed.catalog = parts[3] || {};
-      committed.pages = parts[4] || {};
-      (((parts[5] || {}).symbols) || []).forEach(function (entry) {
+      committed.catalog = parts[2] || {};
+      committed.pages = parts[3] || {};
+      (((parts[4] || {}).symbols) || []).forEach(function (entry) {
         if (entry && entry.id) committed.symbolEntries[entry.id] = entry;
       });
 
@@ -237,7 +235,7 @@
   /* --- painting ------------------------------------------------------------ */
 
   /** Where to scroll on first paint, so the edited data is on screen. */
-  var FOCUS = { catalog: "#lots", landing: "#craft", site: ".banner", pages: ".masthead" };
+  var FOCUS = { catalog: "#lots", site: ".banner", pages: ".masthead" };
 
   /** The last painted preview, so field focus can steer it (see below). */
   var active = null;
@@ -296,7 +294,6 @@
 
     var content = {
       site: committed.site,
-      landing: committed.landing,
       catalog: committed.catalog,
       pages: committed.pages,
       symbolEntries: committed.symbolEntries,
@@ -351,13 +348,6 @@
     catalog: [
       [/^items\.(\d+)/, byIndex(".lot-grid .lot", "#lots")],
       [/^items/, bySelector("#lots")],
-    ],
-    landing: [
-      [/^craft\.steps\.(\d+)/, byIndex(".steps .step", "#craft")],
-      [/^craft/, bySelector("#craft")],
-      [/^faq\.items\.(\d+)/, byIndex(".faq details", "#questions")],
-      [/^faq/, bySelector("#questions")],
-      [/^notify/, bySelector("#notify")],
     ],
     site: [
       [/^announcement/, bySelector(".banner")],
@@ -458,7 +448,6 @@
     };
   }
 
-  window.CMS.registerPreviewTemplate("landing", sitePreview("landing"));
   window.CMS.registerPreviewTemplate("catalog", sitePreview("catalog"));
   window.CMS.registerPreviewTemplate("site", sitePreview("site"));
   // Editing Pages previews the menu live (nav renders from the draft list).

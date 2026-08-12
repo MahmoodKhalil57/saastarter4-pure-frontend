@@ -207,21 +207,19 @@
 
   Promise.all([
     fetchJSON("site.json"),
-    fetchJSON("landing.json"),
     fetchJSON("catalog.json"),
     fetchJSON("pages.json"),
     fetchJSON("symbols.json"),
   ]).then(
     function (parts) {
       var symbolEntries = {};
-      (((parts[4] || {}).symbols) || []).forEach(function (entry) {
+      (((parts[3] || {}).symbols) || []).forEach(function (entry) {
         if (entry && entry.id) symbolEntries[entry.id] = entry;
       });
       var content = {
         site: parts[0] || {},
-        landing: parts[1] || {},
-        catalog: parts[2] || {},
-        pages: parts[3] || {},
+        catalog: parts[1] || {},
+        pages: parts[2] || {},
         symbolEntries: symbolEntries,
       };
       window.PureRender.bindAll(document, content, { asset: asset });

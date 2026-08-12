@@ -37,29 +37,6 @@ collections:
     label: Content
     icon: description
     files:
-      - name: landing
-        label: Landing page
-        file: content/landing.json
-        format: json
-        description: >-
-          The craft steps. (The questions and the form's behaviour moved to
-          their symbols — content that feeds a component lives on the
-          component's entry, not here.)
-        fields:
-          - label: How it is made
-            name: craft
-            widget: object
-            fields:
-              - label: Steps
-                name: steps
-                widget: list
-                label_singular: Step
-                summary: "{{fields.title}}"
-                hint: Numbered on the page in this order.
-                fields:
-                  - { label: Title, name: title, widget: string }
-                  - { label: Body, name: body, widget: text }
-
       - name: catalog
         label: Catalog
         file: content/catalog.json
@@ -203,6 +180,14 @@ collections:
             hint: >-
               A POST URL from Formspree, Basin, or similar — used only when no
               odash backend is configured in Settings.
+      - label: Content source
+        name: source
+        widget: string
+        required: false
+        hint: >-
+          Renders another collection's items through this symbol's template —
+          e.g. catalog.items for the Lot One grid. Leave empty to use the
+          Content items below.
       - label: Content items
         name: items
         widget: list

@@ -160,15 +160,13 @@
   function loadContent() {
     return Promise.all([
       fetchJSON("content/site.json"),
-      fetchJSON("content/landing.json"),
       fetchJSON("content/catalog.json"),
       fetchJSON(PAGES_PATH),
     ]).then(function (parts) {
       return {
         site: parts[0] || {},
-        landing: parts[1] || {},
-        catalog: parts[2] || {},
-        pages: parts[3] || {},
+        catalog: parts[1] || {},
+        pages: parts[2] || {},
       };
     });
   }

@@ -1,0 +1,8 @@
+{
+  "id": "lot-one",
+  "name": "Lot One grid",
+  "binding": {
+    "type": "none"
+  },
+  "source": "catalog.items"
+}

@@ -36,66 +36,10 @@
   /* --- renderers ------------------------------------------------------------
      Each takes (container, items, opts). `opts.asset` maps a CMS media path
      (`/media/uploads/x.jpg`) to whatever URL form the caller needs — absolute
-     for the live page, root-relative for baked HTML. */
+     for the live page, root-relative for baked HTML.
 
-  function renderLots(container, items, opts) {
-    var doc = container.ownerDocument;
-    container.replaceChildren();
-
-    // Note: no inline styles here on purpose — baked markup must stay pure
-    // HTML. The scroll-reveal stagger (--reveal-delay) is applied by main.js.
-    items.forEach(function (item) {
-      var li = el(doc, "li", "lot");
-
-      var figure = el(doc, "figure", "lot__figure");
-      if (isFilled(item.image)) {
-        var img = el(doc, "img");
-        img.setAttribute("src", opts.asset(item.image));
-        img.setAttribute("alt", item.image_alt || item.title || "");
-        img.setAttribute("loading", "lazy");
-        figure.appendChild(img);
-      } else {
-        figure.classList.add("lot__figure--empty");
-      }
-      li.appendChild(figure);
-
-      var meta = el(doc, "p", "lot__meta");
-      meta.appendChild(el(doc, "span", null, item.lot ? "Lot " + item.lot : ""));
-      if (isFilled(item.status)) meta.appendChild(el(doc, "span", "lot__status", item.status));
-      li.appendChild(meta);
-
-      li.appendChild(el(doc, "h3", "lot__title", item.title || ""));
-      if (isFilled(item.blurb)) li.appendChild(el(doc, "p", "lot__blurb", item.blurb));
-      if (isFilled(item.price)) li.appendChild(el(doc, "p", "lot__price", item.price));
-
-      container.appendChild(li);
-    });
-  }
-
-  function renderSteps(container, items) {
-    var doc = container.ownerDocument;
-    container.replaceChildren();
-
-    items.forEach(function (item) {
-      var li = el(doc, "li", "step");
-      li.appendChild(el(doc, "h3", "step__title", item.title || ""));
-      if (isFilled(item.body)) li.appendChild(el(doc, "p", "step__body", item.body));
-      container.appendChild(li);
-    });
-  }
-
-  function renderFaq(container, items) {
-    var doc = container.ownerDocument;
-    container.replaceChildren();
-
-    items.forEach(function (item) {
-      var details = doc.createElement("details");
-      var summary = el(doc, "summary", null, item.question || "");
-      details.appendChild(summary);
-      details.appendChild(el(doc, "p", null, item.answer || ""));
-      container.appendChild(details);
-    });
-  }
+     Most lists render through symbol templates (see renderSymbolItems below);
+     only site chrome that predates any symbol keeps a hand renderer here. */
 
   function renderLinks(container, items) {
     var doc = container.ownerDocument;
@@ -135,9 +79,6 @@
   }
 
   var RENDERERS = {
-    "catalog.items": renderLots,
-    "landing.craft.steps": renderSteps,
-    "landing.faq.items": renderFaq,
     "site.contact.links": renderLinks,
     "pages.pages": renderNav,
   };
@@ -150,7 +91,7 @@
      builder's drawing, and as a <template data-item> in exported pages — so
      any tool can re-render the list without knowing the item's shape. */
 
-  function renderSymbolItems(container, items) {
+  function renderSymbolItems(container, items, opts) {
     var doc = container.ownerDocument;
     var template = container.querySelector("template[data-item]");
     var proto = template
@@ -168,10 +109,32 @@
     container.replaceChildren(template);
     items.forEach(function (item) {
       var clone = proto.cloneNode(true);
+
+      // Text slots: fill when the item has the field, drop the element when
+      // it does not — optional fields (price, status) simply disappear.
       clone.querySelectorAll('[data-text^="item."]').forEach(function (slot) {
         var value = item[slot.getAttribute("data-text").slice(5)];
         if (isFilled(value)) slot.textContent = value;
+        else slot.remove();
       });
+
+      // Image slots: data-img="item.image" appends an <img> when the item has
+      // one (alt from data-img-alt's field, falling back to the title) and
+      // removes the class named in data-img-empty; otherwise the drawn
+      // empty-state stands.
+      clone.querySelectorAll("[data-img]").forEach(function (host) {
+        var value = item[host.getAttribute("data-img").slice(5)];
+        if (!isFilled(value)) return;
+        var img = doc.createElement("img");
+        img.setAttribute("src", opts && opts.asset ? opts.asset(value) : value);
+        var altKey = (host.getAttribute("data-img-alt") || "").slice(5);
+        img.setAttribute("alt", (altKey && item[altKey]) || item.title || "");
+        img.setAttribute("loading", "lazy");
+        var emptyClass = host.getAttribute("data-img-empty");
+        if (emptyClass) host.classList.remove(emptyClass);
+        host.appendChild(img);
+      });
+
       container.appendChild(clone);
     });
   }
@@ -210,8 +173,13 @@
       if (path === "symbol:items") {
         var host = node.closest("[data-symbol]");
         var entry = host && get(content, "symbolEntries." + host.getAttribute("data-symbol"));
-        if (entry && Array.isArray(entry.items) && entry.items.length) {
-          renderSymbolItems(node, entry.items);
+        if (entry) {
+          // A symbol either carries its own items or binds another
+          // collection's through its template (source, e.g. "catalog.items").
+          var symbolItems = entry.source ? get(content, entry.source) : entry.items;
+          if (Array.isArray(symbolItems) && symbolItems.length) {
+            renderSymbolItems(node, symbolItems, opts);
+          }
         }
         return;
       }
