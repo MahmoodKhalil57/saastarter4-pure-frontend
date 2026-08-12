@@ -1,6 +1,6 @@
 {
-  "id": "signup-form",
-  "name": "Sign-up form",
+  "id": "opening-notice-form",
+  "name": "Opening notice form",
   "binding": {
     "type": "form",
     "form": "opening-notice"

@@ -65,8 +65,9 @@ Concretely, Sveltia **creates and binds**, one entry per thing:
   backend **bindings**. A symbol bound to a form (`type: form`, plus the
   form's slug from `odash.json`) gets its submit endpoint stamped at export
   and wired at runtime — backend functionality attaches here, as
-  configuration, never as code in the builder. The sign-up form is the live
-  example: one symbol, placed twice, bound to `opening-notice`.
+  configuration, never as code in the builder. The "Put my name down"
+  form is the live example: one symbol, placed twice, bound to the
+  `opening-notice` form.
 
 The builder bakes aggregated manifests (`content/pages.json`,
 `content/symbols.json`) on every save so the static runtime can read the
@@ -94,7 +95,7 @@ The graduation path — copy, reference, data:
 
 ```
 copy (Save block)   →   reference (Make reusable)   →   data (collection)
-   builder                   builder + Structure           Sveltia
+   builder                   builder + Symbols             Sveltia
 ```
 
 A saved block is a stamp: dropped copies diverge, which is right for "start

@@ -255,7 +255,7 @@
                               "notify"
                             ],
                             "attributes": {
-                              "data-symbol": "signup-form",
+                              "data-symbol": "opening-notice-form",
                               "novalidate": "",
                               "id": "icisk"
                             },
@@ -1834,7 +1834,7 @@
                           "notify"
                         ],
                         "attributes": {
-                          "data-symbol": "signup-form",
+                          "data-symbol": "opening-notice-form",
                           "novalidate": "",
                           "id": "ihflyx"
                         },
@@ -2106,7 +2106,7 @@
         "notify"
       ],
       "attributes": {
-        "data-symbol": "signup-form",
+        "data-symbol": "opening-notice-form",
         "novalidate": "",
         "id": "im4loc"
       },
