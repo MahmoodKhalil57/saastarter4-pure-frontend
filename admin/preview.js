@@ -202,38 +202,48 @@
     ".symbol-stage__empty { font: 0.9rem/1.6 system-ui, sans-serif; opacity: 0.7; " +
     "text-align: center; }";
 
-  function applySymbolStage(doc, draft) {
-    var html = symbolHtml(draft.id);
-    var fingerprint =
-      (draft.id || "") + ":" + html.length + ":" + JSON.stringify(draft.items || "").length;
-    if (doc.body.getAttribute("data-symbol-stage") === fingerprint) return;
+  /** Stage a symbol in isolation and render its content live: `entry` is the
+      symbol (a draft of it, or the committed one), `overrides` replaces
+      committed content files with drafts (e.g. { craft: draftCraft }). */
+  function stageSymbol(doc, entry, overrides) {
+    var html = symbolHtml(entry.id);
+    var fingerprint = (entry.id || "") + ":" + html.length;
 
-    if (!doc.getElementById("symbol-stage-style")) {
-      var style = doc.createElement("style");
-      style.id = "symbol-stage-style";
-      style.textContent = STAGE_CSS;
-      doc.head.appendChild(style);
+    if (doc.body.getAttribute("data-symbol-stage") !== fingerprint) {
+      if (!doc.getElementById("symbol-stage-style")) {
+        var style = doc.createElement("style");
+        style.id = "symbol-stage-style";
+        style.textContent = STAGE_CSS;
+        doc.head.appendChild(style);
+      }
+      doc.body.innerHTML =
+        '<div class="symbol-stage">' +
+        (html ||
+          '<p class="symbol-stage__empty">Not drawn yet — open the builder, draw this element' +
+          " (or select one and use “Make reusable”), and place it on a page.</p>") +
+        "</div>";
+      doc.body.setAttribute("data-symbol-stage", fingerprint);
     }
 
-    doc.body.innerHTML =
-      '<div class="symbol-stage">' +
-      (html ||
-        '<p class="symbol-stage__empty">Not drawn yet — open the builder, draw this element' +
-        " (or select one and use “Make reusable”), and place it on a page.</p>") +
-      "</div>";
-    doc.body.setAttribute("data-symbol-stage", fingerprint);
+    if (!html || !entry.id) return;
+    var entries = Object.assign({}, committed.symbolEntries);
+    entries[entry.id] = entry;
+    window.PureRender.bindAll(
+      doc,
+      Object.assign({}, committed, overrides || {}, { symbolEntries: entries }),
+      {}
+    );
+  }
 
-    // The symbol's content renders live from the draft — its own items, or
-    // its Content source resolved against the committed files.
-    if (html && draft.id) {
-      var entries = Object.assign({}, committed.symbolEntries);
-      entries[draft.id] = draft;
-      window.PureRender.bindAll(
-        doc,
-        Object.assign({}, committed, { symbolEntries: entries }),
-        {}
-      );
+  /** The symbol whose Content source reaches into a given content file —
+      how the craft entry knows to preview as the "How it is made" symbol. */
+  function consumerOf(fileKey) {
+    var ids = Object.keys(committed.symbolEntries);
+    for (var i = 0; i < ids.length; i += 1) {
+      var entry = committed.symbolEntries[ids[i]];
+      if (entry.source && String(entry.source).split(".")[0] === fileKey) return entry;
     }
+    return null;
   }
 
   /** Pick the page whose markup holds the data the current file feeds. */
@@ -288,7 +298,18 @@
     var draft = toPlain(props.entry && props.entry.get("data"));
 
     if (fileKey === "symbols") {
-      applySymbolStage(doc, draft);
+      stageSymbol(doc, draft);
+      return;
+    }
+
+    // A content file that feeds a symbol previews as that symbol, staged in
+    // isolation and rendering the draft as you type. Files no symbol consumes
+    // (Site, Pages) keep the whole-page preview.
+    var consumer = consumerOf(fileKey);
+    if (consumer) {
+      var overrides = {};
+      overrides[fileKey] = draft;
+      stageSymbol(doc, consumer, overrides);
       return;
     }
 
