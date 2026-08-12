@@ -95,24 +95,118 @@
         return page.slug && page.slug !== "index";
       });
       return Promise.all(
-        others.map(function (page) {
-          return siteFetch(page.slug + ".html")
-            .then(function (res) {
-              return res.ok ? res.text() : null;
-            })
-            .then(function (html) {
-              if (html) pageBodies[page.slug] = stripBody(html);
-            })
-            .catch(function () {
-              /* not exported yet */
-            });
-        })
+        others
+          .map(function (page) {
+            return siteFetch(page.slug + ".html")
+              .then(function (res) {
+                return res.ok ? res.text() : null;
+              })
+              .then(function (html) {
+                if (html) pageBodies[page.slug] = stripBody(html);
+              })
+              .catch(function () {
+                /* not exported yet */
+              });
+          })
+          .concat([loadProjectSymbols()])
       );
     })
     .then(function () {
       ready = true;
       scheduleFlush();
     });
+
+  /* --- the symbol stage --------------------------------------------------------
+     Symbol entries get a component workbench, not a field dump: the drawing
+     rendered alone, centered on the site's real styles. The markup comes from
+     an instance on any exported page; a drawn-but-unplaced symbol falls back
+     to reconstructing the drawing from the builder's project file. */
+
+  var projectSymbolHtml = {}; // id -> html, reconstructed from page.grapes.json
+
+  function componentToHtml(node) {
+    if (!node) return "";
+    if (typeof node === "string") return node;
+    if (node.type === "textnode" || node.type === "comment") return node.content || "";
+
+    var VOID = { img: 1, input: 1, br: 1, hr: 1, source: 1, embed: 1 };
+    var tag = node.tagName || "div";
+    var attrs = Object.assign({}, node.attributes);
+    var classes = (node.classes || [])
+      .map(function (cls) {
+        return typeof cls === "string" ? cls : cls.name;
+      })
+      .filter(Boolean);
+    if (classes.length) attrs.class = classes.join(" ");
+
+    var open =
+      "<" +
+      tag +
+      Object.keys(attrs)
+        .map(function (key) {
+          var value = attrs[key];
+          if (value === true || value === "") return " " + key;
+          return " " + key + '="' + String(value).replace(/"/g, "&quot;") + '"';
+        })
+        .join("");
+
+    if (VOID[tag]) return open + " />";
+    var children = (node.components || []).map(componentToHtml).join("");
+    if (!children && node.content) children = node.content;
+    return open + ">" + children + "</" + tag + ">";
+  }
+
+  function loadProjectSymbols() {
+    return jsonPart("page.grapes.json").then(function (project) {
+      ((project || {}).symbols || []).forEach(function (main) {
+        var id = (main.attributes || {})["data-symbol"];
+        if (id) projectSymbolHtml[id] = componentToHtml(main);
+      });
+    });
+  }
+
+  function symbolHtml(id) {
+    if (!id) return "";
+    var marker = 'data-symbol="' + id + '"';
+    var slugs = Object.keys(pageBodies);
+
+    for (var i = 0; i < slugs.length; i += 1) {
+      if (pageBodies[slugs[i]].indexOf(marker) !== -1) {
+        var doc = new DOMParser().parseFromString(pageBodies[slugs[i]], "text/html");
+        var el = doc.querySelector('[data-symbol="' + id + '"]');
+        if (el) return el.outerHTML;
+      }
+    }
+    return projectSymbolHtml[id] || "";
+  }
+
+  var STAGE_CSS =
+    ".symbol-stage { min-height: 100vh; display: grid; place-items: center; " +
+    "padding: 3rem 2rem; box-sizing: border-box; } " +
+    ".symbol-stage > * { width: 100%; max-width: 34rem; } " +
+    ".symbol-stage__empty { font: 0.9rem/1.6 system-ui, sans-serif; opacity: 0.7; " +
+    "text-align: center; }";
+
+  function applySymbolStage(doc, draft) {
+    var html = symbolHtml(draft.id);
+    var fingerprint = (draft.id || "") + ":" + html.length;
+    if (doc.body.getAttribute("data-symbol-stage") === fingerprint) return;
+
+    if (!doc.getElementById("symbol-stage-style")) {
+      var style = doc.createElement("style");
+      style.id = "symbol-stage-style";
+      style.textContent = STAGE_CSS;
+      doc.head.appendChild(style);
+    }
+
+    doc.body.innerHTML =
+      '<div class="symbol-stage">' +
+      (html ||
+        '<p class="symbol-stage__empty">Not drawn yet — open the builder, draw this element' +
+        " (or select one and use “Make reusable”), and place it on a page.</p>") +
+      "</div>";
+    doc.body.setAttribute("data-symbol-stage", fingerprint);
+  }
 
   /** Pick the page whose markup holds the data the current file feeds. */
   function bodyFor(fileKey) {
@@ -158,6 +252,12 @@
 
   function apply(doc, fileKey, props) {
     var draft = toPlain(props.entry && props.entry.get("data"));
+
+    if (fileKey === "symbols") {
+      applySymbolStage(doc, draft);
+      return;
+    }
+
     var chosen;
 
     if (fileKey === "pages") {
@@ -349,6 +449,9 @@
   window.CMS.registerPreviewTemplate("site", sitePreview("site"));
   // Editing Pages previews the menu live (nav renders from the draft list).
   window.CMS.registerPreviewTemplate("pages", sitePreview("pages"));
+  // Symbol entries preview the component itself, staged in isolation on the
+  // site's real styles — a story, not a field list.
+  window.CMS.registerPreviewTemplate("symbols", sitePreview("symbols"));
 
   // Console/debug access — lets you drive a preview by hand.
   window.PurePreview = { sitePreview: sitePreview };
