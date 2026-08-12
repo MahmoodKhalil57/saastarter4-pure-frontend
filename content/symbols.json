@@ -1,6 +1,22 @@
 {
   "symbols": [
     {
+      "id": "how-its-made",
+      "name": "How it is made",
+      "binding": {
+        "type": "none"
+      },
+      "source": "craft.steps"
+    },
+    {
+      "id": "lot-one",
+      "name": "Lot One grid",
+      "binding": {
+        "type": "none"
+      },
+      "source": "catalog.items"
+    },
+    {
       "id": "opening-notice-form",
       "name": "Opening notice form",
       "binding": {
@@ -16,22 +32,6 @@
         "type": "none"
       },
       "source": "questions.items"
-    },
-    {
-      "id": "how-its-made",
-      "name": "How it is made",
-      "binding": {
-        "type": "none"
-      },
-      "source": "craft.steps"
-    },
-    {
-      "id": "lot-one",
-      "name": "Lot One grid",
-      "binding": {
-        "type": "none"
-      },
-      "source": "catalog.items"
     }
   ]
 }

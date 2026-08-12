@@ -228,7 +228,7 @@
                             "components": [
                               {
                                 "type": "textnode",
-                                "content": "\n            A pen is not bought. It is cut for the hand that will hold it.\n          "
+                                "content": "A penn is not bought. It is cut for the hand that will hold it.\n          "
                               }
                             ]
                           },
@@ -493,6 +493,7 @@
                       },
                       {
                         "tagName": "ol",
+                        "droppable": false,
                         "classes": [
                           "lot-grid"
                         ],
@@ -510,7 +511,7 @@
                             "attributes": {
                               "id": "i098zj"
                             },
-                            "__symbol": "i394wp",
+                            "__symbol": "i098zj-5",
                             "components": [
                               {
                                 "tagName": "figure",
@@ -524,7 +525,7 @@
                                   "data-img-empty": "lot__figure--empty",
                                   "id": "i3d955"
                                 },
-                                "__symbol": "iuwtjz"
+                                "__symbol": "i3d955-5"
                               },
                               {
                                 "tagName": "p",
@@ -534,7 +535,7 @@
                                 "attributes": {
                                   "id": "ia4ppi"
                                 },
-                                "__symbol": "i9srrc",
+                                "__symbol": "ia4ppi-5",
                                 "components": [
                                   {
                                     "tagName": "span",
@@ -542,15 +543,15 @@
                                     "attributes": {
                                       "id": "ifa18j"
                                     },
-                                    "__symbol": "iibkol",
+                                    "__symbol": "ifa18j-5",
                                     "components": [
                                       {
                                         "type": "textnode",
                                         "content": "Lot ",
                                         "attributes": {
-                                          "id": "irhiqr"
+                                          "id": "i5jutv"
                                         },
-                                        "__symbol": "iflny1"
+                                        "__symbol": "i0mkoh"
                                       },
                                       {
                                         "tagName": "span",
@@ -559,15 +560,15 @@
                                           "data-text": "item.lot",
                                           "id": "i98gr9"
                                         },
-                                        "__symbol": "iynhu4",
+                                        "__symbol": "i98gr9-5",
                                         "components": [
                                           {
                                             "type": "textnode",
                                             "content": "01",
                                             "attributes": {
-                                              "id": "iirx51"
+                                              "id": "iwt5ez"
                                             },
-                                            "__symbol": "i8wsc6"
+                                            "__symbol": "im88to"
                                           }
                                         ]
                                       }
@@ -583,15 +584,15 @@
                                       "data-text": "item.status",
                                       "id": "issfpm"
                                     },
-                                    "__symbol": "iiuldx",
+                                    "__symbol": "issfpm-5",
                                     "components": [
                                       {
                                         "type": "textnode",
-                                        "content": "Status",
+                                        "content": "Opens first",
                                         "attributes": {
-                                          "id": "i9bviq"
+                                          "id": "i50om2"
                                         },
-                                        "__symbol": "inuwts"
+                                        "__symbol": "ihm5n2"
                                       }
                                     ]
                                   }
@@ -607,15 +608,15 @@
                                   "data-text": "item.title",
                                   "id": "ik08d4"
                                 },
-                                "__symbol": "ivk3bk",
+                                "__symbol": "ik08d4-5",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "content": "The item title",
+                                    "content": "Java reed pen, cut to your angle",
                                     "attributes": {
-                                      "id": "i5d80y"
+                                      "id": "icm3g3"
                                     },
-                                    "__symbol": "iqc4t6"
+                                    "__symbol": "ie1th4"
                                   }
                                 ]
                               },
@@ -629,15 +630,15 @@
                                   "data-text": "item.blurb",
                                   "id": "iuzvkm"
                                 },
-                                "__symbol": "igbj27",
+                                "__symbol": "iuzvkm-5",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "content": "What this item is.",
+                                    "content": "Seasoned three years, cut at the qatt you name. Ships with a bone qat'ah for the second cut.",
                                     "attributes": {
-                                      "id": "i7y10i"
+                                      "id": "i3hj8y"
                                     },
-                                    "__symbol": "ilaq76"
+                                    "__symbol": "i2og1l"
                                   }
                                 ]
                               },
@@ -651,15 +652,777 @@
                                   "data-text": "item.price",
                                   "id": "iku5zi"
                                 },
-                                "__symbol": "i7gpwg",
+                                "__symbol": "iku5zi-5",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "content": "Price",
+                                    "content": "From 34",
                                     "attributes": {
-                                      "id": "ih4m1v"
+                                      "id": "ipk2dm"
                                     },
-                                    "__symbol": "i7kc0a"
+                                    "__symbol": "iwf5vh"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "lot"
+                            ],
+                            "attributes": {
+                              "id": "i098zj-2"
+                            },
+                            "__symbol": "i098zj-2-2",
+                            "components": [
+                              {
+                                "tagName": "figure",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__figure",
+                                  "lot__figure--empty"
+                                ],
+                                "attributes": {
+                                  "data-img": "item.image",
+                                  "data-img-alt": "item.image_alt",
+                                  "data-img-empty": "lot__figure--empty",
+                                  "id": "i3d955-2"
+                                },
+                                "__symbol": "i3d955-2-2"
+                              },
+                              {
+                                "tagName": "p",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__meta"
+                                ],
+                                "attributes": {
+                                  "id": "ia4ppi-2"
+                                },
+                                "__symbol": "ia4ppi-2-2",
+                                "components": [
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "attributes": {
+                                      "id": "ifa18j-2"
+                                    },
+                                    "__symbol": "ifa18j-2-2",
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Lot ",
+                                        "attributes": {
+                                          "id": "iu6ghe"
+                                        },
+                                        "__symbol": "ik7mjs"
+                                      },
+                                      {
+                                        "tagName": "span",
+                                        "type": "text",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "copyable": false,
+                                        "attributes": {
+                                          "data-text": "item.lot",
+                                          "id": "i98gr9-2"
+                                        },
+                                        "__symbol": "i98gr9-2-2",
+                                        "components": [
+                                          {
+                                            "type": "textnode",
+                                            "removable": false,
+                                            "draggable": false,
+                                            "badgable": false,
+                                            "highlightable": false,
+                                            "copyable": false,
+                                            "editable": false,
+                                            "hoverable": false,
+                                            "content": "02",
+                                            "attributes": {
+                                              "id": "iybv1f"
+                                            },
+                                            "__symbol": "isq70k"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "copyable": false,
+                                    "classes": [
+                                      "lot__status"
+                                    ],
+                                    "attributes": {
+                                      "data-text": "item.status",
+                                      "id": "issfpm-2"
+                                    },
+                                    "__symbol": "issfpm-2-2",
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "30 made",
+                                        "attributes": {
+                                          "id": "ig5ygk"
+                                        },
+                                        "__symbol": "i639si"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__title"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "ik08d4-2"
+                                },
+                                "__symbol": "ik08d4-2-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Lamp-black ink, one cooking",
+                                    "attributes": {
+                                      "id": "iekb0m"
+                                    },
+                                    "__symbol": "iygqdk"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__blurb"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.blurb",
+                                  "id": "iuzvkm-2"
+                                },
+                                "__symbol": "iuzvkm-2-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Soot, gum arabic, and a long stir. Thirty bottles from a single pot, then the pot is done.",
+                                    "attributes": {
+                                      "id": "i66wzg"
+                                    },
+                                    "__symbol": "itclmt"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__price"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.price",
+                                  "id": "iku5zi-2"
+                                },
+                                "__symbol": "iku5zi-2-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "18",
+                                    "attributes": {
+                                      "id": "ighzas"
+                                    },
+                                    "__symbol": "iv2bu2"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "lot"
+                            ],
+                            "attributes": {
+                              "id": "i098zj-3"
+                            },
+                            "__symbol": "i098zj-3-2",
+                            "components": [
+                              {
+                                "tagName": "figure",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__figure",
+                                  "lot__figure--empty"
+                                ],
+                                "attributes": {
+                                  "data-img": "item.image",
+                                  "data-img-alt": "item.image_alt",
+                                  "data-img-empty": "lot__figure--empty",
+                                  "id": "i3d955-3"
+                                },
+                                "__symbol": "i3d955-3-2"
+                              },
+                              {
+                                "tagName": "p",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__meta"
+                                ],
+                                "attributes": {
+                                  "id": "ia4ppi-3"
+                                },
+                                "__symbol": "ia4ppi-3-2",
+                                "components": [
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "attributes": {
+                                      "id": "ifa18j-3"
+                                    },
+                                    "__symbol": "ifa18j-3-2",
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Lot ",
+                                        "attributes": {
+                                          "id": "iue9ag"
+                                        },
+                                        "__symbol": "il95nk"
+                                      },
+                                      {
+                                        "tagName": "span",
+                                        "type": "text",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "copyable": false,
+                                        "attributes": {
+                                          "data-text": "item.lot",
+                                          "id": "i98gr9-3"
+                                        },
+                                        "__symbol": "i98gr9-3-2",
+                                        "components": [
+                                          {
+                                            "type": "textnode",
+                                            "removable": false,
+                                            "draggable": false,
+                                            "badgable": false,
+                                            "highlightable": false,
+                                            "copyable": false,
+                                            "editable": false,
+                                            "hoverable": false,
+                                            "content": "03",
+                                            "attributes": {
+                                              "id": "ih2kei"
+                                            },
+                                            "__symbol": "i46hco"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "copyable": false,
+                                    "classes": [
+                                      "lot__status"
+                                    ],
+                                    "attributes": {
+                                      "data-text": "item.status",
+                                      "id": "issfpm-3"
+                                    },
+                                    "__symbol": "issfpm-3-2",
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Opens first",
+                                        "attributes": {
+                                          "id": "is5y9n"
+                                        },
+                                        "__symbol": "icvwdz"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__title"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "ik08d4-3"
+                                },
+                                "__symbol": "ik08d4-3-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Ahar paper, burnished by hand",
+                                    "attributes": {
+                                      "id": "il15hl"
+                                    },
+                                    "__symbol": "ijk8wt"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__blurb"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.blurb",
+                                  "id": "iuzvkm-3"
+                                },
+                                "__symbol": "iuzvkm-3-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Sized with starch, dried flat, then run under agate until the surface refuses to bleed.",
+                                    "attributes": {
+                                      "id": "i2bklg"
+                                    },
+                                    "__symbol": "iv9vhi"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__price"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.price",
+                                  "id": "iku5zi-3"
+                                },
+                                "__symbol": "iku5zi-3-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "26 for 25 sheets",
+                                    "attributes": {
+                                      "id": "itdt76"
+                                    },
+                                    "__symbol": "i66qqy"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "lot"
+                            ],
+                            "attributes": {
+                              "id": "i098zj-4"
+                            },
+                            "__symbol": "i098zj-4-2",
+                            "components": [
+                              {
+                                "tagName": "figure",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__figure",
+                                  "lot__figure--empty"
+                                ],
+                                "attributes": {
+                                  "data-img": "item.image",
+                                  "data-img-alt": "item.image_alt",
+                                  "data-img-empty": "lot__figure--empty",
+                                  "id": "i3d955-4"
+                                },
+                                "__symbol": "i3d955-4-2"
+                              },
+                              {
+                                "tagName": "p",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__meta"
+                                ],
+                                "attributes": {
+                                  "id": "ia4ppi-4"
+                                },
+                                "__symbol": "ia4ppi-4-2",
+                                "components": [
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "attributes": {
+                                      "id": "ifa18j-4"
+                                    },
+                                    "__symbol": "ifa18j-4-2",
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Lot ",
+                                        "attributes": {
+                                          "id": "ic5y7b"
+                                        },
+                                        "__symbol": "iginlh"
+                                      },
+                                      {
+                                        "tagName": "span",
+                                        "type": "text",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "copyable": false,
+                                        "attributes": {
+                                          "data-text": "item.lot",
+                                          "id": "i98gr9-4"
+                                        },
+                                        "__symbol": "i98gr9-4-2",
+                                        "components": [
+                                          {
+                                            "type": "textnode",
+                                            "removable": false,
+                                            "draggable": false,
+                                            "badgable": false,
+                                            "highlightable": false,
+                                            "copyable": false,
+                                            "editable": false,
+                                            "hoverable": false,
+                                            "content": "04",
+                                            "attributes": {
+                                              "id": "i1wngm"
+                                            },
+                                            "__symbol": "ip9c8f"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "copyable": false,
+                                    "classes": [
+                                      "lot__status"
+                                    ],
+                                    "attributes": {
+                                      "data-text": "item.status",
+                                      "id": "issfpm-4"
+                                    },
+                                    "__symbol": "issfpm-4-2",
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "12 made",
+                                        "attributes": {
+                                          "id": "iy6k0m"
+                                        },
+                                        "__symbol": "i5id2k"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__title"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "ik08d4-4"
+                                },
+                                "__symbol": "ik08d4-4-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Walnut pen case",
+                                    "attributes": {
+                                      "id": "ixqmsf"
+                                    },
+                                    "__symbol": "i11v94"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__blurb"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.blurb",
+                                  "id": "iuzvkm-4"
+                                },
+                                "__symbol": "iuzvkm-4-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Holds four pens and a bottle upright. Lacquered inside, oiled outside, no hardware.",
+                                    "attributes": {
+                                      "id": "i6tzpb"
+                                    },
+                                    "__symbol": "idhye2"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "lot__price"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.price",
+                                  "id": "iku5zi-4"
+                                },
+                                "__symbol": "iku5zi-4-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "95",
+                                    "attributes": {
+                                      "id": "ijjpu5"
+                                    },
+                                    "__symbol": "i4228y"
                                   }
                                 ]
                               }
@@ -736,6 +1499,7 @@
                       },
                       {
                         "tagName": "ol",
+                        "droppable": false,
                         "classes": [
                           "steps"
                         ],
@@ -753,7 +1517,7 @@
                             "attributes": {
                               "id": "ick7hn"
                             },
-                            "__symbol": "idwz4a",
+                            "__symbol": "ick7hn-4",
                             "components": [
                               {
                                 "tagName": "h3",
@@ -765,15 +1529,15 @@
                                   "data-text": "item.title",
                                   "id": "ipqimc"
                                 },
-                                "__symbol": "ifv1y7",
+                                "__symbol": "ipqimc-4",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "content": "The step title",
+                                    "content": "The shoulder",
                                     "attributes": {
-                                      "id": "isrrcb"
+                                      "id": "i1iasv"
                                     },
-                                    "__symbol": "il3ufh"
+                                    "__symbol": "i4zir9"
                                   }
                                 ]
                               },
@@ -787,15 +1551,185 @@
                                   "data-text": "item.body",
                                   "id": "i4dask"
                                 },
-                                "__symbol": "inakib",
+                                "__symbol": "i4dask-4",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "content": "What happens in this step, written plainly.",
+                                    "content": "The reed is opened at a long shallow angle so the ink has somewhere to sit. Cut it short and the pen runs dry mid-letter.",
                                     "attributes": {
-                                      "id": "iviowh"
+                                      "id": "iexjea"
                                     },
-                                    "__symbol": "ivwj23"
+                                    "__symbol": "i0gpl8"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "step"
+                            ],
+                            "attributes": {
+                              "id": "ick7hn-2"
+                            },
+                            "__symbol": "ick7hn-2-2",
+                            "components": [
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "step__title"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "ipqimc-2"
+                                },
+                                "__symbol": "ipqimc-2-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "The slit",
+                                    "attributes": {
+                                      "id": "if54f1"
+                                    },
+                                    "__symbol": "i2h8de"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "step__body"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.body",
+                                  "id": "i4dask-2"
+                                },
+                                "__symbol": "i4dask-2-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "One press splits the nib down the centre. It has to stop exactly where the shoulder ends, or the two halves will spread under pressure.",
+                                    "attributes": {
+                                      "id": "i4sk3b"
+                                    },
+                                    "__symbol": "i6x2lh"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "step"
+                            ],
+                            "attributes": {
+                              "id": "ick7hn-3"
+                            },
+                            "__symbol": "ick7hn-3-2",
+                            "components": [
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "step__title"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "ipqimc-3"
+                                },
+                                "__symbol": "ipqimc-3-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "The qatt",
+                                    "attributes": {
+                                      "id": "ihktr4"
+                                    },
+                                    "__symbol": "iletz4"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "classes": [
+                                  "step__body"
+                                ],
+                                "attributes": {
+                                  "data-text": "item.body",
+                                  "id": "i4dask-3"
+                                },
+                                "__symbol": "i4dask-3-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "The tip is trimmed against the qat'ah at the angle your script needs — flat for thuluth, oblique for nastaliq. This is the cut you cannot take back.",
+                                    "attributes": {
+                                      "id": "iljiu8"
+                                    },
+                                    "__symbol": "inyqb6"
                                   }
                                 ]
                               }
@@ -838,6 +1772,7 @@
                         ]
                       },
                       {
+                        "droppable": false,
                         "classes": [
                           "faq"
                         ],
@@ -852,7 +1787,7 @@
                             "attributes": {
                               "id": "im9e5u"
                             },
-                            "__symbol": "iqme05",
+                            "__symbol": "im9e5u-5",
                             "components": [
                               {
                                 "tagName": "summary",
@@ -861,15 +1796,15 @@
                                   "data-text": "item.title",
                                   "id": "inacwu"
                                 },
-                                "__symbol": "i90prj",
+                                "__symbol": "inacwu-5",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "content": "The question goes here",
+                                    "content": "Can I order before the shop opens?",
                                     "attributes": {
-                                      "id": "ivxm8b"
+                                      "id": "iny3cl"
                                     },
-                                    "__symbol": "itdahx"
+                                    "__symbol": "ieji3o"
                                   }
                                 ]
                               },
@@ -880,15 +1815,243 @@
                                   "data-text": "item.body",
                                   "id": "iownze"
                                 },
-                                "__symbol": "ij0moq",
+                                "__symbol": "iownze-5",
                                 "components": [
                                   {
                                     "type": "textnode",
-                                    "content": "The answer, written plainly.",
+                                    "content": "No. Lot One is cut in a single run and every piece goes to the list in the order names came in. Adding your name is the whole queue.",
                                     "attributes": {
-                                      "id": "i3apd3"
+                                      "id": "i8ra2b"
                                     },
-                                    "__symbol": "ivf6qz"
+                                    "__symbol": "iew1dl"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "details",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "attributes": {
+                              "id": "im9e5u-2"
+                            },
+                            "__symbol": "im9e5u-2-2",
+                            "components": [
+                              {
+                                "tagName": "summary",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "inacwu-2"
+                                },
+                                "__symbol": "inacwu-2-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Do you cut for left hands?",
+                                    "attributes": {
+                                      "id": "ixxvjk"
+                                    },
+                                    "__symbol": "ipdcog"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "attributes": {
+                                  "data-text": "item.body",
+                                  "id": "iownze-2"
+                                },
+                                "__symbol": "iownze-2-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Yes. Say so when you order and the qatt is reversed. There is no extra charge and no extra wait.",
+                                    "attributes": {
+                                      "id": "iry50a"
+                                    },
+                                    "__symbol": "ino8kc"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "details",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "attributes": {
+                              "id": "im9e5u-3"
+                            },
+                            "__symbol": "im9e5u-3-2",
+                            "components": [
+                              {
+                                "tagName": "summary",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "inacwu-3"
+                                },
+                                "__symbol": "inacwu-3-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "How long does a reed pen last?",
+                                    "attributes": {
+                                      "id": "i5ss1n"
+                                    },
+                                    "__symbol": "i9mmva"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "attributes": {
+                                  "data-text": "item.body",
+                                  "id": "iownze-3"
+                                },
+                                "__symbol": "iownze-3-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen and instructions for the second cut.",
+                                    "attributes": {
+                                      "id": "iumtww"
+                                    },
+                                    "__symbol": "ifp7qb"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "details",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "attributes": {
+                              "id": "im9e5u-4"
+                            },
+                            "__symbol": "im9e5u-4-2",
+                            "components": [
+                              {
+                                "tagName": "summary",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "attributes": {
+                                  "data-text": "item.title",
+                                  "id": "inacwu-4"
+                                },
+                                "__symbol": "inacwu-4-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Do you ship outside the country?",
+                                    "attributes": {
+                                      "id": "ir8jw6"
+                                    },
+                                    "__symbol": "ijbihi"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "copyable": false,
+                                "attributes": {
+                                  "data-text": "item.body",
+                                  "id": "iownze-4"
+                                },
+                                "__symbol": "iownze-4-2",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Not for Lot One. Ink is a problem at customs and we would rather solve it properly than lose your parcel.",
+                                    "attributes": {
+                                      "id": "iuojm2"
+                                    },
+                                    "__symbol": "iaqmfp"
                                   }
                                 ]
                               }
@@ -1377,6 +2540,7 @@
           ]
         },
         {
+          "droppable": false,
           "classes": [
             "faq"
           ],
@@ -1391,7 +2555,7 @@
             {
               "tagName": "details",
               "attributes": {
-                "id": "iqme05"
+                "id": "im9e5u-5"
               },
               "__symbols": [
                 "im9e5u"
@@ -1402,7 +2566,7 @@
                   "type": "text",
                   "attributes": {
                     "data-text": "item.title",
-                    "id": "i90prj"
+                    "id": "inacwu-5"
                   },
                   "__symbols": [
                     "inacwu"
@@ -1410,12 +2574,12 @@
                   "components": [
                     {
                       "type": "textnode",
-                      "content": "The question goes here",
+                      "content": "Can I order before the shop opens?",
                       "attributes": {
-                        "id": "itdahx"
+                        "id": "ieji3o"
                       },
                       "__symbols": [
-                        "ivxm8b"
+                        "iny3cl"
                       ]
                     }
                   ]
@@ -1425,7 +2589,7 @@
                   "type": "text",
                   "attributes": {
                     "data-text": "item.body",
-                    "id": "ij0moq"
+                    "id": "iownze-5"
                   },
                   "__symbols": [
                     "iownze"
@@ -1433,12 +2597,270 @@
                   "components": [
                     {
                       "type": "textnode",
-                      "content": "The answer, written plainly.",
+                      "content": "No. Lot One is cut in a single run and every piece goes to the list in the order names came in. Adding your name is the whole queue.",
                       "attributes": {
-                        "id": "ivf6qz"
+                        "id": "iew1dl"
                       },
                       "__symbols": [
-                        "i3apd3"
+                        "i8ra2b"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tagName": "details",
+              "removable": false,
+              "draggable": false,
+              "badgable": false,
+              "highlightable": false,
+              "copyable": false,
+              "selectable": false,
+              "hoverable": false,
+              "attributes": {
+                "id": "im9e5u-2-2"
+              },
+              "__symbols": [
+                "im9e5u-2"
+              ],
+              "components": [
+                {
+                  "tagName": "summary",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "inacwu-2-2"
+                  },
+                  "__symbols": [
+                    "inacwu-2"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Do you cut for left hands?",
+                      "attributes": {
+                        "id": "ipdcog"
+                      },
+                      "__symbols": [
+                        "ixxvjk"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "attributes": {
+                    "data-text": "item.body",
+                    "id": "iownze-2-2"
+                  },
+                  "__symbols": [
+                    "iownze-2"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Yes. Say so when you order and the qatt is reversed. There is no extra charge and no extra wait.",
+                      "attributes": {
+                        "id": "ino8kc"
+                      },
+                      "__symbols": [
+                        "iry50a"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tagName": "details",
+              "removable": false,
+              "draggable": false,
+              "badgable": false,
+              "highlightable": false,
+              "copyable": false,
+              "selectable": false,
+              "hoverable": false,
+              "attributes": {
+                "id": "im9e5u-3-2"
+              },
+              "__symbols": [
+                "im9e5u-3"
+              ],
+              "components": [
+                {
+                  "tagName": "summary",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "inacwu-3-2"
+                  },
+                  "__symbols": [
+                    "inacwu-3"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "How long does a reed pen last?",
+                      "attributes": {
+                        "id": "i9mmva"
+                      },
+                      "__symbols": [
+                        "i5ss1n"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "attributes": {
+                    "data-text": "item.body",
+                    "id": "iownze-3-2"
+                  },
+                  "__symbols": [
+                    "iownze-3"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen and instructions for the second cut.",
+                      "attributes": {
+                        "id": "ifp7qb"
+                      },
+                      "__symbols": [
+                        "iumtww"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tagName": "details",
+              "removable": false,
+              "draggable": false,
+              "badgable": false,
+              "highlightable": false,
+              "copyable": false,
+              "selectable": false,
+              "hoverable": false,
+              "attributes": {
+                "id": "im9e5u-4-2"
+              },
+              "__symbols": [
+                "im9e5u-4"
+              ],
+              "components": [
+                {
+                  "tagName": "summary",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "inacwu-4-2"
+                  },
+                  "__symbols": [
+                    "inacwu-4"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Do you ship outside the country?",
+                      "attributes": {
+                        "id": "ijbihi"
+                      },
+                      "__symbols": [
+                        "ir8jw6"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "attributes": {
+                    "data-text": "item.body",
+                    "id": "iownze-4-2"
+                  },
+                  "__symbols": [
+                    "iownze-4"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Not for Lot One. Ink is a problem at customs and we would rather solve it properly than lose your parcel.",
+                      "attributes": {
+                        "id": "iaqmfp"
+                      },
+                      "__symbols": [
+                        "iuojm2"
                       ]
                     }
                   ]
@@ -1528,6 +2950,7 @@
         },
         {
           "tagName": "ol",
+          "droppable": false,
           "classes": [
             "steps"
           ],
@@ -1545,7 +2968,7 @@
                 "step"
               ],
               "attributes": {
-                "id": "idwz4a"
+                "id": "ick7hn-4"
               },
               "__symbols": [
                 "ick7hn"
@@ -1559,7 +2982,7 @@
                   ],
                   "attributes": {
                     "data-text": "item.title",
-                    "id": "ifv1y7"
+                    "id": "ipqimc-4"
                   },
                   "__symbols": [
                     "ipqimc"
@@ -1567,12 +2990,12 @@
                   "components": [
                     {
                       "type": "textnode",
-                      "content": "The step title",
+                      "content": "The shoulder",
                       "attributes": {
-                        "id": "il3ufh"
+                        "id": "i4zir9"
                       },
                       "__symbols": [
-                        "isrrcb"
+                        "i1iasv"
                       ]
                     }
                   ]
@@ -1585,7 +3008,7 @@
                   ],
                   "attributes": {
                     "data-text": "item.body",
-                    "id": "inakib"
+                    "id": "i4dask-4"
                   },
                   "__symbols": [
                     "i4dask"
@@ -1593,12 +3016,202 @@
                   "components": [
                     {
                       "type": "textnode",
-                      "content": "What happens in this step, written plainly.",
+                      "content": "The reed is opened at a long shallow angle so the ink has somewhere to sit. Cut it short and the pen runs dry mid-letter.",
                       "attributes": {
-                        "id": "ivwj23"
+                        "id": "i0gpl8"
                       },
                       "__symbols": [
-                        "iviowh"
+                        "iexjea"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tagName": "li",
+              "removable": false,
+              "draggable": false,
+              "badgable": false,
+              "highlightable": false,
+              "copyable": false,
+              "selectable": false,
+              "hoverable": false,
+              "classes": [
+                "step"
+              ],
+              "attributes": {
+                "id": "ick7hn-2-2"
+              },
+              "__symbols": [
+                "ick7hn-2"
+              ],
+              "components": [
+                {
+                  "tagName": "h3",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "step__title"
+                  ],
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "ipqimc-2-2"
+                  },
+                  "__symbols": [
+                    "ipqimc-2"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "The slit",
+                      "attributes": {
+                        "id": "i2h8de"
+                      },
+                      "__symbols": [
+                        "if54f1"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "step__body"
+                  ],
+                  "attributes": {
+                    "data-text": "item.body",
+                    "id": "i4dask-2-2"
+                  },
+                  "__symbols": [
+                    "i4dask-2"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "One press splits the nib down the centre. It has to stop exactly where the shoulder ends, or the two halves will spread under pressure.",
+                      "attributes": {
+                        "id": "i6x2lh"
+                      },
+                      "__symbols": [
+                        "i4sk3b"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tagName": "li",
+              "removable": false,
+              "draggable": false,
+              "badgable": false,
+              "highlightable": false,
+              "copyable": false,
+              "selectable": false,
+              "hoverable": false,
+              "classes": [
+                "step"
+              ],
+              "attributes": {
+                "id": "ick7hn-3-2"
+              },
+              "__symbols": [
+                "ick7hn-3"
+              ],
+              "components": [
+                {
+                  "tagName": "h3",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "step__title"
+                  ],
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "ipqimc-3-2"
+                  },
+                  "__symbols": [
+                    "ipqimc-3"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "The qatt",
+                      "attributes": {
+                        "id": "iletz4"
+                      },
+                      "__symbols": [
+                        "ihktr4"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "step__body"
+                  ],
+                  "attributes": {
+                    "data-text": "item.body",
+                    "id": "i4dask-3-2"
+                  },
+                  "__symbols": [
+                    "i4dask-3"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "The tip is trimmed against the qat'ah at the angle your script needs — flat for thuluth, oblique for nastaliq. This is the cut you cannot take back.",
+                      "attributes": {
+                        "id": "inyqb6"
+                      },
+                      "__symbols": [
+                        "iljiu8"
                       ]
                     }
                   ]
@@ -1713,6 +3326,7 @@
         },
         {
           "tagName": "ol",
+          "droppable": false,
           "classes": [
             "lot-grid"
           ],
@@ -1730,7 +3344,7 @@
                 "lot"
               ],
               "attributes": {
-                "id": "i394wp"
+                "id": "i098zj-5"
               },
               "__symbols": [
                 "i098zj"
@@ -1746,7 +3360,7 @@
                     "data-img": "item.image",
                     "data-img-alt": "item.image_alt",
                     "data-img-empty": "lot__figure--empty",
-                    "id": "iuwtjz"
+                    "id": "i3d955-5"
                   },
                   "__symbols": [
                     "i3d955"
@@ -1758,7 +3372,7 @@
                     "lot__meta"
                   ],
                   "attributes": {
-                    "id": "i9srrc"
+                    "id": "ia4ppi-5"
                   },
                   "__symbols": [
                     "ia4ppi"
@@ -1768,7 +3382,7 @@
                       "tagName": "span",
                       "type": "text",
                       "attributes": {
-                        "id": "iibkol"
+                        "id": "ifa18j-5"
                       },
                       "__symbols": [
                         "ifa18j"
@@ -1778,10 +3392,10 @@
                           "type": "textnode",
                           "content": "Lot ",
                           "attributes": {
-                            "id": "iflny1"
+                            "id": "i0mkoh"
                           },
                           "__symbols": [
-                            "irhiqr"
+                            "i5jutv"
                           ]
                         },
                         {
@@ -1789,7 +3403,7 @@
                           "type": "text",
                           "attributes": {
                             "data-text": "item.lot",
-                            "id": "iynhu4"
+                            "id": "i98gr9-5"
                           },
                           "__symbols": [
                             "i98gr9"
@@ -1799,10 +3413,10 @@
                               "type": "textnode",
                               "content": "01",
                               "attributes": {
-                                "id": "i8wsc6"
+                                "id": "im88to"
                               },
                               "__symbols": [
-                                "iirx51"
+                                "iwt5ez"
                               ]
                             }
                           ]
@@ -1817,7 +3431,7 @@
                       ],
                       "attributes": {
                         "data-text": "item.status",
-                        "id": "iiuldx"
+                        "id": "issfpm-5"
                       },
                       "__symbols": [
                         "issfpm"
@@ -1825,12 +3439,12 @@
                       "components": [
                         {
                           "type": "textnode",
-                          "content": "Status",
+                          "content": "Opens first",
                           "attributes": {
-                            "id": "inuwts"
+                            "id": "ihm5n2"
                           },
                           "__symbols": [
-                            "i9bviq"
+                            "i50om2"
                           ]
                         }
                       ]
@@ -1845,7 +3459,7 @@
                   ],
                   "attributes": {
                     "data-text": "item.title",
-                    "id": "ivk3bk"
+                    "id": "ik08d4-5"
                   },
                   "__symbols": [
                     "ik08d4"
@@ -1853,12 +3467,12 @@
                   "components": [
                     {
                       "type": "textnode",
-                      "content": "The item title",
+                      "content": "Java reed pen, cut to your angle",
                       "attributes": {
-                        "id": "iqc4t6"
+                        "id": "ie1th4"
                       },
                       "__symbols": [
-                        "i5d80y"
+                        "icm3g3"
                       ]
                     }
                   ]
@@ -1871,7 +3485,7 @@
                   ],
                   "attributes": {
                     "data-text": "item.blurb",
-                    "id": "igbj27"
+                    "id": "iuzvkm-5"
                   },
                   "__symbols": [
                     "iuzvkm"
@@ -1879,12 +3493,12 @@
                   "components": [
                     {
                       "type": "textnode",
-                      "content": "What this item is.",
+                      "content": "Seasoned three years, cut at the qatt you name. Ships with a bone qat'ah for the second cut.",
                       "attributes": {
-                        "id": "ilaq76"
+                        "id": "i2og1l"
                       },
                       "__symbols": [
-                        "i7y10i"
+                        "i3hj8y"
                       ]
                     }
                   ]
@@ -1897,7 +3511,7 @@
                   ],
                   "attributes": {
                     "data-text": "item.price",
-                    "id": "i7gpwg"
+                    "id": "iku5zi-5"
                   },
                   "__symbols": [
                     "iku5zi"
@@ -1905,12 +3519,864 @@
                   "components": [
                     {
                       "type": "textnode",
-                      "content": "Price",
+                      "content": "From 34",
                       "attributes": {
-                        "id": "i7kc0a"
+                        "id": "iwf5vh"
                       },
                       "__symbols": [
-                        "ih4m1v"
+                        "ipk2dm"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tagName": "li",
+              "removable": false,
+              "draggable": false,
+              "badgable": false,
+              "highlightable": false,
+              "copyable": false,
+              "selectable": false,
+              "hoverable": false,
+              "classes": [
+                "lot"
+              ],
+              "attributes": {
+                "id": "i098zj-2-2"
+              },
+              "__symbols": [
+                "i098zj-2"
+              ],
+              "components": [
+                {
+                  "tagName": "figure",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "highlightable": false,
+                  "copyable": false,
+                  "selectable": false,
+                  "hoverable": false,
+                  "classes": [
+                    "lot__figure",
+                    "lot__figure--empty"
+                  ],
+                  "attributes": {
+                    "data-img": "item.image",
+                    "data-img-alt": "item.image_alt",
+                    "data-img-empty": "lot__figure--empty",
+                    "id": "i3d955-2-2"
+                  },
+                  "__symbols": [
+                    "i3d955-2"
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "highlightable": false,
+                  "copyable": false,
+                  "selectable": false,
+                  "hoverable": false,
+                  "classes": [
+                    "lot__meta"
+                  ],
+                  "attributes": {
+                    "id": "ia4ppi-2-2"
+                  },
+                  "__symbols": [
+                    "ia4ppi-2"
+                  ],
+                  "components": [
+                    {
+                      "tagName": "span",
+                      "type": "text",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "selectable": false,
+                      "hoverable": false,
+                      "attributes": {
+                        "id": "ifa18j-2-2"
+                      },
+                      "__symbols": [
+                        "ifa18j-2"
+                      ],
+                      "components": [
+                        {
+                          "type": "textnode",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "highlightable": false,
+                          "copyable": false,
+                          "editable": false,
+                          "hoverable": false,
+                          "content": "Lot ",
+                          "attributes": {
+                            "id": "ik7mjs"
+                          },
+                          "__symbols": [
+                            "iu6ghe"
+                          ]
+                        },
+                        {
+                          "tagName": "span",
+                          "type": "text",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "copyable": false,
+                          "attributes": {
+                            "data-text": "item.lot",
+                            "id": "i98gr9-2-2"
+                          },
+                          "__symbols": [
+                            "i98gr9-2"
+                          ],
+                          "components": [
+                            {
+                              "type": "textnode",
+                              "removable": false,
+                              "draggable": false,
+                              "badgable": false,
+                              "highlightable": false,
+                              "copyable": false,
+                              "editable": false,
+                              "hoverable": false,
+                              "content": "02",
+                              "attributes": {
+                                "id": "isq70k"
+                              },
+                              "__symbols": [
+                                "iybv1f"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tagName": "span",
+                      "type": "text",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "copyable": false,
+                      "classes": [
+                        "lot__status"
+                      ],
+                      "attributes": {
+                        "data-text": "item.status",
+                        "id": "issfpm-2-2"
+                      },
+                      "__symbols": [
+                        "issfpm-2"
+                      ],
+                      "components": [
+                        {
+                          "type": "textnode",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "highlightable": false,
+                          "copyable": false,
+                          "editable": false,
+                          "hoverable": false,
+                          "content": "30 made",
+                          "attributes": {
+                            "id": "i639si"
+                          },
+                          "__symbols": [
+                            "ig5ygk"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "h3",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__title"
+                  ],
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "ik08d4-2-2"
+                  },
+                  "__symbols": [
+                    "ik08d4-2"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Lamp-black ink, one cooking",
+                      "attributes": {
+                        "id": "iygqdk"
+                      },
+                      "__symbols": [
+                        "iekb0m"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__blurb"
+                  ],
+                  "attributes": {
+                    "data-text": "item.blurb",
+                    "id": "iuzvkm-2-2"
+                  },
+                  "__symbols": [
+                    "iuzvkm-2"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Soot, gum arabic, and a long stir. Thirty bottles from a single pot, then the pot is done.",
+                      "attributes": {
+                        "id": "itclmt"
+                      },
+                      "__symbols": [
+                        "i66wzg"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__price"
+                  ],
+                  "attributes": {
+                    "data-text": "item.price",
+                    "id": "iku5zi-2-2"
+                  },
+                  "__symbols": [
+                    "iku5zi-2"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "18",
+                      "attributes": {
+                        "id": "iv2bu2"
+                      },
+                      "__symbols": [
+                        "ighzas"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tagName": "li",
+              "removable": false,
+              "draggable": false,
+              "badgable": false,
+              "highlightable": false,
+              "copyable": false,
+              "selectable": false,
+              "hoverable": false,
+              "classes": [
+                "lot"
+              ],
+              "attributes": {
+                "id": "i098zj-3-2"
+              },
+              "__symbols": [
+                "i098zj-3"
+              ],
+              "components": [
+                {
+                  "tagName": "figure",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "highlightable": false,
+                  "copyable": false,
+                  "selectable": false,
+                  "hoverable": false,
+                  "classes": [
+                    "lot__figure",
+                    "lot__figure--empty"
+                  ],
+                  "attributes": {
+                    "data-img": "item.image",
+                    "data-img-alt": "item.image_alt",
+                    "data-img-empty": "lot__figure--empty",
+                    "id": "i3d955-3-2"
+                  },
+                  "__symbols": [
+                    "i3d955-3"
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "highlightable": false,
+                  "copyable": false,
+                  "selectable": false,
+                  "hoverable": false,
+                  "classes": [
+                    "lot__meta"
+                  ],
+                  "attributes": {
+                    "id": "ia4ppi-3-2"
+                  },
+                  "__symbols": [
+                    "ia4ppi-3"
+                  ],
+                  "components": [
+                    {
+                      "tagName": "span",
+                      "type": "text",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "selectable": false,
+                      "hoverable": false,
+                      "attributes": {
+                        "id": "ifa18j-3-2"
+                      },
+                      "__symbols": [
+                        "ifa18j-3"
+                      ],
+                      "components": [
+                        {
+                          "type": "textnode",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "highlightable": false,
+                          "copyable": false,
+                          "editable": false,
+                          "hoverable": false,
+                          "content": "Lot ",
+                          "attributes": {
+                            "id": "il95nk"
+                          },
+                          "__symbols": [
+                            "iue9ag"
+                          ]
+                        },
+                        {
+                          "tagName": "span",
+                          "type": "text",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "copyable": false,
+                          "attributes": {
+                            "data-text": "item.lot",
+                            "id": "i98gr9-3-2"
+                          },
+                          "__symbols": [
+                            "i98gr9-3"
+                          ],
+                          "components": [
+                            {
+                              "type": "textnode",
+                              "removable": false,
+                              "draggable": false,
+                              "badgable": false,
+                              "highlightable": false,
+                              "copyable": false,
+                              "editable": false,
+                              "hoverable": false,
+                              "content": "03",
+                              "attributes": {
+                                "id": "i46hco"
+                              },
+                              "__symbols": [
+                                "ih2kei"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tagName": "span",
+                      "type": "text",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "copyable": false,
+                      "classes": [
+                        "lot__status"
+                      ],
+                      "attributes": {
+                        "data-text": "item.status",
+                        "id": "issfpm-3-2"
+                      },
+                      "__symbols": [
+                        "issfpm-3"
+                      ],
+                      "components": [
+                        {
+                          "type": "textnode",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "highlightable": false,
+                          "copyable": false,
+                          "editable": false,
+                          "hoverable": false,
+                          "content": "Opens first",
+                          "attributes": {
+                            "id": "icvwdz"
+                          },
+                          "__symbols": [
+                            "is5y9n"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "h3",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__title"
+                  ],
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "ik08d4-3-2"
+                  },
+                  "__symbols": [
+                    "ik08d4-3"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Ahar paper, burnished by hand",
+                      "attributes": {
+                        "id": "ijk8wt"
+                      },
+                      "__symbols": [
+                        "il15hl"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__blurb"
+                  ],
+                  "attributes": {
+                    "data-text": "item.blurb",
+                    "id": "iuzvkm-3-2"
+                  },
+                  "__symbols": [
+                    "iuzvkm-3"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Sized with starch, dried flat, then run under agate until the surface refuses to bleed.",
+                      "attributes": {
+                        "id": "iv9vhi"
+                      },
+                      "__symbols": [
+                        "i2bklg"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__price"
+                  ],
+                  "attributes": {
+                    "data-text": "item.price",
+                    "id": "iku5zi-3-2"
+                  },
+                  "__symbols": [
+                    "iku5zi-3"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "26 for 25 sheets",
+                      "attributes": {
+                        "id": "i66qqy"
+                      },
+                      "__symbols": [
+                        "itdt76"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tagName": "li",
+              "removable": false,
+              "draggable": false,
+              "badgable": false,
+              "highlightable": false,
+              "copyable": false,
+              "selectable": false,
+              "hoverable": false,
+              "classes": [
+                "lot"
+              ],
+              "attributes": {
+                "id": "i098zj-4-2"
+              },
+              "__symbols": [
+                "i098zj-4"
+              ],
+              "components": [
+                {
+                  "tagName": "figure",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "highlightable": false,
+                  "copyable": false,
+                  "selectable": false,
+                  "hoverable": false,
+                  "classes": [
+                    "lot__figure",
+                    "lot__figure--empty"
+                  ],
+                  "attributes": {
+                    "data-img": "item.image",
+                    "data-img-alt": "item.image_alt",
+                    "data-img-empty": "lot__figure--empty",
+                    "id": "i3d955-4-2"
+                  },
+                  "__symbols": [
+                    "i3d955-4"
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "highlightable": false,
+                  "copyable": false,
+                  "selectable": false,
+                  "hoverable": false,
+                  "classes": [
+                    "lot__meta"
+                  ],
+                  "attributes": {
+                    "id": "ia4ppi-4-2"
+                  },
+                  "__symbols": [
+                    "ia4ppi-4"
+                  ],
+                  "components": [
+                    {
+                      "tagName": "span",
+                      "type": "text",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "selectable": false,
+                      "hoverable": false,
+                      "attributes": {
+                        "id": "ifa18j-4-2"
+                      },
+                      "__symbols": [
+                        "ifa18j-4"
+                      ],
+                      "components": [
+                        {
+                          "type": "textnode",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "highlightable": false,
+                          "copyable": false,
+                          "editable": false,
+                          "hoverable": false,
+                          "content": "Lot ",
+                          "attributes": {
+                            "id": "iginlh"
+                          },
+                          "__symbols": [
+                            "ic5y7b"
+                          ]
+                        },
+                        {
+                          "tagName": "span",
+                          "type": "text",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "copyable": false,
+                          "attributes": {
+                            "data-text": "item.lot",
+                            "id": "i98gr9-4-2"
+                          },
+                          "__symbols": [
+                            "i98gr9-4"
+                          ],
+                          "components": [
+                            {
+                              "type": "textnode",
+                              "removable": false,
+                              "draggable": false,
+                              "badgable": false,
+                              "highlightable": false,
+                              "copyable": false,
+                              "editable": false,
+                              "hoverable": false,
+                              "content": "04",
+                              "attributes": {
+                                "id": "ip9c8f"
+                              },
+                              "__symbols": [
+                                "i1wngm"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tagName": "span",
+                      "type": "text",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "copyable": false,
+                      "classes": [
+                        "lot__status"
+                      ],
+                      "attributes": {
+                        "data-text": "item.status",
+                        "id": "issfpm-4-2"
+                      },
+                      "__symbols": [
+                        "issfpm-4"
+                      ],
+                      "components": [
+                        {
+                          "type": "textnode",
+                          "removable": false,
+                          "draggable": false,
+                          "badgable": false,
+                          "highlightable": false,
+                          "copyable": false,
+                          "editable": false,
+                          "hoverable": false,
+                          "content": "12 made",
+                          "attributes": {
+                            "id": "i5id2k"
+                          },
+                          "__symbols": [
+                            "iy6k0m"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "h3",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__title"
+                  ],
+                  "attributes": {
+                    "data-text": "item.title",
+                    "id": "ik08d4-4-2"
+                  },
+                  "__symbols": [
+                    "ik08d4-4"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Walnut pen case",
+                      "attributes": {
+                        "id": "i11v94"
+                      },
+                      "__symbols": [
+                        "ixqmsf"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__blurb"
+                  ],
+                  "attributes": {
+                    "data-text": "item.blurb",
+                    "id": "iuzvkm-4-2"
+                  },
+                  "__symbols": [
+                    "iuzvkm-4"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "Holds four pens and a bottle upright. Lacquered inside, oiled outside, no hardware.",
+                      "attributes": {
+                        "id": "idhye2"
+                      },
+                      "__symbols": [
+                        "i6tzpb"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tagName": "p",
+                  "type": "text",
+                  "removable": false,
+                  "draggable": false,
+                  "badgable": false,
+                  "copyable": false,
+                  "classes": [
+                    "lot__price"
+                  ],
+                  "attributes": {
+                    "data-text": "item.price",
+                    "id": "iku5zi-4-2"
+                  },
+                  "__symbols": [
+                    "iku5zi-4"
+                  ],
+                  "components": [
+                    {
+                      "type": "textnode",
+                      "removable": false,
+                      "draggable": false,
+                      "badgable": false,
+                      "highlightable": false,
+                      "copyable": false,
+                      "editable": false,
+                      "hoverable": false,
+                      "content": "95",
+                      "attributes": {
+                        "id": "i4228y"
+                      },
+                      "__symbols": [
+                        "ijjpu5"
                       ]
                     }
                   ]
