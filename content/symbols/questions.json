@@ -4,22 +4,5 @@
   "binding": {
     "type": "none"
   },
-  "items": [
-    {
-      "title": "Can I order before the shop opens?",
-      "body": "No. Lot One is cut in a single run and every piece goes to the list in the order names came in. Adding your name is the whole queue."
-    },
-    {
-      "title": "Do you cut for left hands?",
-      "body": "Yes. Say so when you order and the qatt is reversed. There is no extra charge and no extra wait."
-    },
-    {
-      "title": "How long does a reed pen last?",
-      "body": "A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen and instructions for the second cut."
-    },
-    {
-      "title": "Do you ship outside the country?",
-      "body": "Not for Lot One. Ink is a problem at customs and we would rather solve it properly than lose your parcel."
-    }
-  ]
+  "source": "questions.items"
 }

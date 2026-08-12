@@ -4,18 +4,5 @@
   "binding": {
     "type": "none"
   },
-  "items": [
-    {
-      "title": "The shoulder",
-      "body": "The reed is opened at a long shallow angle so the ink has somewhere to sit. Cut it short and the pen runs dry mid-letter."
-    },
-    {
-      "title": "The slit",
-      "body": "One press splits the nib down the centre. It has to stop exactly where the shoulder ends, or the two halves will spread under pressure."
-    },
-    {
-      "title": "The qatt",
-      "body": "The tip is trimmed against the qat'ah at the angle your script needs — flat for thuluth, oblique for nastaliq. This is the cut you cannot take back."
-    }
-  ]
+  "source": "craft.steps"
 }

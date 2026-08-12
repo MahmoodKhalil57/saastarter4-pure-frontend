@@ -205,23 +205,30 @@
 
   /* --- go ----------------------------------------------------------------- */
 
-  Promise.all([
-    fetchJSON("site.json"),
-    fetchJSON("catalog.json"),
-    fetchJSON("pages.json"),
-    fetchJSON("symbols.json"),
-  ]).then(
-    function (parts) {
-      var symbolEntries = {};
-      (((parts[3] || {}).symbols) || []).forEach(function (entry) {
-        if (entry && entry.id) symbolEntries[entry.id] = entry;
+  // Content files are discovered from the bindings: site and pages always,
+  // plus whatever roots the symbols' Content sources name (catalog.items ->
+  // catalog.json, craft.steps -> craft.json, …). Adding a source-bound symbol
+  // needs no change here.
+  fetchJSON("symbols.json").then(function (manifest) {
+    var symbolEntries = {};
+    var roots = { site: true, pages: true };
+
+    (((manifest || {}).symbols) || []).forEach(function (entry) {
+      if (!entry || !entry.id) return;
+      symbolEntries[entry.id] = entry;
+      if (isFilled(entry.source)) roots[String(entry.source).split(".")[0]] = true;
+    });
+
+    var names = Object.keys(roots);
+    return Promise.all(
+      names.map(function (name) {
+        return fetchJSON(name + ".json");
+      })
+    ).then(function (parts) {
+      var content = { symbolEntries: symbolEntries };
+      names.forEach(function (name, index) {
+        content[name] = parts[index] || {};
       });
-      var content = {
-        site: parts[0] || {},
-        catalog: parts[1] || {},
-        pages: parts[2] || {},
-        symbolEntries: symbolEntries,
-      };
       window.PureRender.bindAll(document, content, { asset: asset });
       applyForms(content);
 
@@ -230,6 +237,6 @@
         node.style.setProperty("--reveal-delay", index * 70 + "ms");
       });
       reveal(lots);
-    }
-  );
+    });
+  });
 })();

@@ -157,18 +157,47 @@
       });
   }
 
-  function loadContent() {
-    return Promise.all([
-      fetchJSON("content/site.json"),
-      fetchJSON("content/catalog.json"),
-      fetchJSON(PAGES_PATH),
-    ]).then(function (parts) {
-      return {
-        site: parts[0] || {},
-        catalog: parts[1] || {},
-        pages: parts[2] || {},
-      };
+  /** Which content files the symbols' Content sources reach into —
+      catalog.items -> catalog, craft.steps -> craft — plus the always-needed
+      site and pages. Content loading is driven by the bindings. */
+  function sourceRoots(symbols) {
+    var roots = { site: true, pages: true };
+    (symbols || []).forEach(function (entry) {
+      if (entry && entry.source) roots[String(entry.source).split(".")[0]] = true;
     });
+    return Object.keys(roots);
+  }
+
+  function loadContent() {
+    return fetchJSON(SYMBOLS_PATH).then(function (manifest) {
+      var names = sourceRoots((manifest || {}).symbols);
+      return Promise.all(
+        names.map(function (name) {
+          return fetchJSON("content/" + name + ".json");
+        })
+      ).then(function (parts) {
+        var content = {};
+        names.forEach(function (name, index) {
+          content[name] = parts[index] || {};
+        });
+        return content;
+      });
+    });
+  }
+
+  /** After refreshStructure, a symbol may name a source whose file was not in
+      the boot manifest yet — fetch any missing roots before baking. */
+  function loadMissingRoots() {
+    var missing = sourceRoots(state.symbols).filter(function (name) {
+      return !(name in state.content);
+    });
+    return Promise.all(
+      missing.map(function (name) {
+        return fetchJSON("content/" + name + ".json").then(function (data) {
+          state.content[name] = data || {};
+        });
+      })
+    );
   }
 
   function loadConfig() {
@@ -689,6 +718,7 @@
         // them; the manifests loaded at boot are the fallback.
         return refreshStructure();
       })
+      .then(loadMissingRoots)
       .then(function () {
         // The symbol workbench's stage page is scaffolding, never content:
         // take it down before serializing and exporting, restore it after.

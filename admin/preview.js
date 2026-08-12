@@ -44,7 +44,7 @@
 
   var bodyHtml = ""; // homepage body — the default preview surface
   var pageBodies = {}; // slug -> body html, for multi-page sites
-  var committed = { site: {}, catalog: {}, pages: {}, symbolEntries: {} };
+  var committed = { symbolEntries: {} }; // content files land here by root name
   var ready = false;
   /** The latest paint request; painting is always deferred (see header). */
   var pending = null;
@@ -72,24 +72,37 @@
     return doc.body.innerHTML;
   }
 
+  // Content files are discovered from the bindings: site and pages always,
+  // plus whatever roots the symbols' Content sources name.
   Promise.all([
     siteFetch("index.html").then(function (res) {
       return res.ok ? res.text() : "";
     }),
-    jsonPart("site.json"),
-    jsonPart("catalog.json"),
-    jsonPart("pages.json"),
     jsonPart("symbols.json"),
   ])
     .then(function (parts) {
       bodyHtml = stripBody(parts[0]);
       pageBodies.index = bodyHtml;
-      committed.site = parts[1] || {};
-      committed.catalog = parts[2] || {};
-      committed.pages = parts[3] || {};
-      (((parts[4] || {}).symbols) || []).forEach(function (entry) {
-        if (entry && entry.id) committed.symbolEntries[entry.id] = entry;
+
+      var roots = { site: true, pages: true };
+      (((parts[1] || {}).symbols) || []).forEach(function (entry) {
+        if (!entry || !entry.id) return;
+        committed.symbolEntries[entry.id] = entry;
+        if (entry.source) roots[String(entry.source).split(".")[0]] = true;
       });
+
+      var names = Object.keys(roots);
+      return Promise.all(
+        names.map(function (name) {
+          return jsonPart(name + ".json");
+        })
+      ).then(function (files) {
+        names.forEach(function (name, index) {
+          committed[name] = files[index] || {};
+        });
+      });
+    })
+    .then(function () {
 
       // Multi-page sites: fetch the other exported pages, so the preview can
       // show whichever page actually holds the data being edited.
@@ -210,12 +223,16 @@
       "</div>";
     doc.body.setAttribute("data-symbol-stage", fingerprint);
 
-    // The symbol's own items render live from the draft, so editing Content
-    // items updates the staged component as you type.
+    // The symbol's content renders live from the draft — its own items, or
+    // its Content source resolved against the committed files.
     if (html && draft.id) {
-      var entries = {};
+      var entries = Object.assign({}, committed.symbolEntries);
       entries[draft.id] = draft;
-      window.PureRender.bindAll(doc, { symbolEntries: entries }, {});
+      window.PureRender.bindAll(
+        doc,
+        Object.assign({}, committed, { symbolEntries: entries }),
+        {}
+      );
     }
   }
 
@@ -235,7 +252,13 @@
   /* --- painting ------------------------------------------------------------ */
 
   /** Where to scroll on first paint, so the edited data is on screen. */
-  var FOCUS = { catalog: "#lots", site: ".banner", pages: ".masthead" };
+  var FOCUS = {
+    catalog: "#lots",
+    craft: "#craft",
+    questions: "#questions",
+    site: ".banner",
+    pages: ".masthead",
+  };
 
   /** The last painted preview, so field focus can steer it (see below). */
   var active = null;
@@ -292,12 +315,7 @@
       doc.body.setAttribute("data-preview-src", chosen.slug);
     }
 
-    var content = {
-      site: committed.site,
-      catalog: committed.catalog,
-      pages: committed.pages,
-      symbolEntries: committed.symbolEntries,
-    };
+    var content = Object.assign({}, committed);
 
     if (fileKey === "pages") {
       var list = ((committed.pages || {}).pages || []).slice();
@@ -348,6 +366,14 @@
     catalog: [
       [/^items\.(\d+)/, byIndex(".lot-grid .lot", "#lots")],
       [/^items/, bySelector("#lots")],
+    ],
+    craft: [
+      [/^steps\.(\d+)/, byIndex(".steps .step", "#craft")],
+      [/^steps/, bySelector("#craft")],
+    ],
+    questions: [
+      [/^items\.(\d+)/, byIndex(".faq details", "#questions")],
+      [/^items/, bySelector("#questions")],
     ],
     site: [
       [/^announcement/, bySelector(".banner")],
@@ -449,6 +475,8 @@
   }
 
   window.CMS.registerPreviewTemplate("catalog", sitePreview("catalog"));
+  window.CMS.registerPreviewTemplate("craft", sitePreview("craft"));
+  window.CMS.registerPreviewTemplate("questions", sitePreview("questions"));
   window.CMS.registerPreviewTemplate("site", sitePreview("site"));
   // Editing Pages previews the menu live (nav renders from the draft list).
   window.CMS.registerPreviewTemplate("pages", sitePreview("pages"));

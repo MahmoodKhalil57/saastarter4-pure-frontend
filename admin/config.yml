@@ -37,11 +37,48 @@ collections:
     label: Content
     icon: description
     files:
+      - name: craft
+        label: How a pen is cut
+        file: content/craft.json
+        format: json
+        description: >-
+          The three cuts. Rendered through the “How it is made” symbol's
+          drawn template (Symbols → How it is made).
+        fields:
+          - label: Steps
+            name: steps
+            widget: list
+            label_singular: Step
+            summary: "{{fields.title}}"
+            hint: Numbered on the page in this order.
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Body, name: body, widget: text }
+
+      - name: questions
+        label: Questions
+        file: content/questions.json
+        format: json
+        description: >-
+          The questions and answers. Rendered through the “Questions” symbol's
+          drawn template (Symbols → Questions).
+        fields:
+          - label: Questions
+            name: items
+            widget: list
+            label_singular: Question
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Question, name: title, widget: string }
+              - { label: Answer, name: body, widget: text }
+
       - name: catalog
         label: Catalog
         file: content/catalog.json
         format: json
-        description: The items shown in the Lot One grid.
+        description: >-
+          The items shown in the Lot One grid, rendered through the “Lot One
+          grid” symbol's drawn template.
         fields:
           - label: Items
             name: items
