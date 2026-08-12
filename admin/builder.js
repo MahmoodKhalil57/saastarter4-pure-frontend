@@ -77,6 +77,7 @@
     hadBlocksFile: false,
     symbolMode: null, // symbol id while the workbench stage is open
     bakedBound: {}, // symbol id -> items snapshot at last bake (write-back baseline)
+    embedded: window.self !== window.top, // inside the dashboard (shell.js)
   };
 
   function status(message, isError) {
@@ -1049,8 +1050,9 @@
     });
   }
 
-  /** Try the CMS's token, then the builder's own — no prompt. Signing in to
-      either editor once signs you in to both. */
+  /** Try the CMS's token, then the builder's own — no prompt. The CMS is the
+      sign-in surface: when its token works, the builder's own connection
+      controls disappear entirely and Save just works. */
   function autoConnectGithub() {
     var token = sveltiaToken() || state.token;
     if (!state.repo || !token) return;
@@ -1058,10 +1060,19 @@
 
     verifyGithub(false)
       .then(function () {
-        status("Signed in with the shared GitHub token. Save commits to " + state.branch + ".");
+        ui.github.hidden = true;
+        ui.local.hidden = true;
+        status("Signed in through the CMS. Save commits to " + state.branch + ".");
       })
       .catch(function () {
-        state.mode = null; // stale token — the Connect button still works
+        state.mode = null;
+        if (state.embedded) {
+          status(
+            "The CMS sign-in has expired — sign in to the CMS again, then reopen the builder.",
+            true
+          );
+        }
+        // Standalone: the Connect button still works as the fallback.
       });
   }
 
@@ -1143,7 +1154,12 @@
 
   function save() {
     if (!state.mode) {
-      status("Connect GitHub or a local folder before saving.", true);
+      status(
+        state.embedded
+          ? "Sign in to the CMS first — the builder shares the CMS sign-in."
+          : "Connect GitHub or a local folder before saving.",
+        true
+      );
       return;
     }
     ui.save.disabled = true;
@@ -1235,6 +1251,9 @@
       return;
     }
     if ("showDirectoryPicker" in window) ui.local.hidden = false;
+    // Inside the dashboard, the CMS owns authentication: the builder never
+    // asks for its own token there.
+    if (state.embedded) ui.github.hidden = true;
     ui.github.addEventListener("click", connectGithub);
     ui.local.addEventListener("click", connectLocal);
     ui.save.addEventListener("click", save);
@@ -1339,6 +1358,9 @@
               ? "Loaded content/page.grapes.json."
               : "First run: imported index.html. The first save creates content/page.grapes.json."
           );
+          if (state.embedded && !state.mode && !sveltiaToken()) {
+            status("Sign in to the CMS to save — the builder shares the CMS sign-in.");
+          }
           applyFocus();
         });
       })
