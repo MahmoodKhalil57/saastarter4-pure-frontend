@@ -1,0 +1,3 @@
+[     440ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8642/content/page.grapes.json:0
+[     448ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8642/content/blocks.grapes.json:0
+[     452ms] [ERROR] Failed to load resource: the server responded with a status of 404 (File not found) @ http://localhost:8642/favicon.ico:0

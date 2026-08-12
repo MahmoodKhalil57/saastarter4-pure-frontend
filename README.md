@@ -22,8 +22,10 @@ assets/css/styles.css       hand-written styling
 assets/css/page.css         styling authored in the visual builder
 assets/js/render.js         the JSON -> HTML renderers (shared: page + builder)
 assets/js/main.js           runtime enhancement: refresh data, wire forms, motion
-content/pages.json          the pages: slug, title, menu   -> CMS "Structure"
-content/symbols.json        reusable elements + bindings   -> CMS "Structure"
+content/pages/<slug>.json   one entry per page             -> CMS "Pages"
+content/symbols/<id>.json   one entry per reusable element -> CMS "Symbols"
+content/pages.json          baked manifest of the pages (builder artifact)
+content/symbols.json        baked manifest of the symbols (builder artifact)
 content/page.grapes.json    the builder's project file — every page's drawing
 content/blocks.grapes.json  designer-saved starter blocks
 content/site.json           announcement, contact, backend -> CMS "Settings"
@@ -53,17 +55,22 @@ The two admin surfaces are not two ways to do the same thing.
 (Equivalently: the builder owns what you would point at; the CMS owns what
 you would count or configure.)
 
-Concretely, Sveltia **creates and binds** under Structure:
+Concretely, Sveltia **creates and binds**, one entry per thing:
 
-- **Pages** (`content/pages.json`): slug, title, description, menu label.
-  The builder composes each declared page and exports it to `<slug>.html`;
-  it cannot create or delete pages. Give a page a menu label and the site
-  menu renders from this list on every page.
-- **Symbols** (`content/symbols.json`): reusable elements and their backend
-  **bindings**. A symbol bound to a form (`type: form`, plus the form's slug
-  from `odash.json`) gets its submit endpoint stamped at export and wired at
-  runtime — backend functionality attaches here, as configuration, never as
-  code in the builder.
+- **Pages** (`content/pages/<slug>.json`): slug, title, description, menu
+  label. The builder composes each declared page and exports it to
+  `<slug>.html`; it cannot create or delete pages. Give a page a menu label
+  and the site menu renders from the Pages list on every page.
+- **Symbols** (`content/symbols/<id>.json`): reusable elements and their
+  backend **bindings**. A symbol bound to a form (`type: form`, plus the
+  form's slug from `odash.json`) gets its submit endpoint stamped at export
+  and wired at runtime — backend functionality attaches here, as
+  configuration, never as code in the builder. The sign-up form is the live
+  example: one symbol, placed twice, bound to `opening-notice`.
+
+The builder bakes aggregated manifests (`content/pages.json`,
+`content/symbols.json`) on every save so the static runtime can read the
+lists without a directory listing; the entry files are the source of truth.
 
 And the builder **draws and places**: page bodies, symbol bodies (declared
 symbols appear as stubs to fill in), instances from the "Reusable" block

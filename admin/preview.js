@@ -157,7 +157,20 @@
   }
 
   function apply(doc, fileKey, props) {
-    var chosen = bodyFor(fileKey);
+    var draft = toPlain(props.entry && props.entry.get("data"));
+    var chosen;
+
+    if (fileKey === "pages") {
+      // Pages is a folder collection: the draft is ONE page entry. Show that
+      // page if it has been exported, and preview the menu with the draft
+      // merged into the committed list.
+      chosen =
+        draft.slug && pageBodies[draft.slug]
+          ? { slug: draft.slug, html: pageBodies[draft.slug] }
+          : { slug: "index", html: bodyHtml };
+    } else {
+      chosen = bodyFor(fileKey);
+    }
     // React's first commit clears the iframe body, so detect injection by
     // content, not by a marker — and re-inject when the right page changes.
     var firstPaint =
@@ -175,7 +188,17 @@
       pages: committed.pages,
     };
 
-    content[fileKey] = toPlain(props.entry && props.entry.get("data"));
+    if (fileKey === "pages") {
+      var list = ((committed.pages || {}).pages || []).slice();
+      var at = list.findIndex(function (page) {
+        return page.slug === draft.slug;
+      });
+      if (at === -1) list.push(draft);
+      else list[at] = draft;
+      content.pages = { pages: list };
+    } else {
+      content[fileKey] = draft;
+    }
     window.PureRender.bindAll(doc, content, { asset: assetResolver(props.getAsset) });
     active = { doc: doc, fileKey: fileKey };
 
@@ -228,7 +251,8 @@
       [/^contact/, bySelector(".colophon")],
       [/^backend/, bySelector("#notify")],
     ],
-    pages: [[/^pages/, bySelector(".masthead__nav")]],
+    // Folder collection: key paths are entry fields (slug, title, nav_label…).
+    pages: [[/^/, bySelector(".masthead__nav")]],
   };
 
   function bySelector(selector) {

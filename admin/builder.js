@@ -37,8 +37,10 @@
 
   var SITE_BASE = new URL("..", location.href);
   var PROJECT_PATH = "content/page.grapes.json";
-  var PAGES_PATH = "content/pages.json";
-  var SYMBOLS_PATH = "content/symbols.json";
+  var PAGES_DIR = "content/pages"; // Sveltia-owned: one entry file per page
+  var SYMBOLS_DIR = "content/symbols"; // Sveltia-owned: one entry file per symbol
+  var PAGES_PATH = "content/pages.json"; // baked manifest (artifact, like index.html)
+  var SYMBOLS_PATH = "content/symbols.json"; // baked manifest
   var BLOCKS_PATH = "content/blocks.grapes.json";
   var PAGE_CSS_PATH = "assets/css/page.css";
   var TOKEN_KEY = "pure-builder.github-token";
@@ -209,10 +211,113 @@
      Declared pages are synced into the GrapesJS Pages module — missing ones
      start empty — and each one exports to <slug>.html on save. */
 
+  function pageOrder(a, b) {
+    if (a.slug === "index") return -1;
+    if (b.slug === "index") return 1;
+    var ao = typeof a.nav_order === "number" ? a.nav_order : 999;
+    var bo = typeof b.nav_order === "number" ? b.nav_order : 999;
+    return ao !== bo ? ao - bo : a.slug < b.slug ? -1 : 1;
+  }
+
   function declaredPages() {
-    return Array.isArray(state.pages) && state.pages.length
+    var pages = Array.isArray(state.pages) && state.pages.length
       ? state.pages
       : [{ slug: "index", title: "", description: "" }];
+    return pages.slice().sort(pageOrder);
+  }
+
+  /** List a Sveltia folder collection through the connected backend and parse
+      every entry. Resolves null when no backend is connected — callers fall
+      back to the last baked manifest. */
+  function listBackendEntries(dir) {
+    if (state.mode === "github") {
+      return ghFetch("/contents/" + dir + "?ref=" + encodeURIComponent(state.branch))
+        .then(function (items) {
+          return Promise.all(
+            (Array.isArray(items) ? items : [])
+              .filter(function (item) {
+                return item.type === "file" && /\.json$/.test(item.name);
+              })
+              .map(function (item) {
+                return ghFetch(
+                  "/contents/" + item.path + "?ref=" + encodeURIComponent(state.branch),
+                  { accept: "application/vnd.github.raw+json", raw: true }
+                ).then(JSON.parse);
+              })
+          );
+        })
+        .catch(function () {
+          return [];
+        });
+    }
+    if (state.mode === "local" && state.dirHandle) {
+      var parts = dir.split("/");
+      var walk = Promise.resolve(state.dirHandle);
+      parts.forEach(function (part) {
+        walk = walk.then(function (handle) {
+          return handle.getDirectoryHandle(part);
+        });
+      });
+      return walk
+        .then(function (handle) {
+          var reads = [];
+          var iterate = function (iterator) {
+            return iterator.next().then(function (result) {
+              if (result.done) return Promise.all(reads);
+              var entry = result.value;
+              if (entry.kind === "file" && /\.json$/.test(entry.name)) {
+                reads.push(
+                  entry
+                    .getFile()
+                    .then(function (file) {
+                      return file.text();
+                    })
+                    .then(JSON.parse)
+                );
+              }
+              return iterate(iterator);
+            });
+          };
+          return iterate(handle.values());
+        })
+        .catch(function () {
+          return [];
+        });
+    }
+    return Promise.resolve(null);
+  }
+
+  /** Re-read the Sveltia-owned entry folders so a save always composes from
+      what the CMS holds right now. */
+  function refreshStructure() {
+    return Promise.all([listBackendEntries(PAGES_DIR), listBackendEntries(SYMBOLS_DIR)]).then(
+      function (results) {
+        if (Array.isArray(results[0])) {
+          state.pages = results[0].filter(function (page) {
+            return page && page.slug;
+          });
+        }
+        if (Array.isArray(results[1])) {
+          var listed = results[1].filter(function (entry) {
+            return entry && entry.id;
+          });
+          // Keep rows minted this session that the backend has not seen yet.
+          state.symbols
+            .filter(function (entry) {
+              return (
+                state.newSymbolIds.indexOf(entry.id) !== -1 &&
+                !listed.some(function (row) {
+                  return row.id === entry.id;
+                })
+              );
+            })
+            .forEach(function (entry) {
+              listed.push(entry);
+            });
+          state.symbols = listed;
+        }
+      }
+    );
   }
 
   function findProjectPage(slug) {
@@ -371,7 +476,7 @@
     addSymbolBlock(entry);
     status(
       "“" + name + "” is reusable — place copies from the block panel; edits sync everywhere. " +
-        "Bind it to the backend in the CMS under Structure → Symbols."
+        "Bind it to the backend in the CMS under Symbols."
     );
   }
 
@@ -390,36 +495,6 @@
 
     var instance = state.editor.Components.addSymbol(main);
     if (instance) parent.append(instance, { at: at });
-  }
-
-  /** Re-read the registry from the backend at save time and merge: Sveltia is
-      the authority on existing rows (names, bindings); the builder may only
-      add rows it minted this session. A binding set in the CMS can never be
-      clobbered by a stale builder save. */
-  function mergeSymbolRegistry() {
-    return readBackendFile(SYMBOLS_PATH)
-      .then(function (text) {
-        var fresh = [];
-        try {
-          fresh = (JSON.parse(text) || {}).symbols || [];
-        } catch (error) {
-          /* missing or malformed file — treat as empty */
-        }
-        var merged = fresh.slice();
-        state.symbols.forEach(function (entry) {
-          var known = fresh.some(function (row) {
-            return row.id === entry.id;
-          });
-          if (!known && state.newSymbolIds.indexOf(entry.id) !== -1) {
-            merged.push(entry);
-          }
-        });
-        state.symbols = merged;
-        return merged;
-      })
-      .catch(function () {
-        return state.symbols;
-      });
   }
 
   /** Stamp backend bindings onto exported markup: a form-bound symbol's form
@@ -482,6 +557,9 @@
 
         var holder = document.createElement(cmp.get("tagName") || "div");
         render(holder, items, { asset: canvasAsset });
+        // A renderer may decline (e.g. the menu, while no page has a label);
+        // leave the drawing untouched then, exactly like bindAll does.
+        if (!holder.childNodes.length) return;
         cmp.set({ droppable: false });
         cmp.components(holder.innerHTML);
         cmp.components().forEach(lockDeep);
@@ -600,10 +678,15 @@
     return loadContent()
       .then(function (content) {
         state.content = content;
-        state.pages = (content.pages || {}).pages || state.pages;
+        // The entry folders are the source of truth when a backend can list
+        // them; the manifests loaded at boot are the fallback.
+        return refreshStructure();
+      })
+      .then(function () {
+        state.content.pages = { pages: declaredPages() };
         syncPages();
+        syncSymbols();
         bakeCanvas();
-        return mergeSymbolRegistry();
       })
       .then(function () {
         // The homepage's shell is the fallback for pages without a file yet.
@@ -650,9 +733,29 @@
           path: PAGE_CSS_PATH,
           content: PAGE_CSS_HEADER + state.editor.getCss() + "\n",
         });
+        // Manifests: aggregated copies of the entry folders, baked for the
+        // static runtime (nav refresh) and for builder boot without a backend.
+        files.push({
+          path: PAGES_PATH,
+          content: JSON.stringify({ pages: declaredPages() }, null, 2) + "\n",
+        });
         files.push({
           path: SYMBOLS_PATH,
           content: JSON.stringify({ symbols: state.symbols }, null, 2) + "\n",
+        });
+        // Symbols minted with "Make reusable" become their own Sveltia
+        // entries; existing entry files are never rewritten by the builder,
+        // so a binding edited in the CMS cannot be clobbered here.
+        state.newSymbolIds.forEach(function (id) {
+          var entry = state.symbols.find(function (row) {
+            return row.id === id;
+          });
+          if (entry) {
+            files.push({
+              path: SYMBOLS_DIR + "/" + id + ".json",
+              content: JSON.stringify(entry, null, 2) + "\n",
+            });
+          }
         });
         if (state.customBlocks.length || state.hadBlocksFile) {
           files.push({
@@ -843,10 +946,12 @@
               return writeLocal(file.path, file.content);
             })
           ).then(function () {
+            state.newSymbolIds = [];
             status("Saved to the local folder. Commit and push when it looks right.");
           });
         }
         return ghCommit(files, "page: edit in the visual builder").then(function () {
+          state.newSymbolIds = [];
           status("Committed to " + state.branch + " — GitHub Pages redeploys in about a minute.");
         });
       })

@@ -1,3 +1,12 @@
 {
-  "symbols": []
+  "symbols": [
+    {
+      "id": "signup-form",
+      "name": "Sign-up form",
+      "binding": {
+        "type": "form",
+        "form": "opening-notice"
+      }
+    }
+  ]
 }

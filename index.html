@@ -1,253 +1,39 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- The head is hand-owned: the visual builder preserves it verbatim on
          every save. Edit titles and descriptions right here. -->
     <title>Qalam &amp; Ahar — a calligraphy supply workshop</title>
-    <meta
-      name="description"
-      content="Reed pens cut to order, soot ink, and burnished ahar paper. The shop opens with Lot One."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Qalam &amp; Ahar" />
-    <meta
-      property="og:description"
-      content="Reed pens cut to order, soot ink, and burnished ahar paper."
-    />
-    <meta name="theme-color" content="#191016" />
+    <meta name="description" content="Reed pens cut to order, soot ink, and burnished ahar paper. The shop opens with Lot One.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Qalam &amp; Ahar — a calligraphy supply workshop">
+    <meta property="og:description" content="Reed pens cut to order, soot ink, and burnished ahar paper. The shop opens with Lot One.">
+    <meta name="theme-color" content="#191016">
 
-    <link rel="icon" href="data:," />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap"
-    />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400..700&amp;display=swap">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <!-- Styles authored in the visual builder land here; styles.css stays hand-written. -->
-    <link rel="stylesheet" href="assets/css/page.css" />
+    <link rel="stylesheet" href="assets/css/page.css">
   </head>
 
-  <body>
-    <a class="skip" href="#main">Skip to content</a>
-
-    <aside class="banner" aria-label="Announcement" data-when="site.announcement">
-      <p data-text="site.announcement">
-        Lot One opens to the list first. Nothing is held back for later.
-      </p>
-    </aside>
-
-    <header class="masthead">
-      <a class="brand" href="#main">
-        <span class="brand__ar" lang="ar" dir="rtl">قلم و آهار</span>
-        <span class="brand__latin">Qalam &amp; Ahar</span>
-      </a>
-      <!-- Renders from content/pages.json once any page has a menu label;
-           until then these hand-written section links stand. -->
-      <nav class="masthead__nav" aria-label="Sections" data-list="pages.pages">
-        <a href="#lots">Lot One</a>
-        <a href="#craft">The cut</a>
-        <a href="#questions">Questions</a>
-      </nav>
-      <a class="btn btn--ghost masthead__cta" href="#notify">Get the opening notice</a>
-    </header>
-
-    <main id="main">
-      <section class="hero">
-        <div class="hero__lede">
-          <p class="eyebrow">Opening this winter</p>
-
-          <h1 class="hero__headline">
+  <body><a href="#main" class="skip">Skip to content</a><aside aria-label="Announcement" data-when="site.announcement" class="banner"><p data-text="site.announcement">Lot One opens to the list first. Nothing is held back for later.</p></aside><header class="masthead"><a href="#main" class="brand"><span lang="ar" dir="rtl" class="brand__ar">قلم و آهار</span><span class="brand__latin">Qalam &amp; Ahar</span></a><!-- Renders from content/pages.json once any page has a menu label;
+           until then these hand-written section links stand. --><nav aria-label="Sections" data-list="pages.pages" class="masthead__nav"><a href="#lots">Lot One</a><a href="#craft">The cut</a><a href="#questions">Questions</a></nav><a href="#notify" class="btn btn--ghost masthead__cta">Get the opening notice</a></header><main id="main"><section id="notify" class="hero"><div class="hero__lede"><p class="eyebrow">Opening this winter</p><h1 class="hero__headline">
             A pen is not bought. It is cut for the hand that will hold it.
-          </h1>
-          <p class="hero__sub">
+          </h1><p class="hero__sub">
             We cut reed pens to your nib angle, cook our own soot ink, and burnish paper the slow
             way. Four items open the shop. Put your name down and you will hear first.
-          </p>
-
-          <form class="notify notify--inline" id="notify" novalidate>
-            <label class="notify__label" for="email-hero">Get the opening notice</label>
-            <div class="notify__row">
-              <input
-                class="notify__input"
-                id="email-hero"
-                type="email"
-                name="email"
-                required
-                autocomplete="email"
-                placeholder="you@example.com"
-                aria-describedby="notify-note"
-              />
-              <button class="btn btn--solid" type="submit">Put my name down</button>
-            </div>
-            <p class="notify__note" id="notify-note">
-              One message when the shop opens. Nothing else, ever.
-            </p>
-            <p class="notify__status" role="status" aria-live="polite"></p>
-          </form>
-        </div>
-
-        <div class="wordmark" aria-hidden="true">
-          <span class="wordmark__ar" lang="ar" dir="rtl">قَلَم</span>
-          <span class="wordmark__nib"></span>
-        </div>
-      </section>
-
-      <section class="lots" id="lots">
-        <header class="section-head">
-          <p class="eyebrow">Lot One</p>
-          <h2 class="section-head__title">The four that open the shop</h2>
-          <p class="section-head__blurb">
+          </p><!-- The sign-up form is a symbol: drawn once in the builder,
+               bound to a backend form in the CMS (Symbols -> Sign-up form),
+               placed here and in the closer. Ids are avoided on purpose so
+               instances can repeat without duplicating them. --><form data-symbol="signup-form" novalidate="" class="notify" id="icisk" data-form="opening-notice" method="post" action="https://tenantone-aug2026.saastemly.com/api/f/opening-notice"><p class="notify__label" id="i7kyi">Get the opening notice</p><div class="notify__row" id="in0t2"><input type="email" name="email" required="" autocomplete="email" placeholder="you@example.com" aria-label="Email address" class="notify__input" id="igue6"><button type="submit" class="btn btn--solid" id="i3dh8">Put my name down</button></div><p class="notify__note" id="ijpfn">One message when the shop opens. Nothing else, ever.</p><p role="status" aria-live="polite" class="notify__status" id="i5mk5"></p></form></div><div aria-hidden="true" class="wordmark"><span lang="ar" dir="rtl" class="wordmark__ar">قَلَم</span><span class="wordmark__nib"></span></div></section><section id="lots" class="lots"><header class="section-head"><p class="eyebrow">Lot One</p><h2 class="section-head__title">The four that open the shop</h2><p class="section-head__blurb">
             Each lot is cut, cooked, or burnished in one run, then the run closes. Numbers are the
             order they leave the bench.
-          </p>
-        </header>
-
-        <!-- Baked from content/catalog.json so the page is complete without
-             JavaScript; the builder re-bakes on save, main.js refreshes live. -->
-        <ol class="lot-grid" data-list="catalog.items">
-          <li class="lot">
-            <figure class="lot__figure lot__figure--empty"></figure>
-            <p class="lot__meta"><span>Lot 01</span><span class="lot__status">Opens first</span></p>
-            <h3 class="lot__title">Java reed pen, cut to your angle</h3>
-            <p class="lot__blurb">
-              Seasoned three years, cut at the qatt you name. Ships with a bone qat'ah for the
-              second cut.
-            </p>
-            <p class="lot__price">From 34</p>
-          </li>
-          <li class="lot">
-            <figure class="lot__figure lot__figure--empty"></figure>
-            <p class="lot__meta"><span>Lot 02</span><span class="lot__status">30 made</span></p>
-            <h3 class="lot__title">Lamp-black ink, one cooking</h3>
-            <p class="lot__blurb">
-              Soot, gum arabic, and a long stir. Thirty bottles from a single pot, then the pot is
-              done.
-            </p>
-            <p class="lot__price">18</p>
-          </li>
-          <li class="lot">
-            <figure class="lot__figure lot__figure--empty"></figure>
-            <p class="lot__meta"><span>Lot 03</span><span class="lot__status">Opens first</span></p>
-            <h3 class="lot__title">Ahar paper, burnished by hand</h3>
-            <p class="lot__blurb">
-              Sized with starch, dried flat, then run under agate until the surface refuses to
-              bleed.
-            </p>
-            <p class="lot__price">26 for 25 sheets</p>
-          </li>
-          <li class="lot">
-            <figure class="lot__figure lot__figure--empty"></figure>
-            <p class="lot__meta"><span>Lot 04</span><span class="lot__status">12 made</span></p>
-            <h3 class="lot__title">Walnut pen case</h3>
-            <p class="lot__blurb">
-              Holds four pens and a bottle upright. Lacquered inside, oiled outside, no hardware.
-            </p>
-            <p class="lot__price">95</p>
-          </li>
-        </ol>
-      </section>
-
-      <section class="craft" id="craft">
-        <header class="section-head">
-          <p class="eyebrow">How a pen is cut</p>
-          <h2 class="section-head__title">Three cuts, in this order, no going back</h2>
-        </header>
-        <ol class="steps" data-list="landing.craft.steps">
-          <li class="step">
-            <h3 class="step__title">The shoulder</h3>
-            <p class="step__body">
-              The reed is opened at a long shallow angle so the ink has somewhere to sit. Cut it
-              short and the pen runs dry mid-letter.
-            </p>
-          </li>
-          <li class="step">
-            <h3 class="step__title">The slit</h3>
-            <p class="step__body">
-              One press splits the nib down the centre. It has to stop exactly where the shoulder
-              ends, or the two halves will spread under pressure.
-            </p>
-          </li>
-          <li class="step">
-            <h3 class="step__title">The qatt</h3>
-            <p class="step__body">
-              The tip is trimmed against the qat'ah at the angle your script needs — flat for
-              thuluth, oblique for nastaliq. This is the cut you cannot take back.
-            </p>
-          </li>
-        </ol>
-      </section>
-
-      <section class="questions" id="questions">
-        <h2 class="section-head__title">Questions</h2>
-        <div class="faq" data-list="landing.faq.items">
-          <details>
-            <summary>Can I order before the shop opens?</summary>
-            <p>
-              No. Lot One is cut in a single run and every piece goes to the list in the order
-              names came in. Adding your name is the whole queue.
-            </p>
-          </details>
-          <details>
-            <summary>Do you cut for left hands?</summary>
-            <p>
-              Yes. Say so when you order and the qatt is reversed. There is no extra charge and no
-              extra wait.
-            </p>
-          </details>
-          <details>
-            <summary>How long does a reed pen last?</summary>
-            <p>
-              A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen
-              and instructions for the second cut.
-            </p>
-          </details>
-          <details>
-            <summary>Do you ship outside the country?</summary>
-            <p>
-              Not for Lot One. Ink is a problem at customs and we would rather solve it properly
-              than lose your parcel.
-            </p>
-          </details>
-        </div>
-      </section>
-
-      <section class="closer">
-        <h2 class="closer__title">The shop opens once. Be on the list.</h2>
-        <form class="notify notify--closer" novalidate>
-          <label class="visually-hidden" for="email-closer">Email address</label>
-          <div class="notify__row">
-            <input
-              class="notify__input"
-              id="email-closer"
-              type="email"
-              name="email"
-              required
-              autocomplete="email"
-              placeholder="you@example.com"
-            />
-            <button class="btn btn--solid" type="submit">Put my name down</button>
-          </div>
-          <p class="notify__status" role="status" aria-live="polite"></p>
-        </form>
-      </section>
-    </main>
-
-    <footer class="colophon">
-      <p class="colophon__ar" lang="ar" dir="rtl">قلم و آهار</p>
-      <p class="colophon__note">
+          </p></header><!-- Baked from content/catalog.json so the page is complete without
+             JavaScript; the builder re-bakes on save, main.js refreshes live. --><ol data-list="catalog.items" class="lot-grid"><li class="lot"><figure class="lot__figure lot__figure--empty"></figure><p class="lot__meta"><span>Lot 01</span><span class="lot__status">Opens first</span></p><h3 class="lot__title">Java reed pen, cut to your angle</h3><p class="lot__blurb">Seasoned three years, cut at the qatt you name. Ships with a bone qat'ah for the second cut.</p><p class="lot__price">From 34</p></li><li class="lot"><figure class="lot__figure lot__figure--empty"></figure><p class="lot__meta"><span>Lot 02</span><span class="lot__status">30 made</span></p><h3 class="lot__title">Lamp-black ink, one cooking</h3><p class="lot__blurb">Soot, gum arabic, and a long stir. Thirty bottles from a single pot, then the pot is done.</p><p class="lot__price">18</p></li><li class="lot"><figure class="lot__figure lot__figure--empty"></figure><p class="lot__meta"><span>Lot 03</span><span class="lot__status">Opens first</span></p><h3 class="lot__title">Ahar paper, burnished by hand</h3><p class="lot__blurb">Sized with starch, dried flat, then run under agate until the surface refuses to bleed.</p><p class="lot__price">26 for 25 sheets</p></li><li class="lot"><figure class="lot__figure lot__figure--empty"></figure><p class="lot__meta"><span>Lot 04</span><span class="lot__status">12 made</span></p><h3 class="lot__title">Walnut pen case</h3><p class="lot__blurb">Holds four pens and a bottle upright. Lacquered inside, oiled outside, no hardware.</p><p class="lot__price">95</p></li></ol></section><section id="craft" class="craft"><header class="section-head"><p class="eyebrow">How a pen is cut</p><h2 class="section-head__title">Three cuts, in this order, no going back</h2></header><ol data-list="landing.craft.steps" class="steps"><li class="step"><h3 class="step__title">The shoulder</h3><p class="step__body">The reed is opened at a long shallow angle so the ink has somewhere to sit. Cut it short and the pen runs dry mid-letter.</p></li><li class="step"><h3 class="step__title">The slit</h3><p class="step__body">One press splits the nib down the centre. It has to stop exactly where the shoulder ends, or the two halves will spread under pressure.</p></li><li class="step"><h3 class="step__title">The qatt</h3><p class="step__body">The tip is trimmed against the qat'ah at the angle your script needs — flat for thuluth, oblique for nastaliq. This is the cut you cannot take back.</p></li></ol></section><section id="questions" class="questions"><h2 class="section-head__title">Questions</h2><div data-list="landing.faq.items" class="faq"><details><summary>Can I order before the shop opens?</summary><p>No. Lot One is cut in a single run and every piece goes to the list in the order names came in. Adding your name is the whole queue.</p></details><details><summary>Do you cut for left hands?</summary><p>Yes. Say so when you order and the qatt is reversed. There is no extra charge and no extra wait.</p></details><details><summary>How long does a reed pen last?</summary><p>A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen and instructions for the second cut.</p></details><details><summary>Do you ship outside the country?</summary><p>Not for Lot One. Ink is a problem at customs and we would rather solve it properly than lose your parcel.</p></details></div></section><section class="closer"><h2 class="closer__title">The shop opens once. Be on the list.</h2><form data-symbol="signup-form" novalidate="" id="ihflyx" class="notify" data-form="opening-notice" method="post" action="https://tenantone-aug2026.saastemly.com/api/f/opening-notice"><p id="ieobhj" class="notify__label">Get the opening notice</p><div id="i7ndvk" class="notify__row"><input type="email" name="email" required="" autocomplete="email" placeholder="you@example.com" aria-label="Email address" id="iydtdm" class="notify__input"><button type="submit" id="i81vck" class="btn btn--solid">Put my name down</button></div><p id="i1wfse" class="notify__note">One message when the shop opens. Nothing else, ever.</p><p role="status" aria-live="polite" id="ipvxoy" class="notify__status"></p></form></section></main><footer class="colophon"><p lang="ar" dir="rtl" class="colophon__ar">قلم و آهار</p><p class="colophon__note">
         Cut and cooked in a two-bench workshop. Nothing is kept in stock.
-      </p>
-      <ul class="colophon__links" data-list="site.contact.links">
-        <li><a href="https://instagram.com/" rel="noopener" target="_blank">Instagram</a></li>
-        <li><a href="mailto:bench@qalam-ahar.example">Email the bench</a></li>
-      </ul>
-    </footer>
-
-    <script src="assets/js/render.js"></script>
-    <script src="assets/js/main.js"></script>
-  </body>
-</html>
+      </p><ul data-list="site.contact.links" class="colophon__links"><li><a href="https://instagram.com/" rel="noopener" target="_blank">Instagram</a></li><li><a href="mailto:bench@qalam-ahar.example">Email the bench</a></li></ul></footer><script src="assets/js/render.js"></script><script src="assets/js/main.js"></script></body></html>

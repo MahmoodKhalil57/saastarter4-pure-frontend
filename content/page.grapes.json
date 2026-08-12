@@ -1,0 +1,2253 @@
+{
+  "dataSources": [],
+  "assets": [],
+  "styles": [],
+  "pages": [
+    {
+      "name": "index",
+      "frames": [
+        {
+          "component": {
+            "type": "wrapper",
+            "stylable": [
+              "background",
+              "background-color",
+              "background-image",
+              "background-repeat",
+              "background-attachment",
+              "background-position",
+              "background-size"
+            ],
+            "components": [
+              {
+                "type": "link",
+                "classes": [
+                  "skip"
+                ],
+                "attributes": {
+                  "href": "#main"
+                },
+                "components": [
+                  {
+                    "type": "textnode",
+                    "content": "Skip to content"
+                  }
+                ]
+              },
+              {
+                "tagName": "aside",
+                "classes": [
+                  "banner"
+                ],
+                "attributes": {
+                  "aria-label": "Announcement",
+                  "data-when": "site.announcement"
+                },
+                "components": [
+                  {
+                    "tagName": "p",
+                    "type": "text",
+                    "editable": false,
+                    "attributes": {
+                      "data-text": "site.announcement"
+                    },
+                    "components": [
+                      {
+                        "type": "textnode",
+                        "removable": false,
+                        "draggable": false,
+                        "badgable": false,
+                        "highlightable": false,
+                        "copyable": false,
+                        "editable": false,
+                        "hoverable": false,
+                        "content": "Lot One opens to the list first. Nothing is held back for later."
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tagName": "header",
+                "classes": [
+                  "masthead"
+                ],
+                "components": [
+                  {
+                    "type": "link",
+                    "editable": false,
+                    "classes": [
+                      "brand"
+                    ],
+                    "attributes": {
+                      "href": "#main"
+                    },
+                    "components": [
+                      {
+                        "tagName": "span",
+                        "type": "text",
+                        "classes": [
+                          "brand__ar"
+                        ],
+                        "attributes": {
+                          "lang": "ar",
+                          "dir": "rtl"
+                        },
+                        "components": [
+                          {
+                            "type": "textnode",
+                            "content": "قلم و آهار"
+                          }
+                        ]
+                      },
+                      {
+                        "tagName": "span",
+                        "type": "text",
+                        "classes": [
+                          "brand__latin"
+                        ],
+                        "components": [
+                          {
+                            "type": "textnode",
+                            "content": "Qalam & Ahar"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "comment",
+                    "content": " Renders from content/pages.json once any page has a menu label;\n           until then these hand-written section links stand. "
+                  },
+                  {
+                    "tagName": "nav",
+                    "classes": [
+                      "masthead__nav"
+                    ],
+                    "attributes": {
+                      "aria-label": "Sections",
+                      "data-list": "pages.pages"
+                    },
+                    "components": [
+                      {
+                        "type": "link",
+                        "attributes": {
+                          "href": "#lots"
+                        },
+                        "components": [
+                          {
+                            "type": "textnode",
+                            "content": "Lot One"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "link",
+                        "attributes": {
+                          "href": "#craft"
+                        },
+                        "components": [
+                          {
+                            "type": "textnode",
+                            "content": "The cut"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "link",
+                        "attributes": {
+                          "href": "#questions"
+                        },
+                        "components": [
+                          {
+                            "type": "textnode",
+                            "content": "Questions"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "link",
+                    "classes": [
+                      "btn",
+                      "btn--ghost",
+                      "masthead__cta"
+                    ],
+                    "attributes": {
+                      "href": "#notify"
+                    },
+                    "components": [
+                      {
+                        "type": "textnode",
+                        "content": "Get the opening notice"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tagName": "main",
+                "attributes": {
+                  "id": "main"
+                },
+                "components": [
+                  {
+                    "tagName": "section",
+                    "classes": [
+                      "hero"
+                    ],
+                    "attributes": {
+                      "id": "notify"
+                    },
+                    "components": [
+                      {
+                        "classes": [
+                          "hero__lede"
+                        ],
+                        "components": [
+                          {
+                            "tagName": "p",
+                            "type": "text",
+                            "classes": [
+                              "eyebrow"
+                            ],
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "Opening this winter"
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "h1",
+                            "type": "text",
+                            "classes": [
+                              "hero__headline"
+                            ],
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "\n            A pen is not bought. It is cut for the hand that will hold it.\n          "
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "p",
+                            "type": "text",
+                            "classes": [
+                              "hero__sub"
+                            ],
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "\n            We cut reed pens to your nib angle, cook our own soot ink, and burnish paper the slow\n            way. Four items open the shop. Put your name down and you will hear first.\n          "
+                              }
+                            ]
+                          },
+                          {
+                            "type": "comment",
+                            "content": " The sign-up form is a symbol: drawn once in the builder,\n               bound to a backend form in the CMS (Symbols -> Sign-up form),\n               placed here and in the closer. Ids are avoided on purpose so\n               instances can repeat without duplicating them. "
+                          },
+                          {
+                            "tagName": "form",
+                            "classes": [
+                              "notify"
+                            ],
+                            "attributes": {
+                              "data-symbol": "signup-form",
+                              "novalidate": "",
+                              "id": "icisk"
+                            },
+                            "__symbol": "im4loc",
+                            "components": [
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "classes": [
+                                  "notify__label"
+                                ],
+                                "attributes": {
+                                  "id": "i7kyi"
+                                },
+                                "__symbol": "inxl4v",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "content": "Get the opening notice",
+                                    "attributes": {
+                                      "id": "ie4mg"
+                                    },
+                                    "__symbol": "inxlah"
+                                  }
+                                ]
+                              },
+                              {
+                                "classes": [
+                                  "notify__row"
+                                ],
+                                "attributes": {
+                                  "id": "in0t2"
+                                },
+                                "__symbol": "ia01ld",
+                                "components": [
+                                  {
+                                    "tagName": "input",
+                                    "void": true,
+                                    "classes": [
+                                      "notify__input"
+                                    ],
+                                    "attributes": {
+                                      "type": "email",
+                                      "name": "email",
+                                      "required": true,
+                                      "autocomplete": "email",
+                                      "placeholder": "you@example.com",
+                                      "aria-label": "Email address",
+                                      "id": "igue6"
+                                    },
+                                    "__symbol": "ivw9rb"
+                                  },
+                                  {
+                                    "tagName": "button",
+                                    "type": "text",
+                                    "classes": [
+                                      "btn",
+                                      "btn--solid"
+                                    ],
+                                    "attributes": {
+                                      "type": "submit",
+                                      "id": "i3dh8"
+                                    },
+                                    "__symbol": "iq41th",
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "content": "Put my name down",
+                                        "attributes": {
+                                          "id": "ij9wu"
+                                        },
+                                        "__symbol": "ibtsjg"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "classes": [
+                                  "notify__note"
+                                ],
+                                "attributes": {
+                                  "id": "ijpfn"
+                                },
+                                "__symbol": "ibesa8",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "content": "One message when the shop opens. Nothing else, ever.",
+                                    "attributes": {
+                                      "id": "i3q6k"
+                                    },
+                                    "__symbol": "i8dg62"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "classes": [
+                                  "notify__status"
+                                ],
+                                "attributes": {
+                                  "role": "status",
+                                  "aria-live": "polite",
+                                  "id": "i5mk5"
+                                },
+                                "__symbol": "igs5ph"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "classes": [
+                          "wordmark"
+                        ],
+                        "attributes": {
+                          "aria-hidden": "true"
+                        },
+                        "components": [
+                          {
+                            "tagName": "span",
+                            "type": "text",
+                            "classes": [
+                              "wordmark__ar"
+                            ],
+                            "attributes": {
+                              "lang": "ar",
+                              "dir": "rtl"
+                            },
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "قَلَم"
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "span",
+                            "classes": [
+                              "wordmark__nib"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tagName": "section",
+                    "classes": [
+                      "lots"
+                    ],
+                    "attributes": {
+                      "id": "lots"
+                    },
+                    "components": [
+                      {
+                        "tagName": "header",
+                        "classes": [
+                          "section-head"
+                        ],
+                        "components": [
+                          {
+                            "tagName": "p",
+                            "type": "text",
+                            "classes": [
+                              "eyebrow"
+                            ],
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "Lot One"
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "h2",
+                            "type": "text",
+                            "classes": [
+                              "section-head__title"
+                            ],
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "The four that open the shop"
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "p",
+                            "type": "text",
+                            "classes": [
+                              "section-head__blurb"
+                            ],
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "\n            Each lot is cut, cooked, or burnished in one run, then the run closes. Numbers are the\n            order they leave the bench.\n          "
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "comment",
+                        "content": " Baked from content/catalog.json so the page is complete without\n             JavaScript; the builder re-bakes on save, main.js refreshes live. "
+                      },
+                      {
+                        "tagName": "ol",
+                        "droppable": false,
+                        "classes": [
+                          "lot-grid"
+                        ],
+                        "attributes": {
+                          "data-list": "catalog.items"
+                        },
+                        "components": [
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "lot"
+                            ],
+                            "components": [
+                              {
+                                "tagName": "figure",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__figure",
+                                  "lot__figure--empty"
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__meta"
+                                ],
+                                "components": [
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "layerable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Lot 01"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "layerable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "classes": [
+                                      "lot__status"
+                                    ],
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Opens first"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__title"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Java reed pen, cut to your angle"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__blurb"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Seasoned three years, cut at the qatt you name. Ships with a bone qat'ah for the second cut."
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__price"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "From 34"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "lot"
+                            ],
+                            "components": [
+                              {
+                                "tagName": "figure",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__figure",
+                                  "lot__figure--empty"
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__meta"
+                                ],
+                                "components": [
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "layerable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Lot 02"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "layerable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "classes": [
+                                      "lot__status"
+                                    ],
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "30 made"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__title"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Lamp-black ink, one cooking"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__blurb"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Soot, gum arabic, and a long stir. Thirty bottles from a single pot, then the pot is done."
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__price"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "18"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "lot"
+                            ],
+                            "components": [
+                              {
+                                "tagName": "figure",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__figure",
+                                  "lot__figure--empty"
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__meta"
+                                ],
+                                "components": [
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "layerable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Lot 03"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "layerable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "classes": [
+                                      "lot__status"
+                                    ],
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Opens first"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__title"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Ahar paper, burnished by hand"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__blurb"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Sized with starch, dried flat, then run under agate until the surface refuses to bleed."
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__price"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "26 for 25 sheets"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "lot"
+                            ],
+                            "components": [
+                              {
+                                "tagName": "figure",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__figure",
+                                  "lot__figure--empty"
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__meta"
+                                ],
+                                "components": [
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "layerable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "Lot 04"
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "tagName": "span",
+                                    "type": "text",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "layerable": false,
+                                    "selectable": false,
+                                    "hoverable": false,
+                                    "classes": [
+                                      "lot__status"
+                                    ],
+                                    "components": [
+                                      {
+                                        "type": "textnode",
+                                        "removable": false,
+                                        "draggable": false,
+                                        "badgable": false,
+                                        "highlightable": false,
+                                        "copyable": false,
+                                        "editable": false,
+                                        "hoverable": false,
+                                        "content": "12 made"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__title"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Walnut pen case"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__blurb"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Holds four pens and a bottle upright. Lacquered inside, oiled outside, no hardware."
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "lot__price"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "95"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tagName": "section",
+                    "classes": [
+                      "craft"
+                    ],
+                    "attributes": {
+                      "id": "craft"
+                    },
+                    "components": [
+                      {
+                        "tagName": "header",
+                        "classes": [
+                          "section-head"
+                        ],
+                        "components": [
+                          {
+                            "tagName": "p",
+                            "type": "text",
+                            "classes": [
+                              "eyebrow"
+                            ],
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "How a pen is cut"
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "h2",
+                            "type": "text",
+                            "classes": [
+                              "section-head__title"
+                            ],
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "Three cuts, in this order, no going back"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tagName": "ol",
+                        "droppable": false,
+                        "classes": [
+                          "steps"
+                        ],
+                        "attributes": {
+                          "data-list": "landing.craft.steps"
+                        },
+                        "components": [
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "step"
+                            ],
+                            "components": [
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "step__title"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "The shoulder"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "step__body"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "The reed is opened at a long shallow angle so the ink has somewhere to sit. Cut it short and the pen runs dry mid-letter."
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "step"
+                            ],
+                            "components": [
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "step__title"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "The slit"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "step__body"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "One press splits the nib down the centre. It has to stop exactly where the shoulder ends, or the two halves will spread under pressure."
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "li",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "classes": [
+                              "step"
+                            ],
+                            "components": [
+                              {
+                                "tagName": "h3",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "step__title"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "The qatt"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "classes": [
+                                  "step__body"
+                                ],
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "The tip is trimmed against the qat'ah at the angle your script needs — flat for thuluth, oblique for nastaliq. This is the cut you cannot take back."
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tagName": "section",
+                    "classes": [
+                      "questions"
+                    ],
+                    "attributes": {
+                      "id": "questions"
+                    },
+                    "components": [
+                      {
+                        "tagName": "h2",
+                        "type": "text",
+                        "classes": [
+                          "section-head__title"
+                        ],
+                        "components": [
+                          {
+                            "type": "textnode",
+                            "content": "Questions"
+                          }
+                        ]
+                      },
+                      {
+                        "droppable": false,
+                        "classes": [
+                          "faq"
+                        ],
+                        "attributes": {
+                          "data-list": "landing.faq.items"
+                        },
+                        "components": [
+                          {
+                            "tagName": "details",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "components": [
+                              {
+                                "tagName": "summary",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Can I order before the shop opens?"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "No. Lot One is cut in a single run and every piece goes to the list in the order names came in. Adding your name is the whole queue."
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "details",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "components": [
+                              {
+                                "tagName": "summary",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Do you cut for left hands?"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Yes. Say so when you order and the qatt is reversed. There is no extra charge and no extra wait."
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "details",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "components": [
+                              {
+                                "tagName": "summary",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "How long does a reed pen last?"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "A season of daily practice, then it wants re-cutting. We send a qat'ah with every pen and instructions for the second cut."
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "details",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "components": [
+                              {
+                                "tagName": "summary",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Do you ship outside the country?"
+                                  }
+                                ]
+                              },
+                              {
+                                "tagName": "p",
+                                "type": "text",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "layerable": false,
+                                "selectable": false,
+                                "hoverable": false,
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "removable": false,
+                                    "draggable": false,
+                                    "badgable": false,
+                                    "highlightable": false,
+                                    "copyable": false,
+                                    "editable": false,
+                                    "hoverable": false,
+                                    "content": "Not for Lot One. Ink is a problem at customs and we would rather solve it properly than lose your parcel."
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "tagName": "section",
+                    "classes": [
+                      "closer"
+                    ],
+                    "components": [
+                      {
+                        "tagName": "h2",
+                        "type": "text",
+                        "classes": [
+                          "closer__title"
+                        ],
+                        "components": [
+                          {
+                            "type": "textnode",
+                            "content": "The shop opens once. Be on the list."
+                          }
+                        ]
+                      },
+                      {
+                        "tagName": "form",
+                        "classes": [
+                          "notify"
+                        ],
+                        "attributes": {
+                          "data-symbol": "signup-form",
+                          "novalidate": "",
+                          "id": "ihflyx"
+                        },
+                        "__symbol": "im4loc",
+                        "components": [
+                          {
+                            "tagName": "p",
+                            "type": "text",
+                            "classes": [
+                              "notify__label"
+                            ],
+                            "attributes": {
+                              "id": "ieobhj"
+                            },
+                            "__symbol": "inxl4v",
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "Get the opening notice",
+                                "attributes": {
+                                  "id": "ih1duw"
+                                },
+                                "__symbol": "inxlah"
+                              }
+                            ]
+                          },
+                          {
+                            "classes": [
+                              "notify__row"
+                            ],
+                            "attributes": {
+                              "id": "i7ndvk"
+                            },
+                            "__symbol": "ia01ld",
+                            "components": [
+                              {
+                                "tagName": "input",
+                                "void": true,
+                                "classes": [
+                                  "notify__input"
+                                ],
+                                "attributes": {
+                                  "type": "email",
+                                  "name": "email",
+                                  "required": true,
+                                  "autocomplete": "email",
+                                  "placeholder": "you@example.com",
+                                  "aria-label": "Email address",
+                                  "id": "iydtdm"
+                                },
+                                "__symbol": "ivw9rb"
+                              },
+                              {
+                                "tagName": "button",
+                                "type": "text",
+                                "classes": [
+                                  "btn",
+                                  "btn--solid"
+                                ],
+                                "attributes": {
+                                  "type": "submit",
+                                  "id": "i81vck"
+                                },
+                                "__symbol": "iq41th",
+                                "components": [
+                                  {
+                                    "type": "textnode",
+                                    "content": "Put my name down",
+                                    "attributes": {
+                                      "id": "iuoln7"
+                                    },
+                                    "__symbol": "ibtsjg"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "p",
+                            "type": "text",
+                            "classes": [
+                              "notify__note"
+                            ],
+                            "attributes": {
+                              "id": "i1wfse"
+                            },
+                            "__symbol": "ibesa8",
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "content": "One message when the shop opens. Nothing else, ever.",
+                                "attributes": {
+                                  "id": "i9ewls"
+                                },
+                                "__symbol": "i8dg62"
+                              }
+                            ]
+                          },
+                          {
+                            "tagName": "p",
+                            "classes": [
+                              "notify__status"
+                            ],
+                            "attributes": {
+                              "role": "status",
+                              "aria-live": "polite",
+                              "id": "ipvxoy"
+                            },
+                            "__symbol": "igs5ph"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "tagName": "footer",
+                "classes": [
+                  "colophon"
+                ],
+                "components": [
+                  {
+                    "tagName": "p",
+                    "type": "text",
+                    "classes": [
+                      "colophon__ar"
+                    ],
+                    "attributes": {
+                      "lang": "ar",
+                      "dir": "rtl"
+                    },
+                    "components": [
+                      {
+                        "type": "textnode",
+                        "content": "قلم و آهار"
+                      }
+                    ]
+                  },
+                  {
+                    "tagName": "p",
+                    "type": "text",
+                    "classes": [
+                      "colophon__note"
+                    ],
+                    "components": [
+                      {
+                        "type": "textnode",
+                        "content": "\n        Cut and cooked in a two-bench workshop. Nothing is kept in stock.\n      "
+                      }
+                    ]
+                  },
+                  {
+                    "tagName": "ul",
+                    "droppable": false,
+                    "classes": [
+                      "colophon__links"
+                    ],
+                    "attributes": {
+                      "data-list": "site.contact.links"
+                    },
+                    "components": [
+                      {
+                        "tagName": "li",
+                        "removable": false,
+                        "draggable": false,
+                        "badgable": false,
+                        "highlightable": false,
+                        "copyable": false,
+                        "layerable": false,
+                        "selectable": false,
+                        "hoverable": false,
+                        "components": [
+                          {
+                            "type": "link",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "editable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "attributes": {
+                              "href": "https://instagram.com/",
+                              "rel": "noopener",
+                              "target": "_blank"
+                            },
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "hoverable": false,
+                                "content": "Instagram"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "tagName": "li",
+                        "removable": false,
+                        "draggable": false,
+                        "badgable": false,
+                        "highlightable": false,
+                        "copyable": false,
+                        "layerable": false,
+                        "selectable": false,
+                        "hoverable": false,
+                        "components": [
+                          {
+                            "type": "link",
+                            "removable": false,
+                            "draggable": false,
+                            "badgable": false,
+                            "highlightable": false,
+                            "copyable": false,
+                            "editable": false,
+                            "layerable": false,
+                            "selectable": false,
+                            "hoverable": false,
+                            "attributes": {
+                              "href": "mailto:bench@qalam-ahar.example"
+                            },
+                            "components": [
+                              {
+                                "type": "textnode",
+                                "removable": false,
+                                "draggable": false,
+                                "badgable": false,
+                                "highlightable": false,
+                                "copyable": false,
+                                "editable": false,
+                                "hoverable": false,
+                                "content": "Email the bench"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "head": {
+              "type": "head"
+            },
+            "docEl": {
+              "tagName": "html"
+            }
+          },
+          "id": "rWrund8v43RkiM8W"
+        }
+      ],
+      "id": "g4MCPb2vlUxhZCW7"
+    }
+  ],
+  "symbols": [
+    {
+      "tagName": "form",
+      "classes": [
+        "notify"
+      ],
+      "attributes": {
+        "data-symbol": "signup-form",
+        "novalidate": "",
+        "id": "im4loc"
+      },
+      "__symbols": [
+        "icisk",
+        "ihflyx"
+      ],
+      "components": [
+        {
+          "tagName": "p",
+          "type": "text",
+          "classes": [
+            "notify__label"
+          ],
+          "attributes": {
+            "id": "inxl4v"
+          },
+          "__symbols": [
+            "i7kyi",
+            "ieobhj"
+          ],
+          "components": [
+            {
+              "type": "textnode",
+              "content": "Get the opening notice",
+              "attributes": {
+                "id": "inxlah"
+              },
+              "__symbols": [
+                "ie4mg",
+                "ih1duw"
+              ]
+            }
+          ]
+        },
+        {
+          "classes": [
+            "notify__row"
+          ],
+          "attributes": {
+            "id": "ia01ld"
+          },
+          "__symbols": [
+            "in0t2",
+            "i7ndvk"
+          ],
+          "components": [
+            {
+              "tagName": "input",
+              "void": true,
+              "classes": [
+                "notify__input"
+              ],
+              "attributes": {
+                "type": "email",
+                "name": "email",
+                "required": true,
+                "autocomplete": "email",
+                "placeholder": "you@example.com",
+                "aria-label": "Email address",
+                "id": "ivw9rb"
+              },
+              "__symbols": [
+                "igue6",
+                "iydtdm"
+              ]
+            },
+            {
+              "tagName": "button",
+              "type": "text",
+              "classes": [
+                "btn",
+                "btn--solid"
+              ],
+              "attributes": {
+                "type": "submit",
+                "id": "iq41th"
+              },
+              "__symbols": [
+                "i3dh8",
+                "i81vck"
+              ],
+              "components": [
+                {
+                  "type": "textnode",
+                  "content": "Put my name down",
+                  "attributes": {
+                    "id": "ibtsjg"
+                  },
+                  "__symbols": [
+                    "ij9wu",
+                    "iuoln7"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tagName": "p",
+          "type": "text",
+          "classes": [
+            "notify__note"
+          ],
+          "attributes": {
+            "id": "ibesa8"
+          },
+          "__symbols": [
+            "ijpfn",
+            "i1wfse"
+          ],
+          "components": [
+            {
+              "type": "textnode",
+              "content": "One message when the shop opens. Nothing else, ever.",
+              "attributes": {
+                "id": "i8dg62"
+              },
+              "__symbols": [
+                "i3q6k",
+                "i9ewls"
+              ]
+            }
+          ]
+        },
+        {
+          "tagName": "p",
+          "classes": [
+            "notify__status"
+          ],
+          "attributes": {
+            "role": "status",
+            "aria-live": "polite",
+            "id": "igs5ph"
+          },
+          "__symbols": [
+            "i5mk5",
+            "ipvxoy"
+          ]
+        }
+      ]
+    }
+  ]
+}
