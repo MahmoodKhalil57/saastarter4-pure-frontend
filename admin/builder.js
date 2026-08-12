@@ -75,6 +75,7 @@
     dirHandle: null,
     customBlocks: [], // designer-made blocks, persisted in content/blocks.grapes.json
     hadBlocksFile: false,
+    symbolMode: null, // symbol id while the workbench stage is open
   };
 
   function status(message, isError) {
@@ -683,6 +684,9 @@
         return refreshStructure();
       })
       .then(function () {
+        // The symbol workbench's stage page is scaffolding, never content:
+        // take it down before serializing and exporting, restore it after.
+        if (state.symbolMode) removeSymbolStage();
         state.content.pages = { pages: declaredPages() };
         syncPages();
         syncSymbols();
@@ -763,6 +767,7 @@
             content: JSON.stringify(state.customBlocks, null, 2) + "\n",
           });
         }
+        if (state.symbolMode) enterSymbolStage(state.symbolMode);
         return files;
       });
   }
@@ -1089,11 +1094,15 @@
             styles: [FONTS_URL, new URL("assets/css/styles.css", SITE_BASE).href],
             // GrapesJS's default frameStyle paints the canvas body white, which
             // hides the site's own dark body background. Keep only its
-            // scrollbar styling so the canvas shows exactly what the site does.
+            // scrollbar styling so the canvas shows exactly what the site does
+            // — plus the symbol workbench's stage, which exists only in-canvas.
             frameStyle:
               "* ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.1) }" +
               "* ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2) }" +
-              "* ::-webkit-scrollbar { width: 10px }",
+              "* ::-webkit-scrollbar { width: 10px }" +
+              ".symbol-stage { min-height: 100vh; display: grid; place-items: center; " +
+              "padding: 3rem 2rem; box-sizing: border-box }" +
+              ".symbol-stage > * { width: 100%; max-width: 34rem }",
           },
           assetManager: { upload: false },
           blockManager: {
@@ -1153,32 +1162,60 @@
     }
 
     if (kind === "symbol") {
-      var entry = state.symbols.find(function (row) {
-        return row.id === target;
-      });
-      var name = (entry && entry.name) || target;
-
-      // Find an instance on any page, select it, and bring it into view.
-      var pages = editor.Pages.getAll();
-      for (var i = 0; i < pages.length; i += 1) {
-        var instance = pages[i].getMainComponent().find('[data-symbol="' + target + '"]')[0];
-        if (instance) {
-          editor.Pages.select(pages[i]);
-          renderPageSelect();
-          setTimeout(function () {
-            editor.select(instance);
-            try {
-              instance.getEl().scrollIntoView({ block: "center", behavior: "smooth" });
-            } catch (error) {
-              /* not rendered yet — selection alone still scopes the panels */
-            }
-          }, 300);
-          status("Editing “" + name + "” — changes apply everywhere it is placed.");
-          return;
-        }
+      if (!enterSymbolStage(target)) {
+        status("No drawing found for “" + target + "” — check content/symbols/.");
       }
-      status("“" + name + "” is not placed yet — drag it in from the Reusable block category.");
     }
+  }
+
+  /* --- the symbol workbench ------------------------------------------------------
+     ?focus=symbol:<id> edits the symbol in isolation: a temporary stage page
+     holds one linked instance, centered, and nothing else. Edits sync to every
+     real placement (that is what a symbol is). The stage is scaffolding — it
+     is stripped before the project is serialized or pages are exported, and
+     restored right after, so it never reaches the repo. */
+
+  var STAGE_PAGE = "__symbol-stage";
+
+  function enterSymbolStage(id) {
+    var editor = state.editor;
+    var main = symbolMains()[id];
+    if (!main) return false;
+    var entry = state.symbols.find(function (row) {
+      return row.id === id;
+    });
+
+    var stage =
+      findProjectPage(STAGE_PAGE) ||
+      editor.Pages.add({
+        name: STAGE_PAGE,
+        component: '<div class="symbol-stage" data-symbol-stage></div>',
+      });
+    editor.Pages.select(stage);
+
+    var holder = stage.getMainComponent().find("[data-symbol-stage]")[0];
+    holder.components("");
+    var instance = editor.Components.addSymbol(main);
+    if (instance) holder.append(instance);
+
+    state.symbolMode = id;
+    ui.pageSelect.hidden = true;
+    ui.makeSymbol.hidden = true;
+    editor.UndoManager.clear();
+    setTimeout(function () {
+      if (instance) editor.select(instance);
+    }, 300);
+    status(
+      "Editing “" +
+        ((entry && entry.name) || id) +
+        "” in isolation — changes apply everywhere it is placed. Save when done."
+    );
+    return true;
+  }
+
+  function removeSymbolStage() {
+    var stage = findProjectPage(STAGE_PAGE);
+    if (stage) state.editor.Pages.remove(stage);
   }
 
   boot();
