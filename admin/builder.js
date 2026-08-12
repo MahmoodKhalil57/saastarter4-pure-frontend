@@ -1124,11 +1124,61 @@
               ? "Loaded content/page.grapes.json."
               : "First run: imported index.html. The first save creates content/page.grapes.json."
           );
+          applyFocus();
         });
       })
       .catch(function (err) {
         status(err.message || String(err), true);
       });
+  }
+
+  /** Honor ?focus=page:<slug> or ?focus=symbol:<id> — the CMS's "Edit in
+      builder" action opens the builder scoped to what was being edited. */
+  function applyFocus() {
+    var match = /[?&]focus=([^&]+)/.exec(location.search);
+    if (!match) return;
+    var focus = decodeURIComponent(match[1]);
+    var kind = focus.split(":")[0];
+    var target = focus.split(":")[1];
+    var editor = state.editor;
+
+    if (kind === "page") {
+      var page = findProjectPage(target);
+      if (page) {
+        editor.Pages.select(page);
+        renderPageSelect();
+        status("Editing the “" + target + "” page.");
+      }
+      return;
+    }
+
+    if (kind === "symbol") {
+      var entry = state.symbols.find(function (row) {
+        return row.id === target;
+      });
+      var name = (entry && entry.name) || target;
+
+      // Find an instance on any page, select it, and bring it into view.
+      var pages = editor.Pages.getAll();
+      for (var i = 0; i < pages.length; i += 1) {
+        var instance = pages[i].getMainComponent().find('[data-symbol="' + target + '"]')[0];
+        if (instance) {
+          editor.Pages.select(pages[i]);
+          renderPageSelect();
+          setTimeout(function () {
+            editor.select(instance);
+            try {
+              instance.getEl().scrollIntoView({ block: "center", behavior: "smooth" });
+            } catch (error) {
+              /* not rendered yet — selection alone still scopes the panels */
+            }
+          }, 300);
+          status("Editing “" + name + "” — changes apply everywhere it is placed.");
+          return;
+        }
+      }
+      status("“" + name + "” is not placed yet — drag it in from the Reusable block category.");
+    }
   }
 
   boot();
